@@ -1,10 +1,31 @@
 PODS:
-  - Canary (0.1.0)
+  - Canary (0.1.1):
+    - Canary/Core (= 0.1.1)
+    - MJExtension
+    - SAMKeychain (~> 1.5)
+    - SocketRocket (~> 0.5)
+  - Canary/Core (0.1.1):
+    - CocoaLumberjack (<= 3.5.2)
+    - MJExtension
+    - SAMKeychain (~> 1.5)
+    - SocketRocket (~> 0.5)
+  - Canary/Swift (0.1.1):
+    - Canary/Core
+    - CocoaLumberjack/Swift (<= 3.5.2)
+    - MJExtension
+    - SAMKeychain (~> 1.5)
+    - SocketRocket (~> 0.5)
+  - CocoaLumberjack (3.5.2):
+    - CocoaLumberjack/Core (= 3.5.2)
+  - CocoaLumberjack/Core (3.5.2)
+  - CocoaLumberjack/Swift (3.5.2):
+    - CocoaLumberjack/Core
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
+  - MJExtension (3.2.1)
   - Nimble (7.3.4)
   - Nimble-Snapshots (6.3.0):
     - Nimble-Snapshots/Core (= 6.3.0)
@@ -12,32 +33,42 @@ PODS:
     - FBSnapshotTestCase (~> 2.0)
     - Nimble (~> 7.0)
   - Quick (1.2.0)
+  - SAMKeychain (1.5.3)
+  - SocketRocket (0.5.1)
 
 DEPENDENCIES:
   - Canary (from `../`)
-  - FBSnapshotTestCase (~> 2.1.4)
+  - Canary/Swift (from `../`)
   - Nimble (~> 7.0)
   - Nimble-Snapshots (~> 6.3.0)
   - Quick (~> 1.2.0)
 
 SPEC REPOS:
   trunk:
+    - CocoaLumberjack
     - FBSnapshotTestCase
+    - MJExtension
     - Nimble
     - Nimble-Snapshots
     - Quick
+    - SAMKeychain
+    - SocketRocket
 
 EXTERNAL SOURCES:
   Canary:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Canary: 7903a57d6b5fee26370be49ff080e49ab5702842
+  Canary: c63e846c22338bb2062eefb6cbe21a461d2bf4b7
+  CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 092f9ee4f03f267c8237adb1c35e393390d2e835
+PODFILE CHECKSUM: a99f5c2d7a685083dc15e2d2cc07a3c133b17c7d
 
 COCOAPODS: 1.9.1

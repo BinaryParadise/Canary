@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Canary
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let manager = CanaryManager.manager()!
+        manager.appKey = "com.binaryparadise.neverland"
+        manager.enableDebug = true
+        manager.baseURL = URL.init(string: "https://y.neverland.life")
+        manager.startLogMonitor { () -> [String : Any]? in
+            return ["test" : "89897923561987341897", "number": 10086, "dict": ["extra": "嵌套对象"]]
+        }
         return true
     }
 

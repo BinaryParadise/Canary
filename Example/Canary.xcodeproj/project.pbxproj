@@ -15,6 +15,17 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		A7E59504DA6FECE2D5642267 /* Pods_Canary_Example_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B068C366C69E4469299AFE /* Pods_Canary_Example_macOS.framework */; };
+		C9C0253C85C2CFD4C0E0E209 /* Pods_Canary_Exampe_OC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64689C47F08537C43646DFE0 /* Pods_Canary_Exampe_OC.framework */; };
+		C9C4F4D1242367F900D7A8F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C4F4D0242367F900D7A8F1 /* AppDelegate.swift */; };
+		C9C4F4D3242367FA00D7A8F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9C4F4D2242367FA00D7A8F1 /* Assets.xcassets */; };
+		C9C4F4D6242367FA00D7A8F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9C4F4D4242367FA00D7A8F1 /* MainMenu.xib */; };
+		C9C4F50024236C3600D7A8F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C4F4FF24236C3600D7A8F1 /* AppDelegate.m */; };
+		C9C4F50624236C3600D7A8F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C4F50524236C3600D7A8F1 /* ViewController.m */; };
+		C9C4F50924236C3600D7A8F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C4F50724236C3600D7A8F1 /* Main.storyboard */; };
+		C9C4F50B24236C3700D7A8F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9C4F50A24236C3700D7A8F1 /* Assets.xcassets */; };
+		C9C4F50E24236C3700D7A8F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9C4F50C24236C3700D7A8F1 /* LaunchScreen.storyboard */; };
+		C9C4F51124236C3700D7A8F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C4F51024236C3700D7A8F1 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,8 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DA99338C5679B31BDBD9DA6 /* Pods-Canary_Exampe_OC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Exampe_OC.debug.xcconfig"; path = "Target Support Files/Pods-Canary_Exampe_OC/Pods-Canary_Exampe_OC.debug.xcconfig"; sourceTree = "<group>"; };
 		1959B2EB6EF1359D972E3B54 /* Pods_Canary_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canary_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3575224A16838C9DD4E50062 /* Canary.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Canary.podspec; path = ../Canary.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3ECE38FE9EC97904597EDB3D /* Pods-Canary_Example_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Example_macOS.release.xcconfig"; path = "Target Support Files/Pods-Canary_Example_macOS/Pods-Canary_Example_macOS.release.xcconfig"; sourceTree = "<group>"; };
+		48B068C366C69E4469299AFE /* Pods_Canary_Example_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canary_Example_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49589624863A3777CB36F6CA /* Pods-Canary_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Tests.release.xcconfig"; path = "Target Support Files/Pods-Canary_Tests/Pods-Canary_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		53A9391EC2FA9434BA0C91B2 /* Pods-Canary_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Example.debug.xcconfig"; path = "Target Support Files/Pods-Canary_Example/Pods-Canary_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Canary_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,11 +56,30 @@
 		607FACE51AFB9204008FA782 /* Canary_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Canary_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		64689C47F08537C43646DFE0 /* Pods_Canary_Exampe_OC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canary_Exampe_OC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5DF483F7C1FA81A02A67D26 /* Pods-Canary_Example_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Example_macOS.debug.xcconfig"; path = "Target Support Files/Pods-Canary_Example_macOS/Pods-Canary_Example_macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C17E491F113A3F6125E5D911 /* Pods_Canary_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canary_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9C4F4CE242367F900D7A8F1 /* Canary_Example_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary_Example_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9C4F4D0242367F900D7A8F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C9C4F4D2242367FA00D7A8F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9C4F4D5242367FA00D7A8F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C9C4F4D7242367FA00D7A8F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9C4F4D8242367FA00D7A8F1 /* Canary_Example_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Canary_Example_macOS.entitlements; sourceTree = "<group>"; };
+		C9C4F4FC24236C3600D7A8F1 /* Canary_Exampe_OC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canary_Exampe_OC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9C4F4FE24236C3600D7A8F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C9C4F4FF24236C3600D7A8F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C9C4F50424236C3600D7A8F1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C9C4F50524236C3600D7A8F1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C9C4F50824236C3600D7A8F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C9C4F50A24236C3700D7A8F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9C4F50D24236C3700D7A8F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C9C4F50F24236C3700D7A8F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9C4F51024236C3700D7A8F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CDBEEFE21A69F1F9FB10EA21 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D075958BAF49E689B6A4A619 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D8892C3AC22407A98C504DE0 /* Pods-Canary_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Example.release.xcconfig"; path = "Target Support Files/Pods-Canary_Example/Pods-Canary_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E8D8F717B0B038FFAA0D843E /* Pods-Canary_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Tests.debug.xcconfig"; path = "Target Support Files/Pods-Canary_Tests/Pods-Canary_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FFE82417388BE7B954AF6A29 /* Pods-Canary_Exampe_OC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canary_Exampe_OC.release.xcconfig"; path = "Target Support Files/Pods-Canary_Exampe_OC/Pods-Canary_Exampe_OC.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +99,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C9C4F4CB242367F900D7A8F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7E59504DA6FECE2D5642267 /* Pods_Canary_Example_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9C4F4F924236C3600D7A8F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9C0253C85C2CFD4C0E0E209 /* Pods_Canary_Exampe_OC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -74,6 +123,8 @@
 			children = (
 				1959B2EB6EF1359D972E3B54 /* Pods_Canary_Example.framework */,
 				C17E491F113A3F6125E5D911 /* Pods_Canary_Tests.framework */,
+				48B068C366C69E4469299AFE /* Pods_Canary_Example_macOS.framework */,
+				64689C47F08537C43646DFE0 /* Pods_Canary_Exampe_OC.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -85,6 +136,10 @@
 				D8892C3AC22407A98C504DE0 /* Pods-Canary_Example.release.xcconfig */,
 				E8D8F717B0B038FFAA0D843E /* Pods-Canary_Tests.debug.xcconfig */,
 				49589624863A3777CB36F6CA /* Pods-Canary_Tests.release.xcconfig */,
+				B5DF483F7C1FA81A02A67D26 /* Pods-Canary_Example_macOS.debug.xcconfig */,
+				3ECE38FE9EC97904597EDB3D /* Pods-Canary_Example_macOS.release.xcconfig */,
+				0DA99338C5679B31BDBD9DA6 /* Pods-Canary_Exampe_OC.debug.xcconfig */,
+				FFE82417388BE7B954AF6A29 /* Pods-Canary_Exampe_OC.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -95,6 +150,8 @@
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for Canary */,
 				607FACE81AFB9204008FA782 /* Tests */,
+				C9C4F4CF242367F900D7A8F1 /* Canary_Example_macOS */,
+				C9C4F4FD24236C3600D7A8F1 /* Canary_Exampe_OC */,
 				607FACD11AFB9204008FA782 /* Products */,
 				5C4152AE6EB6C060B535D436 /* Pods */,
 				3EF622AEE721D359E7937285 /* Frameworks */,
@@ -106,6 +163,8 @@
 			children = (
 				607FACD01AFB9204008FA782 /* Canary_Example.app */,
 				607FACE51AFB9204008FA782 /* Canary_Tests.xctest */,
+				C9C4F4CE242367F900D7A8F1 /* Canary_Example_macOS.app */,
+				C9C4F4FC24236C3600D7A8F1 /* Canary_Exampe_OC.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +218,34 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		C9C4F4CF242367F900D7A8F1 /* Canary_Example_macOS */ = {
+			isa = PBXGroup;
+			children = (
+				C9C4F4D0242367F900D7A8F1 /* AppDelegate.swift */,
+				C9C4F4D2242367FA00D7A8F1 /* Assets.xcassets */,
+				C9C4F4D4242367FA00D7A8F1 /* MainMenu.xib */,
+				C9C4F4D7242367FA00D7A8F1 /* Info.plist */,
+				C9C4F4D8242367FA00D7A8F1 /* Canary_Example_macOS.entitlements */,
+			);
+			path = Canary_Example_macOS;
+			sourceTree = "<group>";
+		};
+		C9C4F4FD24236C3600D7A8F1 /* Canary_Exampe_OC */ = {
+			isa = PBXGroup;
+			children = (
+				C9C4F4FE24236C3600D7A8F1 /* AppDelegate.h */,
+				C9C4F4FF24236C3600D7A8F1 /* AppDelegate.m */,
+				C9C4F50424236C3600D7A8F1 /* ViewController.h */,
+				C9C4F50524236C3600D7A8F1 /* ViewController.m */,
+				C9C4F50724236C3600D7A8F1 /* Main.storyboard */,
+				C9C4F50A24236C3700D7A8F1 /* Assets.xcassets */,
+				C9C4F50C24236C3700D7A8F1 /* LaunchScreen.storyboard */,
+				C9C4F50F24236C3700D7A8F1 /* Info.plist */,
+				C9C4F51024236C3700D7A8F1 /* main.m */,
+			);
+			path = Canary_Exampe_OC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -170,6 +257,8 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
+				21ADCCC85DEB1F953F10C9CB /* [CP] Embed Pods Frameworks */,
+				9F2FBC5A3E5D61CF3D8B0B06 /* [MC] Fetch Remote Config */,
 			);
 			buildRules = (
 			);
@@ -200,13 +289,53 @@
 			productReference = 607FACE51AFB9204008FA782 /* Canary_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		C9C4F4CD242367F900D7A8F1 /* Canary_Example_macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9C4F4EF242367FB00D7A8F1 /* Build configuration list for PBXNativeTarget "Canary_Example_macOS" */;
+			buildPhases = (
+				3BD37D025DA83AA8C63F3F21 /* [CP] Check Pods Manifest.lock */,
+				C9C4F4CA242367F900D7A8F1 /* Sources */,
+				C9C4F4CB242367F900D7A8F1 /* Frameworks */,
+				C9C4F4CC242367F900D7A8F1 /* Resources */,
+				939C9807814DDAC69047252D /* [CP] Embed Pods Frameworks */,
+				B6B27AAA0C63B9E454D1DA44 /* [MC] Fetch Remote Config */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Canary_Example_macOS;
+			productName = Canary_Example_macOS;
+			productReference = C9C4F4CE242367F900D7A8F1 /* Canary_Example_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C9C4F4FB24236C3600D7A8F1 /* Canary_Exampe_OC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9C4F51224236C3700D7A8F1 /* Build configuration list for PBXNativeTarget "Canary_Exampe_OC" */;
+			buildPhases = (
+				5D36A9C523D415434CBF196A /* [CP] Check Pods Manifest.lock */,
+				C9C4F4F824236C3600D7A8F1 /* Sources */,
+				C9C4F4F924236C3600D7A8F1 /* Frameworks */,
+				C9C4F4FA24236C3600D7A8F1 /* Resources */,
+				B1F9904C4BC7F8724FEE24CC /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Canary_Exampe_OC;
+			productName = Canary_Exampe_OC;
+			productReference = C9C4F4FC24236C3600D7A8F1 /* Canary_Exampe_OC.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -219,6 +348,15 @@
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
+					C9C4F4CD242367F900D7A8F1 = {
+						CreatedOnToolsVersion = 11.3;
+						DevelopmentTeam = 9V4T4T8D8H;
+						ProvisioningStyle = Automatic;
+					};
+					C9C4F4FB24236C3600D7A8F1 = {
+						CreatedOnToolsVersion = 11.3;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "Canary" */;
@@ -226,6 +364,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -236,6 +375,8 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* Canary_Example */,
 				607FACE41AFB9204008FA782 /* Canary_Tests */,
+				C9C4F4CD242367F900D7A8F1 /* Canary_Example_macOS */,
+				C9C4F4FB24236C3600D7A8F1 /* Canary_Exampe_OC */,
 			);
 		};
 /* End PBXProject section */
@@ -255,6 +396,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9C4F4CC242367F900D7A8F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9C4F4D3242367FA00D7A8F1 /* Assets.xcassets in Resources */,
+				C9C4F4D6242367FA00D7A8F1 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9C4F4FA24236C3600D7A8F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9C4F50E24236C3700D7A8F1 /* LaunchScreen.storyboard in Resources */,
+				C9C4F50B24236C3700D7A8F1 /* Assets.xcassets in Resources */,
+				C9C4F50924236C3600D7A8F1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +443,76 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		21ADCCC85DEB1F953F10C9CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Canary_Example/Pods-Canary_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Canary-Core-Swift-iOS/Canary.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack.default-Swift-iOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension-iOS/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/SAMKeychain-iOS/SAMKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket-iOS/SocketRocket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Canary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Canary_Example/Pods-Canary_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3BD37D025DA83AA8C63F3F21 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Canary_Example_macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D36A9C523D415434CBF196A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Canary_Exampe_OC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7C17748381CDF1904D0185FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -304,6 +534,96 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		939C9807814DDAC69047252D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Canary_Example_macOS/Pods-Canary_Example_macOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Canary-Core-Swift-macOS/Canary.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack.default-Swift-macOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension-macOS/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/SAMKeychain-macOS/SAMKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket-macOS/SocketRocket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Canary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Canary_Example_macOS/Pods-Canary_Example_macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F2FBC5A3E5D61CF3D8B0B06 /* [MC] Fetch Remote Config */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[MC] Fetch Remote Config";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/rakeyang/Github/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
+		};
+		B1F9904C4BC7F8724FEE24CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Canary_Exampe_OC/Pods-Canary_Exampe_OC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Canary/Canary.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension-iOS/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/SAMKeychain-iOS/SAMKeychain.framework",
+				"${BUILT_PRODUCTS_DIR}/SocketRocket-iOS/SocketRocket.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Canary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Canary_Exampe_OC/Pods-Canary_Exampe_OC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6B27AAA0C63B9E454D1DA44 /* [MC] Fetch Remote Config */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[MC] Fetch Remote Config";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/rakeyang/Github/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
 		};
 		F2A5DF65DDFCDD71D5D559CF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -349,6 +669,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C9C4F4CA242367F900D7A8F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9C4F4D1242367F900D7A8F1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C9C4F4F824236C3600D7A8F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9C4F50624236C3600D7A8F1 /* ViewController.m in Sources */,
+				C9C4F50024236C3600D7A8F1 /* AppDelegate.m in Sources */,
+				C9C4F51124236C3700D7A8F1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -374,6 +712,30 @@
 				607FACDF1AFB9204008FA782 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		C9C4F4D4242367FA00D7A8F1 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9C4F4D5242367FA00D7A8F1 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		C9C4F50724236C3600D7A8F1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9C4F50824236C3600D7A8F1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C9C4F50C24236C3700D7A8F1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C9C4F50D24236C3700D7A8F1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -548,6 +910,119 @@
 			};
 			name = Release;
 		};
+		C9C4F4F0242367FB00D7A8F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5DF483F7C1FA81A02A67D26 /* Pods-Canary_Example_macOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Canary_Example_macOS/Canary_Example_macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9V4T4T8D8H;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Canary_Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.binaryparadise.Canary-Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C9C4F4F1242367FB00D7A8F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ECE38FE9EC97904597EDB3D /* Pods-Canary_Example_macOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Canary_Example_macOS/Canary_Example_macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 9V4T4T8D8H;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Canary_Example_macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.binaryparadise.Canary-Example-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C9C4F51324236C3700D7A8F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DA99338C5679B31BDBD9DA6 /* Pods-Canary_Exampe_OC.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Canary_Exampe_OC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.binaryparadise.Canary-Exampe-OC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C9C4F51424236C3700D7A8F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFE82417388BE7B954AF6A29 /* Pods-Canary_Exampe_OC.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = Canary_Exampe_OC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.binaryparadise.Canary-Exampe-OC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -574,6 +1049,24 @@
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
 				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9C4F4EF242367FB00D7A8F1 /* Build configuration list for PBXNativeTarget "Canary_Example_macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9C4F4F0242367FB00D7A8F1 /* Debug */,
+				C9C4F4F1242367FB00D7A8F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9C4F51224236C3700D7A8F1 /* Build configuration list for PBXNativeTarget "Canary_Exampe_OC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9C4F51324236C3700D7A8F1 /* Debug */,
+				C9C4F51424236C3700D7A8F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

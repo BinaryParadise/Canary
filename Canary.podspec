@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Canary'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'Canary is SDK For CanaryWeb.'
 
 # This description is used to generate tags and improve search results.
@@ -31,14 +31,25 @@ TODO: Add long description of the pod here.
   s.swift_version = '4.0'
 
   s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.11'
 
-  s.source_files = 'Canary/Classes/**/*'
+  s.default_subspecs = 'Core'
   
-  # s.resource_bundles = {
-  #   'Canary' => ['Canary/Assets/*.png']
-  # }
+  s.subspec 'Core' do |ss|
+    ss.ios.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/iOS/*'
+    ss.osx.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/macOS/*'
+    ss.dependency 'CocoaLumberjack', '<= 3.5.2'
+  end
+
+  s.subspec 'Swift' do |ss|
+    ss.source_files = 'CanarySwift/*'
+    ss.dependency   'Canary/Core'
+    ss.dependency 'CocoaLumberjack/Swift', '<= 3.5.2'
+  end
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'MJExtension'
+  s.dependency 'SAMKeychain', '~> 1.5'
+  s.dependency 'SocketRocket', '~> 0.5'
 end
