@@ -42,7 +42,7 @@ TODO: Add long description of the pod here.
   end
 
   s.subspec 'Swift' do |ss|
-    ss.source_files = 'CanarySwift/*'
+    ss.source_files = 'Sources/CanarySwift/*'
     ss.dependency   'Canary/Core'
     ss.dependency 'CocoaLumberjack/Swift', '<= 3.5.2'
   end
