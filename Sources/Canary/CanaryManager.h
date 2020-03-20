@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define MCParam(_key, _def) [MCFrontendKit.manager stringForKey:_key def:_def]
+#define CNParam(_key, _def) [CanaryManager.manager stringForKey:_key def:_def]
 
 @interface CanaryManager : NSObject
 

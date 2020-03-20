@@ -318,6 +318,7 @@
 				C9C4F4F924236C3600D7A8F1 /* Frameworks */,
 				C9C4F4FA24236C3600D7A8F1 /* Resources */,
 				B1F9904C4BC7F8724FEE24CC /* [CP] Embed Pods Frameworks */,
+				068542115843B9444BEB60F0 /* [MC] Fetch Remote Config */,
 			);
 			buildRules = (
 			);
@@ -421,6 +422,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		068542115843B9444BEB60F0 /* [MC] Fetch Remote Config */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[MC] Fetch Remote Config";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/rakeyang/Github/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
+		};
 		184E07AA312C55228EE197FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
