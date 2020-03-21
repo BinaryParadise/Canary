@@ -19,11 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    CanaryManager.manager.appKey = @"com.binaryparadise.neverland";
-    CanaryManager.manager.enableDebug = YES;
-    CanaryManager.manager.baseURL = [NSURL URLWithString:@"https://y.neverland.life"];
-    CanaryManager.manager.currentName = @"奶味蓝";
-    [CanaryManager.manager startLogMonitor:^NSDictionary<NSString *, id> *{
+    CNManager.manager.appKey = @"com.binaryparadise.neverland";
+    CNManager.manager.enableDebug = YES;
+    CNManager.manager.baseURL = [NSURL URLWithString:@"https://y.neverland.life"];
+    CNManager.manager.currentName = @"奶味蓝";
+    [CNManager.manager startLogMonitor:^NSDictionary<NSString *, id> *{
         return @{@"PushToken": @"fjejfliejglaje",
                  @"uid": @"0101010101",
                  @"num": @100982,

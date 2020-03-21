@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.swift_version = '4.0'
 
   s.ios.deployment_target = '8.0'
-  # s.osx.deployment_target = '10.11'
+  s.osx.deployment_target = '10.11'
 
   s.default_subspecs = 'Core'
   

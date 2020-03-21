@@ -17,8 +17,8 @@
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
 
-#if TARGET_OS_MAC
-    #import <sys/sysc.h>
+#if TARGET_OS_OSX
+    #import <sys/sysctl.h>
 #endif
 
 @implementation MCDevice
@@ -27,12 +27,13 @@
 {
     self = [super init];
     if (self) {
-#if TARGET_OS_IOS
+        
+#if TARGET_OS_IPHONE
         self.name = UIDevice.currentDevice.name;
         self.osName = UIDevice.currentDevice.systemName;
         self.osVersion = UIDevice.currentDevice.systemVersion;
         self.modelName = UIDevice.currentDevice.localizedModel;
-#else
+#elif TARGET_OS_MAC
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
         self.name = NSHost.currentHost.localizedName;
         self.osName = dict[@"ProductName"];
@@ -47,8 +48,10 @@
     return self;
 }
 
-#if TARGET_OS_MAC
 - (NSString *)modelIdentifier{
+#if TARGET_OS_IPHONE
+    return @"";
+#elif TARGET_OS_MAC
     NSString *result=@"Mac";
     size_t size;
     sysctlbyname("hw.model", NULL, &size, NULL, 0);
@@ -63,8 +66,8 @@
     }
     
     return result;
-}
 #endif
+}
 
 - (NSString *)getIPAddress:(BOOL)preferIPv4
 {

@@ -21,7 +21,7 @@
 }
 
 - (IBAction)showConfig:(id)sender {
-    [CanaryManager.manager show];
+    [CNManager.manager show];
 }
 
 
