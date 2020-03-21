@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        let manager = CanaryManager.manager()!
+        let manager = CNManager()!
         manager.appKey = "com.binaryparadise.neverland"
         manager.enableDebug = true
         manager.baseURL = URL.init(string: "https://y.neverland.life")
@@ -32,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func showConfig(sender:Any?) -> Void {
         DDLogWarn("日志测试")
-        CanaryManager.manager()?.show()
+        CNManager()?.show()
     }
 
 }

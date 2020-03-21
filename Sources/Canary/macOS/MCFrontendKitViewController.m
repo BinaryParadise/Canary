@@ -6,7 +6,7 @@
 //
 
 #import "MCFrontendKitViewController.h"
-#import "CanaryManager.h"
+#import "CNManager.h"
 #import "MCRemoteConfigItemView.h"
 
 #define kIdentifier @"MCRemoteConfigItemView"
@@ -38,7 +38,7 @@ static DDLogLevel ddLogLevel = DDLogLevelVerbose;
 //    [self.collectionView registerClass:MCRemoteConfigItemView.class forItemWithIdentifier:kIdentifier];
     
     __weak typeof(self) self_weak = self;
-    [[CanaryManager manager] fetchRemoteConfig:^{
+    [[CNManager manager] fetchRemoteConfig:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self_weak reloadData];
         });
@@ -56,7 +56,7 @@ static DDLogLevel ddLogLevel = DDLogLevelVerbose;
 //        [marr addObject:@{@"name":obj[@"name"]}];
 //        [marr addObjectsFromArray:obj[@"items"]];
 //    }];
-    self.remoteConfig = CanaryManager.manager.remoteConfig;
+    self.remoteConfig = CNManager.manager.remoteConfig;
     [self.collectionView reloadData];
 }
 

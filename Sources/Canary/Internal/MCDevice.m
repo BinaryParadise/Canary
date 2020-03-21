@@ -23,7 +23,7 @@
 {
     self = [super init];
     if (self) {
-#if TARGET_OS_IPHONE        
+#if TARGET_OS_IOS
         self.name = UIDevice.currentDevice.name;
         self.osName = UIDevice.currentDevice.systemName;
         self.osVersion = UIDevice.currentDevice.systemVersion;
@@ -43,8 +43,8 @@
     return self;
 }
 
-#if TARGET_OS_OSX
-- (NSString *)modelIdentifier{
+#if TARGET_OS_MAC
+- (NSString *)modelIdentifier{    
     NSString *result=@"Mac";
     size_t size;
     sysctlbyname("hw.model", NULL, &size, NULL, 0);
