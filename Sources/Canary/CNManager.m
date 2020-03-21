@@ -195,14 +195,14 @@
     mdict[@"requestfields"] = netLog.allRequestHTTPHeaderFields?:NSNull.null;
     mdict[@"responsefields"] = netLog.allResponseHTTPHeaderFields?:NSNull.null;
     if ([netLog.requestBody isKindOfClass:[NSData class]]) {
-        mdict[@"requestbody"] = [[NSString alloc] initWithData:netLog.requestBody?:NSData.data encoding:NSUTF8StringEncoding];
+        mdict[@"requestbody"] = [NSJSONSerialization JSONObjectWithData:netLog.requestBody?:NSData.data options:NSJSONReadingMutableLeaves error:nil];
     } else {
-        mdict[@"requestbody"] = netLog.requestBody;
+        mdict[@"requestbody"] = netLog.requestBody?:@{};
     }
     if ([netLog.responseBody isKindOfClass:[NSData class]]) {
-        mdict[@"responsebody"] = [[NSString alloc] initWithData:netLog.responseBody?:NSData.data encoding:NSUTF8StringEncoding];
+        mdict[@"responsebody"] = [NSJSONSerialization JSONObjectWithData:netLog.responseBody options:NSJSONReadingMutableLeaves error:nil];
     } else {
-        mdict[@"responsebody"] = netLog.responseBody;
+        mdict[@"responsebody"] = netLog.responseBody?:@{};
     }
     mdict[@"timestamp"] = @((NSUInteger)timestamp);
     mdict[@"statusCode"] = @(netLog.statusCode);
