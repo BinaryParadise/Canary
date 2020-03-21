@@ -17,6 +17,10 @@
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
 
+#if TARGET_OS_MAC
+    #import <sys/sysc.h>
+#endif
+
 @implementation MCDevice
 
 - (instancetype)init
@@ -44,7 +48,7 @@
 }
 
 #if TARGET_OS_MAC
-- (NSString *)modelIdentifier{    
+- (NSString *)modelIdentifier{
     NSString *result=@"Mac";
     size_t size;
     sysctlbyname("hw.model", NULL, &size, NULL, 0);
