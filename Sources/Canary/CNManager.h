@@ -1,16 +1,17 @@
 //
-//  CanaryManager.h
-//  CanaryManager
+//  CNManager.h
+//  Canary
 //
 //  Created by Rake Yang on 2020/2/22.
 //  Copyright © 2020 BinaryParadise. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "CNNetworkLoggerProtocol.h"
 
-#define CNParam(_key, _def) [CanaryManager.manager stringForKey:_key def:_def]
+#define CNParam(_key, _def) [CNManager.manager stringForKey:_key def:_def]
 
-@interface CanaryManager : NSObject
+@interface CNManager : NSObject
 
 /// 前端服务地址，例如 https://frontend.binaryparadise.org
 @property (nonatomic, copy) NSURL *baseURL;
@@ -54,5 +55,8 @@
 /// 启动日志监控服务
 /// @param customProfileBlock 自定义附加信息
 - (void)startLogMonitor:(NSDictionary<NSString *, id> * (^)(void))customProfileBlock;
+
+/// 存储日志到本地数据库并同步到金丝雀前端页面
+- (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog;
 
 @end

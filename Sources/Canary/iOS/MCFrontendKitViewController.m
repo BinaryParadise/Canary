@@ -7,7 +7,7 @@
 //
 
 #import "MCFrontendKitViewController.h"
-#import "CanaryManager.h"
+#import "CNManager.h"
 #import "MCRemoveConfigItemViewController.h"
 #import "MCRemoteConfigViewCell.h"
 
@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"远程配置";
-    self.remoteConfig = CanaryManager.manager.remoteConfig;
+    self.remoteConfig = CNManager.manager.remoteConfig;
     
     self.view.backgroundColor = [UIColor colorWithRed:0xF6/255.0 green:0xF6/255.0 blue:0xF6/255.0 alpha:1.0];
     
@@ -41,18 +41,18 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(closeView:)];
     
     __weak typeof(self) self_weak = self;
-    [[CanaryManager manager] fetchRemoteConfig:^{
+    [[CNManager manager] fetchRemoteConfig:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            self_weak.remoteConfig = CanaryManager.manager.remoteConfig;
+            self_weak.remoteConfig = CNManager.manager.remoteConfig;
             [self_weak.tableView reloadData];
         });
     }];
 }
 
 - (IBAction)closeView:(id)sender {
-    [CanaryManager.manager hide];
+    [CNManager.manager hide];
     [self dismissViewControllerAnimated:YES completion:^{
-        [CanaryManager.manager hide];
+        [CNManager.manager hide];
     }];
 }
 
@@ -80,7 +80,7 @@
     NSDictionary *item = group[@"items"][indexPath.row];
     cell.textLabel.text = item[@"name"];
     cell.detailTextLabel.text = item[@"comment"];
-    cell.checked = [item[@"name"] isEqual:CanaryManager.manager.currentName];
+    cell.checked = [item[@"name"] isEqual:CNManager.manager.currentName];
     return cell;
 }
 

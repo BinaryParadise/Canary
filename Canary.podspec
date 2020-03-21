@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Canary'
-  s.version          = '0.1.1'
+  s.version          = '0.2.0'
   s.summary          = 'Canary is SDK For CanaryWeb.'
 
 # This description is used to generate tags and improve search results.
@@ -38,6 +38,7 @@ TODO: Add long description of the pod here.
   s.subspec 'Core' do |ss|
     ss.ios.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/iOS/*'
     ss.osx.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/macOS/*'
+    ss.dependency 'FMDB', '~> 2.7.0'
     ss.dependency 'CocoaLumberjack', '<= 3.5.2'
   end
 

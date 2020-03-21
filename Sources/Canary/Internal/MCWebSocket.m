@@ -10,10 +10,10 @@
 #import <SocketRocket/SRWebSocket.h>
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "MCLoggerUtils.h"
-#import "CanaryManager.h"
+#import "CNManager.h"
 
 #define TRACE(fmt, ...) \
-if (CanaryManager.manager.enableDebug) {\
+if (CNManager.manager.enableDebug) {\
     NSLog(@"[MFK] %s+%d " fmt, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__); \
 } \
 

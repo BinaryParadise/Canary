@@ -23,13 +23,15 @@ class ViewController: UIViewController {
         DDLogWarn("warning...")
         DDLogError("error")
         
-        CanaryManager.manager()?.show()
+        CNManager()?.show()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func showNetLog(_ sender: Any) {
+        var request = URLRequest.init(url: URL.init(string: "https://y.neverland.life/api/conf/full?appkey=com.binaryparadise.neverland&os=iOS")!)
+//        request.httpBody = "{\"test\": \"param\"}".data(using: String.Encoding.utf8)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            CNManager()?.storeNetworkLogger(CNNetLogMessage.init(reqest: request, resposne: response as! HTTPURLResponse, data: data!))
+        }.resume()
     }
 
 }
-

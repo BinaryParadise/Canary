@@ -7,7 +7,7 @@
 
 #import "MCRemoveConfigItemViewController.h"
 #import "MCRemoteConfigViewCell.h"
-#import "CanaryManager.h"
+#import "CNManager.h"
 
 @interface MCRemoveConfigItemViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -80,9 +80,9 @@
 }
 
 - (IBAction)applyConfig:(id)sender {
-    CanaryManager.manager.currentName = self.item[@"name"];
+    CNManager.manager.currentName = self.item[@"name"];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [CanaryManager.manager hide];
+    [CNManager.manager hide];
 }
 
 #pragma mark - UITableViewDataSource

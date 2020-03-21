@@ -1,22 +1,25 @@
 //
-//  MCFrontendKit.m
-//  MCFrontendKit
+//  CNManager.m
+//  Canary
 //
 //  Created by Rake Yang on 2020/2/22.
 //  Copyright © 2020 BinaryParadise. All rights reserved.
 //
 
-#import "CanaryManager.h"
+#import "CNManager.h"
 #import "MCFrontendKitViewController.h"
 #import "MCLoggerUtils.h"
 #import "MCLogger.h"
 #import "MCFrontendLogFormatter.h"
+#import "Internal/MCDatabase.h"
+#import "Internal/MCWebSocket.h"
+#import <MJExtension/MJExtension.h>
 
 #define kMCSuiteName @"com.binaryparadise.frontendkit"
 #define kMCRemoteConfig @"remoteConfig"
 #define kMCCurrentName @"currenName"
 
-@interface CanaryManager ()
+@interface CNManager ()
 
 @property (nonatomic, copy) NSArray *remoteConfig;
 @property (nonatomic, strong) NSUserDefaults *frontendDefaults;
@@ -26,7 +29,7 @@
 #endif
 @end
 
-@implementation CanaryManager
+@implementation CNManager
 
 - (instancetype)init
 {
@@ -51,7 +54,7 @@
 
 + (instancetype)manager {
     static dispatch_once_t onceToken;
-    static CanaryManager *instance;
+    static CNManager *instance;
     dispatch_once(&onceToken, ^{
         instance = [self.alloc init];
     });
@@ -170,6 +173,42 @@
     [DDLog addLogger:DDTTYLogger.sharedInstance];
     MCLogger.sharedInstance.customProfileBlock = customProfileBlock;
     [MCLogger.sharedInstance startWithAppKey:self.appKey domain:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/channel", self.baseURL.scheme, self.baseURL.host, self.baseURL.port?[NSString stringWithFormat:@":%@",self.baseURL.port]:@""]]];
+}
+
+- (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog {
+    NSMutableArray *args = [NSMutableArray array];
+    NSTimeInterval timestamp = NSDate.date.timeIntervalSince1970*1000;
+    [args addObject:@((NSUInteger)timestamp)];
+    [args addObject:netLog.method];
+    [args addObject:netLog.requestURL.absoluteString];
+    [args addObject:netLog.allRequestHTTPHeaderFields.mj_JSONString?:NSNull.null];
+    [args addObject:netLog.allResponseHTTPHeaderFields.mj_JSONString?:NSNull.null];
+    [args addObject:netLog.requestBody?:NSNull.null];
+    [args addObject:netLog.responseBody?:NSNull.null];
+    [MCDatabase.defaultDB executeUpdate:@"INSERT INTO CNNetLog(timestamp, method,url,requestfields,responsefields,requestbody,responsebody) values(?, ?,?,?,?,?,?)" arguments:args];
+    
+    MCWebSocketMessage *msg = [MCWebSocketMessage messageWithType:MCMessageTypeNetLogger];
+    NSMutableDictionary *mdict = [NSMutableDictionary dictionary];
+    mdict[@"flag"] = @(DDLogFlagInfo);
+    mdict[@"method"] = netLog.method;
+    mdict[@"url"] = netLog.requestURL.absoluteString;
+    mdict[@"requestfields"] = netLog.allRequestHTTPHeaderFields?:NSNull.null;
+    mdict[@"responsefields"] = netLog.allResponseHTTPHeaderFields?:NSNull.null;
+    if ([netLog.requestBody isKindOfClass:[NSData class]]) {
+        mdict[@"requestbody"] = [[NSString alloc] initWithData:netLog.requestBody?:NSData.data encoding:NSUTF8StringEncoding];
+    } else {
+        mdict[@"requestbody"] = netLog.requestBody;
+    }
+    if ([netLog.responseBody isKindOfClass:[NSData class]]) {
+        mdict[@"responsebody"] = [[NSString alloc] initWithData:netLog.responseBody?:NSData.data encoding:NSUTF8StringEncoding];
+    } else {
+        mdict[@"responsebody"] = netLog.responseBody;
+    }
+    mdict[@"timestamp"] = @((NSUInteger)timestamp);
+    mdict[@"statusCode"] = @(netLog.statusCode);
+    mdict[@"type"] = @(2);
+    msg.data = mdict;
+    [MCWebSocket.shared sendMessage:msg];
 }
 
 - (NSBundle *)resourceBundle {
