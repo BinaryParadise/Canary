@@ -73,6 +73,7 @@
     _currentName = currentName;
     [self.frontendDefaults setObject:currentName forKey:kMCCurrentName];
     [self.frontendDefaults synchronize];
+    [self switchToCurrentConfig];
 }
 
 - (void)show {
