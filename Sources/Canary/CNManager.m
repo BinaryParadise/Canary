@@ -14,8 +14,9 @@
 #import "Internal/MCDatabase.h"
 #import "Internal/MCWebSocket.h"
 #import <MJExtension/MJExtension.h>
+#if TARGET_OS_IPHONE
 #import "CNWebViewController.h"
-
+#endif
 #define kMCSuiteName @"com.binaryparadise.frontendkit"
 #define kMCRemoteConfig @"remoteConfig"
 #define kMCCurrentName @"currenName"
@@ -77,7 +78,7 @@
 }
 
 - (void)show {
-#if TARGET_OS_IOS
+#if TARGET_OS_IPHONE
     [self show:UIWindowLevelStatusBar+9];
 }
 
@@ -106,7 +107,7 @@
 #endif
 }
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IPHONE
 
 - (void)showWebView {
     UIWindow *window = [UIWindow.alloc initWithFrame:UIScreen.mainScreen.bounds];

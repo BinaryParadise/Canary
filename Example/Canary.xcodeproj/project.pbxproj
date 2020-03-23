@@ -351,7 +351,6 @@
 					};
 					C9C4F4CD242367F900D7A8F1 = {
 						CreatedOnToolsVersion = 11.3;
-						DevelopmentTeam = 9V4T4T8D8H;
 						ProvisioningStyle = Automatic;
 					};
 					C9C4F4FB24236C3600D7A8F1 = {
@@ -439,7 +438,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/bonana/Github/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/bonana/GitHub/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
 		};
 		184E07AA312C55228EE197FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -602,7 +601,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/bonana/Github/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/bonana/GitHub/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
 		};
 		B1F9904C4BC7F8724FEE24CC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -649,7 +648,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/bonana/Github/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/bonana/GitHub/Canary/Sources/Canary/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"com.binaryparadise.neverland\" https://y.neverland.life\nfi";
 		};
 		F2A5DF65DDFCDD71D5D559CF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -955,7 +954,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 9V4T4T8D8H;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Canary_Example_macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -986,7 +985,7 @@
 				CODE_SIGN_ENTITLEMENTS = Canary_Example_macOS/Canary_Example_macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 9V4T4T8D8H;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = Canary_Example_macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
