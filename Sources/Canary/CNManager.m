@@ -14,6 +14,7 @@
 #import "Internal/MCDatabase.h"
 #import "Internal/MCWebSocket.h"
 #import <MJExtension/MJExtension.h>
+#import "CNWebViewController.h"
 
 #define kMCSuiteName @"com.binaryparadise.frontendkit"
 #define kMCRemoteConfig @"remoteConfig"
@@ -105,6 +106,37 @@
 }
 
 #if TARGET_OS_IOS
+
+- (void)showWebView {
+    UIWindow *window = [UIWindow.alloc initWithFrame:UIScreen.mainScreen.bounds];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:CNWebViewController.new];
+    window.rootViewController = nav;
+    window.windowLevel = UIWindowLevelStatusBar+10;
+    [window makeKeyAndVisible];
+    self.coverWindow = window;
+}
+
++ (UIViewController *)cn_currentViewControoler {
+    NSAssert([NSThread isMainThread], @"非主线程");
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    UIViewController *currentViewController = window.rootViewController;
+
+    do {
+        if (currentViewController.presentedViewController) {
+            currentViewController = currentViewController.presentedViewController;
+        } else {
+            if ([currentViewController isKindOfClass:[UINavigationController class]]) {
+                currentViewController = ((UINavigationController *)currentViewController).visibleViewController;
+            } else if ([currentViewController isKindOfClass:[UITabBarController class]]) {
+                currentViewController = ((UITabBarController* )currentViewController).selectedViewController;
+            } else {
+                break;
+            }
+        }
+    } while (YES);
+    return currentViewController;
+}
+
 - (void)hide {
     [self.coverWindow removeFromSuperview];
     self.coverWindow = nil;
@@ -212,7 +244,7 @@
 }
 
 - (NSBundle *)resourceBundle {
-    return [NSBundle bundleForClass:self.class];
+    return [NSBundle bundleWithPath:[[NSBundle bundleForClass:self.class].bundlePath stringByAppendingString:@"/Canary.bundle"]];
 }
 
 @end

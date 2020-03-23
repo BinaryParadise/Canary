@@ -37,9 +37,13 @@
 /// 师傅启用调试模式，默认为NO
 @property (nonatomic, assign) BOOL enableDebug;
 
+/// 测试入口
+@property (nonatomic, copy) NSArray * (^testEnterBlock)(void);
+
 - (void)show;
 #if TARGET_OS_IOS
 - (void)show:(UIWindowLevel)level;
+- (void)showWebView;
 #endif
 - (void)hide;
 
@@ -58,5 +62,7 @@
 
 /// 存储日志到本地数据库并同步到金丝雀前端页面
 - (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog;
+
+- (NSBundle *)resourceBundle;
 
 @end
