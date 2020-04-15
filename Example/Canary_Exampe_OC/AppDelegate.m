@@ -21,7 +21,7 @@
     // Override point for customization after application launch.
     CNManager.manager.appKey = @"com.binaryparadise.neverland";
     CNManager.manager.enableDebug = YES;
-    CNManager.manager.baseURL = [NSURL URLWithString:@"https://y.neverland.life"];
+    CNManager.manager.baseURL = [NSURL URLWithString:@"http://127.0.0.1:8080"];
     CNManager.manager.currentName = @"奶味蓝";
     [CNManager.manager startLogMonitor:^NSDictionary<NSString *, id> *{
         return @{@"PushToken": @"fjejfliejglaje",

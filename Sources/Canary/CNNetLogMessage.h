@@ -21,7 +21,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSData *responseBody;
 @property (nonatomic, assign) NSUInteger statusCode;
 
-- (instancetype)initWithReqest:(NSURLRequest *)request resposne:(NSHTTPURLResponse *)response data:(NSData *)data;
+/// 网络请求指标
+@property (nonatomic, strong) NSURLSessionTaskMetrics *metrics API_AVAILABLE(ios(10.0));
+
+- (instancetype)initWithSessionTask:(NSURLSessionTask *)task data:(NSData *)data;
+
+- (instancetype)initWithSessionTask:(NSURLSessionTask *)task metrics:(NSURLSessionTaskMetrics *)metrics API_AVAILABLE(ios(10.0));
+
+@end
+
+@interface NSURLSessionTask (Canary)
+
+@property (nonatomic, copy) NSData *cn_receiveData;
 
 @end
 

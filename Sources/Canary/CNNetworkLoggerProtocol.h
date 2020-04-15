@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSData *requestBody;
 @property (nonatomic, copy, nullable) NSData *responseBody;
 @property (nonatomic, assign) NSUInteger statusCode;
+@property (nonatomic, strong) NSURLSessionTaskMetrics *metrics API_AVAILABLE(ios(10.0));
 
 @end
 

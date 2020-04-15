@@ -234,15 +234,74 @@
         mdict[@"requestbody"] = netLog.requestBody?:@{};
     }
     if ([netLog.responseBody isKindOfClass:[NSData class]]) {
-        mdict[@"responsebody"] = [NSJSONSerialization JSONObjectWithData:netLog.responseBody options:NSJSONReadingMutableLeaves error:nil];
+        if ([netLog.allResponseHTTPHeaderFields[@"Content-Type"] containsString:@"application/json"]) {
+            mdict[@"responsebody"] = [NSJSONSerialization JSONObjectWithData:netLog.responseBody options:NSJSONReadingMutableLeaves error:nil];
+        } else {
+            mdict[@"responsebody"] = netLog.responseBody.mj_JSONString;
+        }
     } else {
         mdict[@"responsebody"] = netLog.responseBody?:@{};
     }
     mdict[@"timestamp"] = @((NSUInteger)timestamp);
     mdict[@"statusCode"] = @(netLog.statusCode);
     mdict[@"type"] = @(2);
+    if (@available(iOS 10.0, *)) {
+        if (netLog.metrics) {
+            mdict[@"metrics"] = [self extractMetrics:netLog];
+        }
+    }
     msg.data = mdict;
     [MCWebSocket.shared sendMessage:msg];
+}
+
+- (NSDictionary *)extractMetrics:(id<CNNetworkLoggerProtocol>)netLog {
+    NSURLSessionTaskMetrics *metrics = netLog.metrics;
+    NSMutableDictionary *mdict = [metrics dictionaryWithValuesForKeys:@[@"redirectCount"]].mutableCopy;
+    mdict[@"taskInterval"] = @{@"duration":@(metrics.taskInterval.duration*1000),@"startDate":@(metrics.taskInterval.startDate.timeIntervalSince1970*1000),@"endDate":@(metrics.taskInterval.endDate.timeIntervalSince1970*1000)};
+    NSMutableArray *marr = [NSMutableArray array];
+    [metrics.transactionMetrics enumerateObjectsUsingBlock:^(NSURLSessionTaskTransactionMetrics * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSMutableDictionary *t = [obj dictionaryWithValuesForKeys:@[
+        @"fetchStartDate",
+        @"domainLookupStartDate",
+        @"domainLookupEndDate",
+        @"connectStartDate",
+        @"secureConnectionStartDate",
+        @"secureConnectionEndDate",
+        @"connectEndDate",
+        @"requestStartDate",
+        @"requestEndDate",
+        @"responseStartDate",
+        @"responseEndDate",
+        @"networkProtocolName",
+        @"proxyConnection",
+        @"reusedConnection",
+        @"resourceFetchType",
+        @"countOfRequestHeaderBytesSent",
+        @"countOfRequestBodyBytesSent",
+        @"countOfRequestBodyBytesBeforeEncoding",
+        @"countOfResponseHeaderBytesReceived",
+        @"countOfResponseBodyBytesReceived",
+        @"countOfResponseBodyBytesAfterDecoding",
+        @"localAddress",
+        @"localPort",
+        @"remoteAddress",
+        @"remotePort",
+        @"negotiatedTLSProtocolVersion",
+        @"negotiatedTLSCipherSuite",
+        @"cellular",
+        @"expensive",
+        @"constrained",
+        @"multipath",
+        ]].mutableCopy;
+        [t enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[NSDate class]]) {
+                t[key] = @([obj timeIntervalSince1970]*1000);
+            }
+        }];
+        [marr addObject:t];
+    }];
+    mdict[@"transactionMetrics"] = marr;
+    return mdict;
 }
 
 - (NSBundle *)resourceBundle {

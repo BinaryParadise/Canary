@@ -7,3 +7,4 @@
 //
 
 #import <Canary/CNManager.h>
+#import <Canary/CNNetLogMessage.h>

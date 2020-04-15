@@ -7,9 +7,12 @@
 //
 
 #import "ViewController.h"
-@import Canary;
+#import <Canary/Canary.h>
 
-@interface ViewController ()
+@interface ViewController () <NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
+
+@property (nonatomic, strong) NSURLSession *urlSession;
+
 
 @end
 
@@ -18,11 +21,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.urlSession = [NSURLSession sessionWithConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration delegate:self delegateQueue:[[NSOperationQueue alloc] init]];
 }
 
 - (IBAction)showConfig:(id)sender {
+    NSURLSessionDataTask *dataTask = [self.urlSession dataTaskWithURL:[NSURL URLWithString:@"http://cip.cc"]];
+    [dataTask resume];
     [CNManager.manager show];
 }
 
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+    if (@available(iOS 10, *)) {
+        dataTask.cn_receiveData = data;
+    } else {
+        [CNManager.manager storeNetworkLogger:[[CNNetLogMessage alloc] initWithSessionTask:dataTask data:data]];
+    }
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics API_AVAILABLE(ios(10.0)){
+    [CNManager.manager storeNetworkLogger:[[CNNetLogMessage alloc] initWithSessionTask:task metrics:metrics]];
+}
 
 @end
