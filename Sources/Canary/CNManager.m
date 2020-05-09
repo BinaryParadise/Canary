@@ -40,8 +40,10 @@
         self.appKey = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
         self.deviceId = [MCLoggerUtils identifier];
         self.frontendDefaults = [[NSUserDefaults alloc] initWithSuiteName:kMCSuiteName];
-        
-        self.remoteConfig = [self.frontendDefaults objectForKey:kMCRemoteConfig];
+        NSData *jsonData = [self.frontendDefaults objectForKey:kMCRemoteConfig];
+        if (jsonData && [jsonData isKindOfClass:[NSData class]]) {
+            self.remoteConfig = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+        }
         if (!self.remoteConfig) {
             NSString *configPath = [NSBundle.mainBundle pathForResource:@"Peregrine.bundle/RemoteConfig.json" ofType:nil];
             if (configPath) {
@@ -166,7 +168,7 @@
     if (code.intValue == 0) {
         if ([dict[@"data"] isKindOfClass:[NSArray class]]) {
             self.remoteConfig = dict[@"data"];
-            [self.frontendDefaults setObject:self.remoteConfig forKey:kMCRemoteConfig];
+            [self.frontendDefaults setObject:self.remoteConfig.mj_JSONData forKey:kMCRemoteConfig];
             [self switchToCurrentConfig];
         }
     }
