@@ -3,8 +3,8 @@ require 'yaml'
 require 'json'
 require 'net/http'
 
-BUILD_PHASE_NAME_FETCH_ENV = '[MC] Fetch Remote Config'
-BUILD_PHASE_VERION  = '1'
+CN_PHASE_NAME_FETCH_ENV = '[MC] Fetch Remote Config'
+CN_PHASE_VERION  = '1'
 
 class ProjectConfigurator
   attr_accessor :ruby_path  #本地开发模式路径
@@ -37,12 +37,12 @@ class ProjectConfigurator
 
       rubyfile = @ruby_path + "/Sources/Canary/ProjectConfigurator.rb"
 
-      phase = self.fetch_exist_phase(BUILD_PHASE_NAME_FETCH_ENV, project_target)
+      phase = self.fetch_exist_phase(CN_PHASE_NAME_FETCH_ENV, project_target)
       if phase.nil?
         phase = project_target.new_shell_script_build_phase(BUILD_PHASE_NAME_FETCH_ENV)
       end
 
-      phase.comments = BUILD_PHASE_VERION
+      phase.comments = CN_PHASE_VERION
       phase.shell_script = 'if [ "$CONFIGURATION" != "Release" ]; then
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
