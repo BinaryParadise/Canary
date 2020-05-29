@@ -1,6 +1,6 @@
 # Canary
 
-[![CI Status](https://img.shields.io/travis/Rake Yang/Canary.svg?style=flat)](https://travis-ci.org/Rake Yang/Canary)
+[![CI Status](https://img.shields.io/travis/BinaryParadise/Canary.svg?style=flat)](https://travis-ci.org/BinaryParadise/Canary)
 [![Version](https://img.shields.io/cocoapods/v/Canary.svg?style=flat)](https://cocoapods.org/pods/Canary)
 [![License](https://img.shields.io/cocoapods/l/Canary.svg?style=flat)](https://cocoapods.org/pods/Canary)
 [![Platform](https://img.shields.io/cocoapods/p/Canary.svg?style=flat)](https://cocoapods.org/pods/Canary)
@@ -11,14 +11,9 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-## Installation
+## Preview
 
-Canary is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'Canary'
-```
+![image](https://user-images.githubusercontent.com/8289395/83215048-9f6c5780-a198-11ea-8456-5df86c95d25e.png)
 
 ## Author
 
