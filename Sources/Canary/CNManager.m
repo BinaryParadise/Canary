@@ -142,6 +142,7 @@
 }
 
 - (void)hide {
+    self.coverWindow.rootViewController = nil;
     [self.coverWindow removeFromSuperview];
     self.coverWindow = nil;
 }

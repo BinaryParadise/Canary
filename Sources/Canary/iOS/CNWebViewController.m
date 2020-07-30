@@ -51,9 +51,6 @@
 
 - (void)closeView:(id)sender {
     [CNManager.manager hide];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [CNManager.manager hide];
-    }];
 }
 
 #pragma mark XCDataLoaderDelegate
