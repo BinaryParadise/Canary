@@ -5,13 +5,13 @@ PODS:
     - SAMKeychain (~> 1.5)
     - SocketRocket (~> 0.5)
   - Canary/Core (0.2.4):
-    - CocoaLumberjack (<= 3.5.2)
+    - CocoaLumberjack
     - MJExtension
     - SAMKeychain (~> 1.5)
     - SocketRocket (~> 0.5)
   - Canary/Swift (0.2.4):
     - Canary/Core
-    - CocoaLumberjack/Swift (<= 3.5.2)
+    - CocoaLumberjack/Swift
     - MJExtension
     - SAMKeychain (~> 1.5)
     - SocketRocket (~> 0.5)
@@ -59,7 +59,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Canary: a8e83aafddf4e8ed93b6e1c14d18848c93ed481f
+  Canary: bb57beeab62ef756f4611c1bf5d9d14cadf7001d
   CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   MJExtension: 635f2c663dcb1bf76fa4b715b2570a5710aec545

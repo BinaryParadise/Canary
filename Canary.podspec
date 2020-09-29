@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
   
   s.swift_version = '4.0'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.11'
 
   s.default_subspecs = 'Core'
@@ -38,13 +38,13 @@ TODO: Add long description of the pod here.
   s.subspec 'Core' do |ss|
     ss.ios.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/iOS/*'
     ss.osx.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/macOS/*'
-    ss.dependency 'CocoaLumberjack', '<= 3.5.2'
+    ss.dependency 'CocoaLumberjack'
   end
 
   s.subspec 'Swift' do |ss|
     ss.source_files = 'Sources/CanarySwift/*'
     ss.dependency   'Canary/Core'
-    ss.dependency 'CocoaLumberjack/Swift', '<= 3.5.2'
+    ss.dependency 'CocoaLumberjack/Swift'
   end
   
   s.resource_bundle = {'Canary' => ['Sources/Assets/*']}

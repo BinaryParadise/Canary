@@ -27,10 +27,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showNetLog(_ sender: Any) {
-        var request = URLRequest.init(url: URL.init(string: "https://y.neverland.life/api/conf/full?appkey=com.binaryparadise.neverland&os=iOS")!)
+        let request = URLRequest.init(url: URL.init(string: "https://y.neverland.life/api/conf/full?appkey=com.binaryparadise.neverland&os=iOS")!)
 //        request.httpBody = "{\"test\": \"param\"}".data(using: String.Encoding.utf8)
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            CNManager()?.storeNetworkLogger(CNNetLogMessage.init(reqest: request, resposne: response as! HTTPURLResponse, data: data!))
+            CNManager()?.storeNetworkLogger(CNNetLogMessage.init(reqest: request, resposne: response as? HTTPURLResponse, data: data))
         }.resume()
     }
 

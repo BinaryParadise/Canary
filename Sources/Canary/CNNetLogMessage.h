@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSData *responseBody;
 @property (nonatomic, assign) NSUInteger statusCode;
 
-- (instancetype)initWithReqest:(NSURLRequest *)request resposne:(NSHTTPURLResponse *)response data:(NSData *)data;
+- (instancetype)initWithReqest:(NSURLRequest *)request resposne:(nullable NSHTTPURLResponse *)response data:(nullable NSData *)data;
 
 @end
 
