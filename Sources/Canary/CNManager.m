@@ -11,7 +11,6 @@
 #import "MCLoggerUtils.h"
 #import "MCLogger.h"
 #import "MCFrontendLogFormatter.h"
-#import "Internal/MCDatabase.h"
 #import "Internal/MCWebSocket.h"
 #import <MJExtension/MJExtension.h>
 #if TARGET_OS_IPHONE
@@ -213,16 +212,7 @@
 }
 
 - (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog {
-    NSMutableArray *args = [NSMutableArray array];
     NSTimeInterval timestamp = NSDate.date.timeIntervalSince1970*1000;
-    [args addObject:@((NSUInteger)timestamp)];
-    [args addObject:netLog.method];
-    [args addObject:netLog.requestURL.absoluteString];
-    [args addObject:netLog.allRequestHTTPHeaderFields.mj_JSONString?:NSNull.null];
-    [args addObject:netLog.allResponseHTTPHeaderFields.mj_JSONString?:NSNull.null];
-    [args addObject:netLog.requestBody?:NSNull.null];
-    [args addObject:netLog.responseBody?:NSNull.null];
-    [MCDatabase.defaultDB executeUpdate:@"INSERT INTO CNNetLog(timestamp, method,url,requestfields,responsefields,requestbody,responsebody) values(?, ?,?,?,?,?,?)" arguments:args];
     
     MCWebSocketMessage *msg = [MCWebSocketMessage messageWithType:MCMessageTypeNetLogger];
     NSMutableDictionary *mdict = [NSMutableDictionary dictionary];

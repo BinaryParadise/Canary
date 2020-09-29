@@ -38,7 +38,6 @@ TODO: Add long description of the pod here.
   s.subspec 'Core' do |ss|
     ss.ios.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/iOS/*'
     ss.osx.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/macOS/*'
-    ss.dependency 'FMDB', '~> 2.7.0'
     ss.dependency 'CocoaLumberjack', '<= 3.5.2'
   end
 
@@ -49,6 +48,7 @@ TODO: Add long description of the pod here.
   end
   
   s.resource_bundle = {'Canary' => ['Sources/Assets/*']}
+  s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1' }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
