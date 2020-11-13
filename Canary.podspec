@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Canary'
-  s.version          = '0.2.5'
+  s.version          = '0.3.0'
   s.summary          = 'Canary is SDK For CanaryWeb.'
 
 # This description is used to generate tags and improve search results.
@@ -55,4 +55,5 @@ TODO: Add long description of the pod here.
   s.dependency 'MJExtension'
   s.dependency 'SAMKeychain', '~> 1.5'
   s.dependency 'SocketRocket', '~> 0.5'
+  s.dependency 'AFNetworking'
 end

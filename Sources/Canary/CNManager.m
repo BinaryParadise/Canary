@@ -19,6 +19,8 @@
 #define kMCSuiteName @"com.binaryparadise.frontendkit"
 #define kMCRemoteConfig @"remoteConfig"
 #define kMCCurrentName @"currenName"
+#import <AFNetworking/AFNetworking.h>
+#import "CNNetLogMessage.h"
 
 @interface CNManager ()
 
@@ -209,6 +211,32 @@
     [DDLog addLogger:DDTTYLogger.sharedInstance];
     MCLogger.sharedInstance.customProfileBlock = customProfileBlock;
     [MCLogger.sharedInstance startWithAppKey:self.appKey domain:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/channel", self.baseURL.scheme, self.baseURL.host, self.baseURL.port?[NSString stringWithFormat:@":%@",self.baseURL.port]:@""]]];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(af_didRquestDidFinish:) name:AFNetworkingTaskDidCompleteNotification object:nil];
+}
+
+- (void)af_didRquestDidFinish:(NSNotification *)notification {
+    NSURLSessionTask *task = [notification object];
+    NSURLRequest *request = task.originalRequest;
+    NSURLResponse *response = task.response;
+
+    if (!request && !response) {
+        return;
+    }
+    
+    NSUInteger responseStatusCode = 0;
+    if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
+        responseStatusCode = (NSUInteger)[(NSHTTPURLResponse *)task.response statusCode];
+    }
+    
+    NSError *error = notification.userInfo[AFNetworkingTaskDidCompleteErrorKey];
+    
+    id responseObject = notification.userInfo[AFNetworkingTaskDidCompleteSerializedResponseKey];
+    
+    id responseData = notification.userInfo[AFNetworkingTaskDidCompleteResponseDataKey];
+    if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
+        [self storeNetworkLogger:[[CNNetLogMessage alloc] initWithReqest:request resposne:response data:responseObject?:responseData]];
+    }
 }
 
 - (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog {

@@ -34,7 +34,7 @@
 /// 当前配置名称，未设置默认时自动取默认环境
 @property (nonatomic, copy) NSString *currentName;
 
-/// 师傅启用调试模式，默认为NO
+/// 是否启用调试模式，默认为NO
 @property (nonatomic, assign) BOOL enableDebug;
 
 /// 测试入口
@@ -56,11 +56,11 @@
 
 #pragma mark - 日志监控
 
-/// 启动日志监控服务
+/// 启动日志（含网络请求）监控服务
 /// @param customProfileBlock 自定义附加信息
 - (void)startLogMonitor:(NSDictionary<NSString *, id> * (^)(void))customProfileBlock;
 
-/// 存储日志到本地数据库并同步到金丝雀前端页面
+/// 将网络请求记录同步到金丝雀前端展示
 - (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog;
 
 - (NSBundle *)resourceBundle;
