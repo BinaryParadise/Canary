@@ -35,13 +35,13 @@ class CanaryWebSocket: NSObject {
         if isReady() {
             mySocket.close()
         }
-        let fullURL = URL(string: "\(webSocketURL)/\(UIDevice.current.systemName)/\(CanarySwift.shared.deviceId)")
+        let fullURL = URL(string: "\(webSocketURL)/\(UIDevice.current.systemName)/\(CanarySwift.shared.deviceId!)")
         mySocket = SRWebSocket(url: fullURL!)
         mySocket.delegate = self
         
         if pingTimer == nil {
             pingTimer = Timer.scheduledTimer(timeInterval: retryInterval, target: self, selector: #selector(pingAction), userInfo: nil, repeats: true)
-            RunLoop.main.add(pingTimer!, forMode: .defaultRunLoopMode)
+            RunLoop.main.add(pingTimer!, forMode: .default)
         }
         pingTimer?.fire()
         mySocket.open()

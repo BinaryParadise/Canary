@@ -14,20 +14,13 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - Canary/Core (0.4.0):
+  - Canary (0.4.0):
     - AFNetworking
-    - CocoaLumberjack
-    - SocketRocket (~> 0.5)
-  - Canary/Swift (0.4.0):
-    - AFNetworking
-    - Canary/Core
     - CocoaLumberjack/Swift
     - SnapKit
     - SocketRocket (~> 0.5)
     - SwifterSwift
     - SwiftyJSON
-  - CocoaLumberjack (3.7.0):
-    - CocoaLumberjack/Core (= 3.7.0)
   - CocoaLumberjack/Core (3.7.0)
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
@@ -69,7 +62,7 @@ PODS:
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
-  - Canary/Swift (from `../`)
+  - Canary (from `../`)
   - Nimble (~> 7.0)
   - Nimble-Snapshots (~> 6.3.0)
   - Quick (~> 1.2.0)
@@ -93,7 +86,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  Canary: 8bcc366a647407ba9c30f6fb8ea7d52a9ffb6ecf
+  Canary: f7db868ee9f0e97ccb15aba2b1d97be61fe2a940
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
@@ -104,6 +97,6 @@ SPEC CHECKSUMS:
   SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 7de4d2426b30798e7afa37cebec85871c63cb472
+PODFILE CHECKSUM: c7006c513df8c04daa58b6e602e5fa6be62984f2
 
 COCOAPODS: 1.10.0

@@ -26,36 +26,22 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Rake Yang' => 'fenglaijun@gmail.com' }
   s.source           = { :git => 'https://github.com/BinaryParadise/Canary.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
-  s.swift_version = '4.0'
+  s.swift_version = '4.2'
 
   s.ios.deployment_target = '9.0'
-
-  s.default_subspecs = 'Core'
   
-  s.user_target_xcconfig = { "DEFINES_MODULE" => "YES" }
   s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
-
-  s.subspec 'Core' do |ss|
-    ss.ios.source_files = 'Sources/Canary/*', 'Sources/Canary/iOS/*'
-    ss.dependency 'CocoaLumberjack'
-  end
-
-  s.subspec 'Swift' do |ss|
-    ss.source_files = 'Sources/CanarySwift/**/*'
-    ss.dependency   'Canary/Core'
-    ss.dependency 'CocoaLumberjack/Swift'
-    ss.dependency 'SwifterSwift'
-    ss.dependency 'SnapKit'
-    ss.dependency 'SwiftyJSON'
-  end
   
   s.resource_bundle = {'Canary' => ['Sources/Assets/*']}
   s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1' }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.source_files = 'Sources/CanarySwift/**/*'
+  s.dependency 'CocoaLumberjack/Swift'
+  s.dependency 'SwifterSwift'
+  s.dependency 'SnapKit'
+  s.dependency 'SwiftyJSON'
   s.dependency 'SocketRocket', '~> 0.5'
   s.dependency 'AFNetworking'
+
 end

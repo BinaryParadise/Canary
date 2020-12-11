@@ -8,6 +8,14 @@
 import Foundation
 import SnapKit
 
+func safeBottom() -> CGFloat {
+    if #available(iOS 11.0, *) {
+        return UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+    } else {
+        return 0
+    }
+}
+
 class CanaryViewController: UIViewController {
     var tableView = UITableView(frame: .zero, style: .plain)
     let datas = ["环境配置", "Mock数据"]
@@ -56,9 +64,9 @@ extension CanaryViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
+            navigationController?.pushViewController(ConfigurationViewController(), animated: true)
         } else if indexPath.row == 1 {
-            
+            navigationController?.pushViewController(MockGroupViewController(), animated: true)
         }
     }
 }

@@ -47,7 +47,7 @@ extension CanarySwift {
         TTYLoggerAdapter.shared.customProfile = customProfile
         let url = URL(string: baseURL!)!
         let port = url.port == nil ? "": ":\(url.port!)"
-        TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/channel")!)
+        TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/api/channel")!)
         
         NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: NSNotification.Name.AFNetworkingTaskDidComplete, object: nil)
     }
