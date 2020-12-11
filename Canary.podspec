@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Canary'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.summary          = 'Canary is SDK For CanaryWeb.'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.swift_version = '4.0'
 
   s.ios.deployment_target = '9.0'
-  s.osx.deployment_target = '10.11'
+  s.osx.deployment_target = '10.12'
 
   s.default_subspecs = 'Core'
   
@@ -42,9 +42,13 @@ TODO: Add long description of the pod here.
   end
 
   s.subspec 'Swift' do |ss|
-    ss.source_files = 'Sources/CanarySwift/*'
+    ss.source_files = 'Sources/CanarySwift/**/*'
     ss.dependency   'Canary/Core'
     ss.dependency 'CocoaLumberjack/Swift'
+    ss.dependency 'SwifterSwift'
+    ss.dependency 'SnapKit'
+    ss.dependency 'SwiftyJSON'
+
   end
   
   s.resource_bundle = {'Canary' => ['Sources/Assets/*']}

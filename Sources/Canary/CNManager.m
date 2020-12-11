@@ -38,7 +38,6 @@
 {
     self = [super init];
     if (self) {
-        self.appKey = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleIdentifier"];
         self.deviceId = [MCLoggerUtils identifier];
         self.frontendDefaults = [[NSUserDefaults alloc] initWithSuiteName:kMCSuiteName];
         NSData *jsonData = [self.frontendDefaults objectForKey:kMCRemoteConfig];
@@ -150,7 +149,7 @@
 #endif
 
 - (void)fetchRemoteConfig:(void (^)(void))completion {
-    NSString *confURL = [NSString stringWithFormat:@"%@/api/conf/full?appkey=%@", self.baseURL.absoluteURL, self.appKey];
+    NSString *confURL = [NSString stringWithFormat:@"%@/api/conf/full?appkey=%@", self.baseURL.absoluteURL, self.appSecret];
     NSURLSessionDataTask *task = [NSURLSession.sharedSession dataTaskWithURL:[NSURL URLWithString:confURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!error) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
@@ -210,7 +209,7 @@
     DDTTYLogger.sharedInstance.logFormatter = [MCFrontendLogFormatter new];
     [DDLog addLogger:DDTTYLogger.sharedInstance];
     MCLogger.sharedInstance.customProfileBlock = customProfileBlock;
-    [MCLogger.sharedInstance startWithAppKey:self.appKey domain:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/channel", self.baseURL.scheme, self.baseURL.host, self.baseURL.port?[NSString stringWithFormat:@":%@",self.baseURL.port]:@""]]];
+    [MCLogger.sharedInstance startWithAppKey:self.appSecret domain:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/channel", self.baseURL.scheme, self.baseURL.host, self.baseURL.port?[NSString stringWithFormat:@":%@",self.baseURL.port]:@""]]];
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(af_didRquestDidFinish:) name:AFNetworkingTaskDidCompleteNotification object:nil];
 }
