@@ -31,10 +31,10 @@ TODO: Add long description of the pod here.
   s.swift_version = '4.0'
 
   s.ios.deployment_target = '9.0'
-  s.osx.deployment_target = '10.12'
 
   s.default_subspecs = 'Core'
-  
+  s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
+
   s.subspec 'Core' do |ss|
     ss.ios.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/iOS/*'
     ss.osx.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/macOS/*'
@@ -48,7 +48,6 @@ TODO: Add long description of the pod here.
     ss.dependency 'SwifterSwift'
     ss.dependency 'SnapKit'
     ss.dependency 'SwiftyJSON'
-
   end
   
   s.resource_bundle = {'Canary' => ['Sources/Assets/*']}
