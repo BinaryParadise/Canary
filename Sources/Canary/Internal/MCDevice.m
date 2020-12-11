@@ -33,13 +33,6 @@
         self.osName = UIDevice.currentDevice.systemName;
         self.osVersion = UIDevice.currentDevice.systemVersion;
         self.modelName = UIDevice.currentDevice.localizedModel;
-#elif TARGET_OS_MAC
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
-        self.name = NSHost.currentHost.localizedName;
-        self.osName = dict[@"ProductName"];
-        self.osVersion = [dict objectForKey:@"ProductVersion"];
-        self.modelName = [self modelIdentifier];
-#endif
         self.ipAddrs = [self getIPAddresses];
         self.appVersion = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
         self.simulator = TARGET_OS_SIMULATOR;

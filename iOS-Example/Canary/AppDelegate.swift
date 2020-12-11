@@ -20,13 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let manager = CNManager()!
         manager.appSecret = "82e439d7968b7c366e24a41d7f53f47d"
         manager.enableDebug = true
-        manager.baseURL = URL.init(string: "http://127.0.0.1:8081")
-        manager.startLogMonitor { () -> [String : Any]? in
-            return ["test" : "89897923561987341897", "number": 10086, "dict": ["extra": "嵌套对象"]]
-        }
         CanarySwift.shared.appSecret = "82e439d7968b7c366e24a41d7f53f47d"
         CanarySwift.shared.baseURL = "http://127.0.0.1:8081"
         CanarySwift.shared.isMockEnabled = true
+        CanarySwift.shared.startLogger { () -> [String : Any] in
+            return ["test" : "89897923561987341897", "number": 10086, "dict": ["extra": "嵌套对象"]]
+        }
         return true
     }
 

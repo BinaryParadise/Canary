@@ -38,8 +38,7 @@ TODO: Add long description of the pod here.
   s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
 
   s.subspec 'Core' do |ss|
-    ss.ios.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/iOS/*'
-    ss.osx.source_files = 'Sources/Canary/Internal/*', 'Sources/Canary/*', 'Sources/Canary/macOS/*'
+    ss.ios.source_files = 'Sources/Canary/*', 'Sources/Canary/iOS/*'
     ss.dependency 'CocoaLumberjack'
   end
 
@@ -57,7 +56,6 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'MJExtension'
   s.dependency 'SocketRocket', '~> 0.5'
   s.dependency 'AFNetworking'
 end

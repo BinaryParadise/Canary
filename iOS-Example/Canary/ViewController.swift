@@ -8,6 +8,7 @@
 
 import UIKit
 import Canary
+import CocoaLumberjack
 
 class ViewController: UIViewController {
 
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
         DDLogWarn("warning...")
         DDLogError("error")
         
-        CNManager()?.show()
+        CanarySwift.shared.show()
     }
     
     @IBAction func showNetLog(_ sender: Any) {
@@ -31,10 +32,6 @@ class ViewController: UIViewController {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             print("\(String(data: data ?? Data(), encoding: .utf8))")
         }.resume()
-    }
-    
-    @IBAction func showMockData(_ sender: Any) {
-        CanarySwift.shared.showMock()
     }
     
     @IBAction func showDoraemon(_ sender: Any) {

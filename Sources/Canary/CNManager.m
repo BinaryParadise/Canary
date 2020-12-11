@@ -8,14 +8,6 @@
 
 #import "CNManager.h"
 #import "MCFrontendKitViewController.h"
-#import "MCLoggerUtils.h"
-#import "MCLogger.h"
-#import "MCFrontendLogFormatter.h"
-#import "Internal/MCWebSocket.h"
-#import <MJExtension/MJExtension.h>
-#if TARGET_OS_IPHONE
-#import "CNWebViewController.h"
-#endif
 #define kMCSuiteName @"com.binaryparadise.frontendkit"
 #define kMCRemoteConfig @"remoteConfig"
 #define kMCCurrentName @"currenName"
@@ -78,75 +70,6 @@
     [self switchToCurrentConfig];
 }
 
-- (void)show {
-#if TARGET_OS_IPHONE
-    [self show:UIWindowLevelStatusBar+9];
-}
-
-- (void)show:(UIWindowLevel)level {
-
-    UIWindow *window = [UIWindow.alloc initWithFrame:UIScreen.mainScreen.bounds];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:MCFrontendKitViewController.new];
-    window.rootViewController = nav;
-    window.windowLevel = level;
-    [window makeKeyAndVisible];
-    self.coverWindow = window;
-//    nav.modalPresentationStyle = UIModalPresentationPopover;
-//    UIViewController *popVC = UIApplication.sharedApplication.keyWindow.rootViewController;
-//    if (popVC.presentedViewController) {
-//        popVC = popVC.presentedViewController;
-//    }
-//    [popVC presentViewController:nav animated:YES completion:nil];
-
-#else
-    NSWindow *newWindow = [[NSWindow alloc] initWithContentRect:CGRectMake(0, 0, 300, 600) styleMask:NSWindowStyleMaskClosable|NSWindowStyleMaskTitled backing:NSBackingStoreBuffered defer:YES];
-    newWindow.contentViewController = [[MCFrontendKitViewController alloc] initWithNibName:nil bundle:[self resourceBundle]];
-    newWindow.title = @"环境配置";
-    newWindow.hasShadow = YES;
-    [newWindow center];
-    [newWindow orderFront:nil];
-#endif
-}
-
-#if TARGET_OS_IPHONE
-
-- (void)showWebView {
-    UIWindow *window = [UIWindow.alloc initWithFrame:UIScreen.mainScreen.bounds];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:CNWebViewController.new];
-    window.rootViewController = nav;
-    window.windowLevel = UIWindowLevelStatusBar+10;
-    [window makeKeyAndVisible];
-    self.coverWindow = window;
-}
-
-+ (UIViewController *)cn_currentViewControoler {
-    NSAssert([NSThread isMainThread], @"非主线程");
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    UIViewController *currentViewController = window.rootViewController;
-
-    do {
-        if (currentViewController.presentedViewController) {
-            currentViewController = currentViewController.presentedViewController;
-        } else {
-            if ([currentViewController isKindOfClass:[UINavigationController class]]) {
-                currentViewController = ((UINavigationController *)currentViewController).visibleViewController;
-            } else if ([currentViewController isKindOfClass:[UITabBarController class]]) {
-                currentViewController = ((UITabBarController* )currentViewController).selectedViewController;
-            } else {
-                break;
-            }
-        }
-    } while (YES);
-    return currentViewController;
-}
-
-- (void)hide {
-    self.coverWindow.rootViewController = nil;
-    [self.coverWindow removeFromSuperview];
-    self.coverWindow = nil;
-}
-#endif
-
 - (void)fetchRemoteConfig:(void (^)(void))completion {
     NSString *confURL = [NSString stringWithFormat:@"%@/api/conf/full?appkey=%@", self.baseURL.absoluteURL, self.appSecret];
     NSURLSessionDataTask *task = [NSURLSession.sharedSession dataTaskWithURL:[NSURL URLWithString:confURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -168,7 +91,8 @@
     if (code.intValue == 0) {
         if ([dict[@"data"] isKindOfClass:[NSArray class]]) {
             self.remoteConfig = dict[@"data"];
-            [self.frontendDefaults setObject:self.remoteConfig.mj_JSONData forKey:kMCRemoteConfig];
+            NSData *data = [NSJSONSerialization dataWithJSONObject:self.remoteConfig options:NSJSONWritingPrettyPrinted error:nil];
+            [self.frontendDefaults setObject:data forKey:kMCRemoteConfig];
             [self switchToCurrentConfig];
         }
     }
@@ -200,72 +124,6 @@
     NSDictionary *dict = [subItems filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name=%@", key]].firstObject;
     NSString *value = dict[@"value"];
     return value?:def;
-}
-
-#pragma mark - 日志监控
-
-- (void)startLogMonitor:(NSDictionary<NSString *,id> *(^)(void))customProfileBlock {
-    DDTTYLogger.sharedInstance.logFormatter = [MCFrontendLogFormatter new];
-    [DDLog addLogger:DDTTYLogger.sharedInstance];
-    MCLogger.sharedInstance.customProfileBlock = customProfileBlock;
-    [MCLogger.sharedInstance startWithAppKey:self.appSecret domain:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/channel", self.baseURL.scheme, self.baseURL.host, self.baseURL.port?[NSString stringWithFormat:@":%@",self.baseURL.port]:@""]]];
-    
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(af_didRquestDidFinish:) name:AFNetworkingTaskDidCompleteNotification object:nil];
-}
-
-- (void)af_didRquestDidFinish:(NSNotification *)notification {
-    NSURLSessionTask *task = [notification object];
-    NSURLRequest *request = task.originalRequest;
-    NSURLResponse *response = task.response;
-
-    if (!request && !response) {
-        return;
-    }
-    
-    NSUInteger responseStatusCode = 0;
-    if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
-        responseStatusCode = (NSUInteger)[(NSHTTPURLResponse *)task.response statusCode];
-    }
-    
-    NSError *error = notification.userInfo[AFNetworkingTaskDidCompleteErrorKey];
-    
-    id responseObject = notification.userInfo[AFNetworkingTaskDidCompleteSerializedResponseKey];
-    
-    id responseData = notification.userInfo[AFNetworkingTaskDidCompleteResponseDataKey];
-    if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
-        [self storeNetworkLogger:[[CNNetLogMessage alloc] initWithReqest:request resposne:response data:responseObject?:responseData]];
-    }
-}
-
-- (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog {
-    NSTimeInterval timestamp = NSDate.date.timeIntervalSince1970*1000;
-    
-    MCWebSocketMessage *msg = [MCWebSocketMessage messageWithType:MCMessageTypeNetLogger];
-    NSMutableDictionary *mdict = [NSMutableDictionary dictionary];
-    mdict[@"flag"] = @(DDLogFlagInfo);
-    mdict[@"method"] = netLog.method;
-    mdict[@"url"] = netLog.requestURL.absoluteString;
-    mdict[@"requestfields"] = netLog.allRequestHTTPHeaderFields?:NSNull.null;
-    mdict[@"responsefields"] = netLog.allResponseHTTPHeaderFields?:NSNull.null;
-    if ([netLog.requestBody isKindOfClass:[NSData class]]) {
-        mdict[@"requestbody"] = [NSJSONSerialization JSONObjectWithData:netLog.requestBody?:NSData.data options:NSJSONReadingMutableLeaves error:nil];
-    } else {
-        mdict[@"requestbody"] = netLog.requestBody?:@{};
-    }
-    if ([netLog.responseBody isKindOfClass:[NSData class]]) {
-        mdict[@"responsebody"] = [NSJSONSerialization JSONObjectWithData:netLog.responseBody options:NSJSONReadingMutableLeaves error:nil];
-    } else {
-        mdict[@"responsebody"] = netLog.responseBody?:@{};
-    }
-    mdict[@"timestamp"] = @((NSUInteger)timestamp);
-    mdict[@"statusCode"] = @(netLog.statusCode);
-    mdict[@"type"] = @(2);
-    msg.data = mdict;
-    [MCWebSocket.shared sendMessage:msg];
-}
-
-- (NSBundle *)resourceBundle {
-    return [NSBundle bundleWithPath:[[NSBundle bundleForClass:self.class].bundlePath stringByAppendingString:@"/Canary.bundle"]];
 }
 
 @end

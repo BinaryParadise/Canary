@@ -54,15 +54,4 @@
 /// @param def 默认值
 - (NSString *)stringForKey:(NSString *)key def:(NSString *)def;
 
-#pragma mark - 日志监控
-
-/// 启动日志（含网络请求）监控服务
-/// @param customProfileBlock 自定义附加信息
-- (void)startLogMonitor:(NSDictionary<NSString *, id> * (^)(void))customProfileBlock;
-
-/// 将网络请求记录同步到金丝雀前端展示
-- (void)storeNetworkLogger:(id<CNNetworkLoggerProtocol>)netLog;
-
-- (NSBundle *)resourceBundle;
-
 @end

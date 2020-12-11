@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-private let suiteName = "com.binaryparadise.canary"
+let suiteName = "com.binaryparadise.canary"
 
 /// 接口状态
 struct MockSwitch: Codable {
