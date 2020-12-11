@@ -16,7 +16,7 @@
 /// 前端服务地址，例如 https://frontend.zhegebula.top
 @property (nonatomic, copy) NSURL *baseURL;
 
-/// 设备唯一标识（默认自动生成）
+/// 设备唯一标识
 @property (nonatomic, copy) NSString *deviceId;
 
 /// 应用标识（添加应用生成的唯一标识）

@@ -64,7 +64,7 @@ if (CNManager.manager.enableDebug) {\
     }
     NSAssert(self.webSocketURL, @"请设置WebSocket服务地址");
     self.mySocket = nil;
-    NSURL *fullURL = [NSURL URLWithString:[self.webSocketURL stringByAppendingFormat:@"/%@/%@", [MCLoggerUtils systemName], [MCLoggerUtils identifier]]];
+    NSURL *fullURL = [NSURL URLWithString:[self.webSocketURL stringByAppendingFormat:@"/%@/%@", [MCLoggerUtils systemName], [CNManager.manager deviceId]]];
     self.mySocket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:fullURL]];
     self.mySocket.delegate = self;
     

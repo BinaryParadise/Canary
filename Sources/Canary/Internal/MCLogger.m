@@ -11,6 +11,7 @@
 #import "MCWebSocket.h"
 #import "MCTTYLogger.h"
 #import "MCDevice.h"
+#import "CNManager.h"
 
 @interface MCLogger () <MCMessageProtocol>
 
@@ -29,14 +30,6 @@
     return instance;
 }
 
-- (void)setIdentifier:(NSString *)identifier {
-    [MCLoggerUtils setIdentifier:identifier];
-}
-
-- (NSString *)identifier {
-    return [MCLoggerUtils identifier];
-}
-
 - (void)startWithAppKey:(NSString *)appKey domain:(NSURL *)domain {
     self.appKey = appKey;
     [DDLog addLogger:[MCTTYLogger sharedInstance]];
@@ -51,7 +44,7 @@
     MCWebSocketMessage *msg = [MCWebSocketMessage messageWithType:MCMessageTypeRegisterDevice];
     msg.appKey = self.appKey;
     MCDevice *device = MCDevice.new;
-    device.deviceId = [self identifier];
+    device.deviceId = [CNManager.manager deviceId];
     device.appKey = self.appKey;
     if (self.customProfileBlock) {
         device.profile = self.customProfileBlock();

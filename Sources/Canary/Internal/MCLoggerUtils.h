@@ -8,13 +8,6 @@
 
 @interface MCLoggerUtils : NSObject
 
-/**
- 存储在Keychain中的唯一标志
- */
-+ (NSString *)identifier;
-
-+ (void)setIdentifier:(NSString *)identifier;
-
 + (NSString *)systemName;
 
 @end

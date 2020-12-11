@@ -9,6 +9,7 @@
 #import "MCTTYLogger.h"
 #import "MCWebSocket.h"
 #import "MCLoggerUtils.h"
+#import "CNManager.h"
 
 static NSArray<NSString *> *keys;
 static MCTTYLogger *instance;
@@ -57,7 +58,7 @@ static MCTTYLogger *instance;
         NSMutableDictionary *mdict = [[logMessage dictionaryWithValuesForKeys:keys] mutableCopy];
         mdict[@"appVersion"] = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         mdict[@"timestamp"] = [NSNumber numberWithLongLong:logMessage.timestamp.timeIntervalSince1970*1000];
-        mdict[@"deviceId"] = [MCLoggerUtils identifier];
+        mdict[@"deviceId"] = [CNManager.manager deviceId];
         mdict[@"type"] = @(1);
         mesage.data = mdict;
         [[MCWebSocket shared] sendMessage:mesage];

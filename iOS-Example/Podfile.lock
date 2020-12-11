@@ -18,14 +18,12 @@ PODS:
     - AFNetworking
     - CocoaLumberjack
     - MJExtension
-    - SAMKeychain (~> 1.5)
     - SocketRocket (~> 0.5)
   - Canary/Swift (0.4.0):
     - AFNetworking
     - Canary/Core
     - CocoaLumberjack/Swift
     - MJExtension
-    - SAMKeychain (~> 1.5)
     - SnapKit
     - SocketRocket (~> 0.5)
     - SwifterSwift
@@ -48,7 +46,6 @@ PODS:
     - FBSnapshotTestCase (~> 2.0)
     - Nimble (~> 7.0)
   - Quick (1.2.0)
-  - SAMKeychain (1.5.3)
   - SnapKit (4.2.0)
   - SocketRocket (0.5.1)
   - SwifterSwift (5.1.0):
@@ -89,7 +86,6 @@ SPEC REPOS:
     - Nimble
     - Nimble-Snapshots
     - Quick
-    - SAMKeychain
     - SnapKit
     - SocketRocket
     - SwifterSwift
@@ -101,14 +97,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  Canary: e6b6993ddaad186291fbbbb136b9a9c4ec569e5b
+  Canary: 625d91c36d8afc81e6de452ee437e705a08dd219
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   MJExtension: d9b9c74cbdeb724c1e9ecbb157b318276e62e876
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  SAMKeychain: 483e1c9f32984d50ca961e26818a534283b4cd5c
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b

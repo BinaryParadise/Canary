@@ -33,6 +33,8 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
 
   s.default_subspecs = 'Core'
+  
+  s.user_target_xcconfig = { "DEFINES_MODULE" => "YES" }
   s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
 
   s.subspec 'Core' do |ss|
@@ -56,7 +58,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MJExtension'
-  s.dependency 'SAMKeychain', '~> 1.5'
   s.dependency 'SocketRocket', '~> 0.5'
   s.dependency 'AFNetworking'
 end

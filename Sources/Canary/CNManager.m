@@ -38,7 +38,6 @@
 {
     self = [super init];
     if (self) {
-        self.deviceId = [MCLoggerUtils identifier];
         self.frontendDefaults = [[NSUserDefaults alloc] initWithSuiteName:kMCSuiteName];
         NSData *jsonData = [self.frontendDefaults objectForKey:kMCRemoteConfig];
         if (jsonData && [jsonData isKindOfClass:[NSData class]]) {
