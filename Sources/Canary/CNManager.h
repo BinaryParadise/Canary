@@ -13,14 +13,14 @@
 
 @interface CNManager : NSObject
 
-/// 前端服务地址，例如 https://frontend.binaryparadise.org
+/// 前端服务地址，例如 https://frontend.zhegebula.top
 @property (nonatomic, copy) NSURL *baseURL;
 
-/// 设备唯一标识（不设置会自动生成）
+/// 设备唯一标识（默认自动生成）
 @property (nonatomic, copy) NSString *deviceId;
 
-/// 应用标识，默认为CFBundleIdentifier
-@property (nonatomic, copy) NSString *appKey;
+/// 应用标识（添加应用生成的唯一标识）
+@property (nonatomic, copy, nonnull) NSString *appSecret;
 
 - (instancetype)init NS_UNAVAILABLE;
 

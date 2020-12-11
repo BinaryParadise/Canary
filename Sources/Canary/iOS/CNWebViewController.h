@@ -1,9 +1,9 @@
 //
 //  CNWebViewController.h
-//  vip8
+//  Canary
 //
 //  Created by Rake Yang on 2020/1/7.
-//  Copyright © 2020 xin818 inc. All rights reserved.
+//  Copyright © 2020 BinaryParadise inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

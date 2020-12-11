@@ -1,0 +1,20 @@
+use_frameworks!
+use_modular_headers!
+
+target 'Canary_Example' do
+  platform :ios, '9.0'
+  pod 'Canary/Swift', :path => '../'
+  
+  target 'Canary_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble', '~> 7.0'
+    pod 'Nimble-Snapshots' , '~> 6.3.0'
+  end
+end
+
+post_install do |installer|
+  require_relative '../Sources/Canary/ProjectConfigurator.rb'
+  ProjectConfigurator::configure_project(installer, 'com.binaryparadise.neverland', 'http://127.0.0.1:8081')
+end
