@@ -65,8 +65,16 @@ class TTYLoggerAdapter: NSObject {
         let device = DeviceMessage()
         device.deviceId = CanarySwift.shared.deviceId
         device.appKey = CanarySwift.shared.appSecret;
-        device.profile = customProfile?() as! [String : String]
-        msg.data = JSON(device)
+        var dict: [String : JSON] = [:]
+        customProfile?().forEach({ (key, value) in
+            dict[key] = JSON(value)
+        })
+        device.profile = dict
+        do {
+            msg.data = try JSON(JSONEncoder().encode(device))
+        } catch {
+            print("\(#filePath).\(#function)+\(#line) \(error)")
+        }
         webSocket.sendMessage(message: msg)
     }
 }

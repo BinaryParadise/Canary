@@ -43,11 +43,18 @@ public class CanarySwift {
 }
 
 extension CanarySwift {
-    @objc public func startLogger(customProfile: @escaping (() -> [String: Any])) {
+    @objc public func startLogger(domain: String? = nil, customProfile: (() -> [String: Any])? = nil) {
         TTYLoggerAdapter.shared.customProfile = customProfile
-        let url = URL(string: baseURL!)!
-        let port = url.port == nil ? "": ":\(url.port!)"
-        TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/api/channel")!)
+        DDTTYLogger.sharedInstance?.logFormatter = LoggerFormatter()
+        if let domain = domain {
+            let url = URL(string: domain)!
+            let port = url.port == nil ? "": ":\(url.port!)"
+            TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/api/channel")!)
+        } else {
+            let url = URL(string: baseURL!)!
+            let port = url.port == nil ? "": ":\(url.port!)"
+            TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/channel")!)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: NSNotification.Name.AFNetworkingTaskDidComplete, object: nil)
     }
@@ -58,10 +65,8 @@ extension CanarySwift {
         guard let response = task.response as? HTTPURLResponse else { return }
                         
         let responseObject = notification.userInfo![AFNetworkingTaskDidCompleteSerializedResponseKey];
-        let responseData = notification.userInfo![AFNetworkingTaskDidCompleteResponseDataKey];
-        guard let _ = responseObject as? Array<Any> else { return }
-        guard let _ = responseObject as? Dictionary<AnyHashable, Any> else { return }
-        storeNetworkLogger(netLog: NetLogMessage(request: request, response: response, data: responseData as? Data))
+        guard let responseData = notification.userInfo![AFNetworkingTaskDidCompleteResponseDataKey] as? Data else { return }
+        storeNetworkLogger(netLog: NetLogMessage(request: request, response: response, data: responseData))
     }
 
     func storeNetworkLogger(netLog: NetLogMessage) {
@@ -69,7 +74,7 @@ extension CanarySwift {
         
         let msg = WebSocketMessage(type: .netLogger);
         var mdict: [String: Any] = [:]
-        mdict["flag"] = DDLogFlag.info
+        mdict["flag"] = DDLogFlag.info.rawValue
         mdict["method"] = netLog.method
         mdict["url"] = netLog.requestURL!.absoluteString;
         mdict["requestfields"] = netLog.allRequestHTTPHeaderFields
@@ -86,12 +91,12 @@ extension CanarySwift {
                 mdict["responsebody"] = netLog.responseBody
             }
         } catch {
-            print("\(error)")
+            print("\(#file).\(#function)+\(#line)\(error)")
         }
         mdict["timestamp"] = timestamp
         mdict["statusCode"] = netLog.statusCode
         mdict["type"] = 2
-        msg.data = JSON(mdict);
+        msg.data = JSON(mdict)
         CanaryWebSocket.shared.sendMessage(message: msg)
     }
 }

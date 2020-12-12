@@ -49,13 +49,13 @@ class WebSocketMessage: Codable {
 class DeviceMessage: Codable {
     var name: String?
     var deviceId: String?
-    var ipAddrs: [String]?
+    var ipAddrs: [String: [String:String]]?
     var appKey: String?
     var appVersion: String?
     var osName: String?
     var osVersion: String?
     var modelName: String?
-    var profile: [String : String]?
+    var profile: [String : JSON]?
     var simulator: Bool
     
     init() {
@@ -65,11 +65,12 @@ class DeviceMessage: Codable {
         modelName = UIDevice.current.localizedModel
         appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
         simulator = TARGET_OS_SIMULATOR == 1
-        ipAddrs = ipv4()
+        ipAddrs = ipAddress()
     }
     
-    private func ipv4() -> [String]? {
-        var addresses = [String]()
+    private func ipAddress() -> [String : [String : String]]? {
+        var ipv4: [String : String] = [:]
+        var ipv6: [String : String] = [:]
         var ifaddr : UnsafeMutablePointer<ifaddrs>? = nil
         if getifaddrs(&ifaddr) == 0 {
             var ptr = ifaddr
@@ -81,8 +82,13 @@ class DeviceMessage: Codable {
                         var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                         if (getnameinfo(&addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),nil, socklen_t(0), NI_NUMERICHOST) == 0) {
                             if let address = String(validatingUTF8:hostname) {
-                                if String.init(cString: ptr!.pointee.ifa_name).hasPrefix("en") {
-                                    addresses.append(address)
+                                let name = String(cString: ptr!.pointee.ifa_name)
+                                if name.hasPrefix("en") {
+                                    if addr.sa_family == AF_INET {
+                                        ipv4[name] = address
+                                    } else {
+                                        ipv6[name] = address
+                                    }
                                 }
                             }
                         }
@@ -93,6 +99,6 @@ class DeviceMessage: Codable {
             freeifaddrs(ifaddr)
         }
         
-        return addresses
+        return ["ipv4": ipv4, "ipv6" : ipv6]
     }
 }

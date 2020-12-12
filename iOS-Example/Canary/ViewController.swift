@@ -9,12 +9,14 @@
 import UIKit
 import Canary
 import CocoaLumberjack
+import AFNetworking
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        DDLog.add(DDTTYLogger.sharedInstance!)
     }
 
     @IBAction func showConfig(_ sender: Any) {
@@ -28,10 +30,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showNetLog(_ sender: Any) {
-        let request = URLRequest.init(url: URL.init(string: "http://127.0.0.1:8081/api/canary/conf")!)
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            print("\(String(data: data ?? Data(), encoding: .utf8))")
-        }.resume()
+        
+        NetworkManager.shared.request(requestType: .GET, urlString: "http://127.0.0.1:8081/api/canary/conf", parameters: nil) { (obj) in
+            print("\(String(data: obj as? Data ?? Data(), encoding: .utf8))")
+        }
     }
     
     @IBAction func showDoraemon(_ sender: Any) {

@@ -33,7 +33,7 @@ TODO: Add long description of the pod here.
   
   s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
   
-  s.resource_bundle = {'Canary' => ['Sources/Assets/*']}
+  s.resource = 'Sources/Assets/Canary.bundle'
   s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1' }
 
   s.source_files = 'Sources/CanarySwift/**/*'

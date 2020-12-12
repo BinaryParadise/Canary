@@ -64,10 +64,10 @@ class CanaryWebSocket: NSObject {
     func sendMessage(message: WebSocketMessage) {
         if isReady() {
             do {
-                let data = try JSON(message).rawData()
+                let data = try JSONEncoder().encode(message)
                 mySocket.send(data)
             } catch {
-                print("\(error)")
+                print("\(#filePath).\(#function)+\(#line) \(error)")
             }
         }
     }
@@ -109,7 +109,7 @@ extension CanaryWebSocket: SRWebSocketDelegate {
                 print("\(result.msg ?? "")")
             }
         } catch {
-            print("\(error)")
+            print("\(#filePath).\(#function)+\(#line)\(error)")
         }
     }
 

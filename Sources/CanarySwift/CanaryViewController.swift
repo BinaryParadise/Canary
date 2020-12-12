@@ -18,7 +18,7 @@ func safeBottom() -> CGFloat {
 
 class CanaryViewController: UIViewController {
     var tableView = UITableView(frame: .zero, style: .plain)
-    let datas = ["环境配置", "Mock数据"]
+    let datas = ["环境配置", "Mock数据", "WKWebView"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +67,8 @@ extension CanaryViewController: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(ConfigurationViewController(), animated: true)
         } else if indexPath.row == 1 {
             navigationController?.pushViewController(MockGroupViewController(), animated: true)
+        } else if indexPath.row == 2 {
+            navigationController?.pushViewController(CanaryWebViewController(), animated: true)
         }
     }
 }

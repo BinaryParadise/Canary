@@ -30,7 +30,7 @@ public class ConfigProvider {
             do {
                 remoteConfig = try JSONDecoder().decode([ConfigGroup].self, from: jsonData)
             } catch {
-                print("\(error)")
+                print("\(#file).\(#function)+\(#line)\(error)")
             }
         }
         if remoteConfig.count == 0 {
@@ -38,7 +38,7 @@ public class ConfigProvider {
                 do {
                     remoteConfig = try JSONDecoder().decode([ConfigGroup].self, from: Data(contentsOf: URL(fileURLWithPath: configPath)))
                 } catch {
-                    print("\(error)")
+                    print("\(#file).\(#function)+\(#line)\(error)")
                 }
             }
         }
@@ -53,7 +53,7 @@ public class ConfigProvider {
                 do {
                     try self?.processRemoteConfig(dict: JSON(data))
                 } catch {
-                    print("\(error)")
+                    print("\(#file).\(#function)+\(#line)\(error)")
                 }
             }
             completion()
@@ -69,7 +69,7 @@ public class ConfigProvider {
                 try userDefaults.set(object: data.rawData(), forKey: kMCRemoteConfig)
                 switchToCurrentConfig()
             } catch {
-                print("\(error)")
+                print("\(#file).\(#function)+\(#line)\(error)")
             }
         }
     }

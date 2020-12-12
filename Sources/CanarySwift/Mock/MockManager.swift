@@ -85,7 +85,7 @@ class MockManager {
                 let data = JSON(data)["data"]
                 self?.groups = try JSONDecoder().decode([MockGroup].self, from: data.rawData())
             } catch {
-                print("\(error)")
+                print("\(#file).\(#function)+\(#line)\(error)")
             }
             completion()
         }.resume()

@@ -30,8 +30,8 @@ class NetLogMessage {
         statusCode = response.statusCode
     }
     
-    private func bodyData(stream: InputStream?) -> Data {
-        guard let stream = stream else { return Data() }
+    private func bodyData(stream: InputStream?) -> Data? {
+        guard let stream = stream else { return nil }
         var data = Data()
         stream.open()
         
@@ -47,6 +47,6 @@ class NetLogMessage {
             }
         }
         stream.close()
-        return data
+        return data.count > 0 ? data:nil
     }
 }
