@@ -7,7 +7,6 @@
 
 #import "CanaryMockURLProtocol.h"
 #import <objc/runtime.h>
-// pod push 时改为Canary/Canary-Swift.h
 #import "Canary-Swift.h"
 
 static BOOL mockEnabled = false;
@@ -59,8 +58,9 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
 - (void)startLoading {
     NSMutableURLRequest *newRequest = self.request.mutableCopy;
     if ([newRequest isKindOfClass:[NSMutableURLRequest class]]) {
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration delegate:self delegateQueue:[[NSOperationQueue alloc] init]];
         self.dataTask = [session dataTaskWithRequest:newRequest];
+        self.receiveData = [NSMutableData data];
         [self.dataTask resume];
     }
 }
@@ -68,7 +68,7 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
 - (void)stopLoading {
     [self.dataTask cancel];
     self.dataTask = nil;
-    [self.receiveData setData:[NSData data]];
+    self.receiveData = nil;
 }
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
@@ -82,7 +82,7 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    [NSNotificationCenter.defaultCenter postNotificationName:@"com.alamofire.networking.task.complete" object:task userInfo:@{@"com.alamofire.networking.complete.finish.responsedata": self.receiveData}];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"com.alamofire.networking.task.complete" object:task userInfo:@{@"com.alamofire.networking.complete.finish.responsedata": self.receiveData ?: [NSData data]}];
     if (error) {
         [self.client URLProtocol:self didFailWithError:error];
     } else {
@@ -163,7 +163,7 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
     return config;
 }
 
-- (void)addCanaryNSURLProtocol {    
+- (void)addCanaryNSURLProtocol {
     if (mockEnabled && [self respondsToSelector:@selector(protocolClasses)]
         && [self respondsToSelector:@selector(setProtocolClasses:)]) {
         NSMutableArray * urlProtocolClasses = [NSMutableArray arrayWithArray: self.protocolClasses];
