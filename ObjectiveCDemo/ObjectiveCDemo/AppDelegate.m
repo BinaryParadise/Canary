@@ -7,7 +7,8 @@
 
 #import "AppDelegate.h"
 
-#import <Canary/Canary-Swift.h>
+#import "ObjectiveCDemo-Bridging-Header.h"
+#import "ObjectiveCDemo-Swift.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import "CanaryTTYLogger.h"
 
@@ -24,7 +25,7 @@
     shared.appSecret = @"82e439d7968b7c366e24a41d7f53f47d";
     shared.deviceId = UIDevice.currentDevice.identifierForVendor.UUIDString;
     shared.baseURL = @"http://127.0.0.1:8081";
-    shared.isMockEnabled = true;
+    [shared setMockWithEnabled:true];
     [DDLog addLogger:CanaryTTYLogger.shared];
     [shared startLoggerWithDomain:@"http://127.0.0.1:9001" customProfile:^NSDictionary<NSString *,id> * _Nonnull{
         return @{@"test" : @"89897923561987341897", @"number": @10086, @"dict": @{@"extra": @"嵌套对象"}};

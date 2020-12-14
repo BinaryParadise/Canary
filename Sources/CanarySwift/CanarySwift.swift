@@ -19,12 +19,6 @@ import SwiftyJSON
     /// 应用标识
     @objc public var appSecret: String = ""
     
-    /// 是否启用Mock
-    @objc public var isMockEnabled: Bool = false {
-        didSet {
-            MockURLProtocol.isEnabled = isMockEnabled
-        }
-    }
     @objc public static let shared = CanarySwift()
     @objc public func show() {
         assert(baseURL != nil, "请初始化baseURL")
@@ -37,6 +31,11 @@ import SwiftyJSON
     
     public func requestURL(with path:String) -> URL {
         return URL(string: "\(baseURL ?? "")\(path)\(path.contains("?") ? "&":"?")appsecret=\(appSecret)")!
+    }
+        
+    /// 是否启用Mock（OC）
+    @objc public func setMock(enabled: Bool) {
+        CanaryMockURLProtocol.setEnabled(enabled)
     }
 }
 

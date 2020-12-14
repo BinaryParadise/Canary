@@ -51,8 +51,6 @@
 		C95C5C0025859F48003596D8 /* ObjectiveCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectiveCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C5C0425859F49003596D8 /* ObjectiveCDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCDemoTests.m; sourceTree = "<group>"; };
 		C95C5C0625859F49003596D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C95C5C0F25859F49003596D8 /* ObjectiveCDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCDemoUITests.m; sourceTree = "<group>"; };
-		C95C5C1125859F49003596D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C95C5C2425859FDB003596D8 /* ObjectiveCDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveCDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		C95C5C2D2585A03A003596D8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C95C5C422585A196003596D8 /* CanaryTTYLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanaryTTYLogger.h; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 			children = (
 				C95C5BE725859F47003596D8 /* ObjectiveCDemo */,
 				C95C5C0325859F48003596D8 /* ObjectiveCDemoTests */,
-				C95C5C0E25859F49003596D8 /* ObjectiveCDemoUITests */,
 				C95C5BE625859F47003596D8 /* Products */,
 				C95C5C2425859FDB003596D8 /* ObjectiveCDemo-Bridging-Header.h */,
 				B28C242FE551DAE423093F94 /* Pods */,
@@ -151,15 +148,6 @@
 				C95C5C0625859F49003596D8 /* Info.plist */,
 			);
 			path = ObjectiveCDemoTests;
-			sourceTree = "<group>";
-		};
-		C95C5C0E25859F49003596D8 /* ObjectiveCDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				C95C5C0F25859F49003596D8 /* ObjectiveCDemoUITests.m */,
-				C95C5C1125859F49003596D8 /* Info.plist */,
-			);
-			path = ObjectiveCDemoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

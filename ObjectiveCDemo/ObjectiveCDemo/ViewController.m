@@ -6,7 +6,9 @@
 //
 
 #import "ViewController.h"
-#import <Canary/Canary-Swift.h>
+#import <AFNetworking/AFNetworking.h>
+#import "ObjectiveCDemo-Bridging-Header.h"
+#import "ObjectiveCDemo-Swift.h"
 
 @interface ViewController ()
 
@@ -17,7 +19,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     NSLog(@"获取配置参数：A = %@", [CanarySwift.shared stringValueFor:@"A" def:@"123"]);
+}
+
+- (IBAction)showCanary:(id)sender {
+    [CanarySwift.shared show];
+}
+
+- (IBAction)showNetworking:(id)sender {
+    
+    NSLog(@"%@", NSURLSessionConfiguration.defaultSessionConfiguration.protocolClasses);
+    
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration];
+    manager.requestSerializer = AFHTTPRequestSerializer.serializer;
+    manager.responseSerializer = AFJSONResponseSerializer.serializer;
+    NSURLSessionDataTask *task = [manager GET:@"https://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+    [task resume];
+    
 }
 
 

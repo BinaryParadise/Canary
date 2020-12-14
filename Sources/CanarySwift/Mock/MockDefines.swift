@@ -16,17 +16,12 @@ struct MockData: Codable {
     var name: String
     var path: String
     var scenes: [MockScene]?
-    func activeScene() -> Int {
-        return scenes?.first?.id ?? 0
-    }
-    
-    func setScene(sceneid: Int) {
-        
-    }
-    
-    func match(for request: URLRequest) -> Bool {
-        //TODO：更多匹配规则
-        return scenes?.count ?? 0 > 0
+
+    func matchScene(for request: URLRequest, sceneid: Int?) -> Int? {
+        guard let match = scenes?.first(where: { (scene) -> Bool in
+            scene.id == sceneid
+        }) else { return nil }
+        return match.id
     }
 }
 

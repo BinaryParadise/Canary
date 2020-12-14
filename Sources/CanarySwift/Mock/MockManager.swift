@@ -17,7 +17,7 @@ struct MockSwitch: Codable {
     var automatic: Bool?
 }
 
-class MockManager {
+@objc public class MockManager: NSObject {
     private var userDefaults = UserDefaults(suiteName: suiteName)!
     
     /// 接口开关
@@ -32,14 +32,18 @@ class MockManager {
             }
         }
     }
-    static let shared = MockManager()
-    init() {
+    @objc public static let shared = MockManager()
+    override init() {
+        super.init()
         if let data = userDefaults.object(forKey: "switchs") as? Data {
             do {
                 mockSwitchs = try JSONDecoder().decode([String: MockSwitch].self, from: data)
             } catch {
                 
             }
+        }
+        fetchGroups {
+            
         }
     }
     
@@ -65,18 +69,21 @@ class MockManager {
         userDefaults.synchronize()
     }
     
-    func shouldIntercept(for request: URLRequest) -> Bool {
+    @objc public func shouldIntercept(for request: URLRequest) -> Bool {
         guard let mock = mockMap[request.url?.path ?? ""] else { return false }
-        if switchFor(mockid: mock.id).isEnabled {
-            return mock.match(for: request)
+        let match = switchFor(mockid: mock.id)
+        if match.isEnabled {
+            return mock.matchScene(for: request, sceneid: match.sceneId) != nil
         } else {
             return false
         }
     }
     
-    func mockURL(for request: URLRequest) -> URL? {
+    @objc public func mockURL(for request: URLRequest) -> URL? {
         guard let mock = mockMap[request.url?.path ?? ""] else { return nil }
-        return URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(switchFor(mockid: mock.id).sceneId ?? 0)")
+        let match = switchFor(mockid: mock.id)
+        let sceneid = mock.matchScene(for: request, sceneid: match.sceneId) ?? 0
+        return URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(sceneid)")
     }
     
     func fetchGroups(completion: @escaping (() -> Void)) -> Void {
