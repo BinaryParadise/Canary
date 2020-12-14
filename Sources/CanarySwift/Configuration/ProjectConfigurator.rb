@@ -39,7 +39,7 @@ class ProjectConfigurator
 
       phase = self.fetch_exist_phase(CN_PHASE_NAME_FETCH_ENV, project_target)
       if phase.nil?
-        phase = project_target.new_shell_script_build_phase(BUILD_PHASE_NAME_FETCH_ENV)
+        phase = project_target.new_shell_script_build_phase(CN_PHASE_NAME_FETCH_ENV)
       end
 
       phase.comments = CN_PHASE_VERION

@@ -8,6 +8,7 @@
 
 import UIKit
 import Canary
+import CocoaLumberjack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         shared.deviceId = UIDevice.current.identifierForVendor!.uuidString
         shared.baseURL = "http://127.0.0.1:8081"
         shared.isMockEnabled = true
+        DDLog.add(CanaryTTYLogger.shared)
         shared.startLogger(domain: "http://127.0.0.1:9001") { () -> [String : Any] in
             return ["test" : "89897923561987341897", "number": 10086, "dict": ["extra": "嵌套对象"]]
         }

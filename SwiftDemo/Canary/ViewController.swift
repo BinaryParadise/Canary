@@ -9,7 +9,6 @@
 import UIKit
 import Canary
 import CocoaLumberjack
-import AFNetworking
 
 class ViewController: UIViewController {
 

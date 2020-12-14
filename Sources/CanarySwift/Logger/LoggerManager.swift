@@ -7,57 +7,30 @@
 //
 
 import Foundation
-import CocoaLumberjack
 import SwifterSwift
 import SwiftyJSON
 
-let keys = ["message",
-"level",
-"flag",
-"context",
-"file",
-"fileName",
-"function",
-"line",
-"tag",
-"options",
-"timestamp",
-"threadID",
-"threadName",
-"queueLabel"]
-
-class TTYLogger: DDAbstractLogger {
-    static let shared = TTYLogger()
-
-    override func log(message logMessage: DDLogMessage) {
+class LoggerManager: NSObject {
+    var customProfile: (() -> [String: Any])?
+    static let shared = LoggerManager()
+    
+    func start(with domain: URL) -> Void {
+        CanaryWebSocket.shared.webSocketURL = domain.absoluteString
+        CanaryWebSocket.shared.addMessageReciver(reciver: self)
+        CanaryWebSocket.shared.start()
+    }
+    
+    func addTTYLogger(dict:[String : Any], timestamp: TimeInterval) -> Void {
         if CanaryWebSocket.shared.isReady() {
             let message = WebSocketMessage(type: .ttyLogger)
-            var mdict = logMessage.dictionaryWithValues(forKeys: keys)
+            var mdict = dict
             mdict["appVersion"] = Bundle.main.infoDictionary!["CFBundleShortVersionString"]
-            mdict["timestamp"] = logMessage.timestamp.timeIntervalSince1970*1000
+            mdict["timestamp"] = timestamp*1000
             mdict["deviceId"] = CanarySwift.shared.deviceId;
             mdict["type"] = 1;
             message.data = JSON(mdict)
             CanaryWebSocket.shared.sendMessage(message: message)
         }
-    }
-}
-
-class TTYLoggerAdapter: NSObject {
-    var customProfile: (() -> [String: Any])?
-    static let shared = TTYLoggerAdapter()
-    
-    override init() {
-        super.init()
-        
-        
-    }
-    
-    func start(with domain: URL) -> Void {
-        DDLog.add(TTYLogger.shared)
-        CanaryWebSocket.shared.webSocketURL = domain.absoluteString
-        CanaryWebSocket.shared.addMessageReciver(reciver: self)
-        CanaryWebSocket.shared.start()
     }
     
     func register(webSocket: CanaryWebSocket) {
@@ -79,7 +52,7 @@ class TTYLoggerAdapter: NSObject {
     }
 }
 
-extension TTYLoggerAdapter: WebSocketMessageProtocol {
+extension LoggerManager: WebSocketMessageProtocol {
     func webSocketDidOpen(webSocket: CanaryWebSocket) {
         register(webSocket: webSocket)
     }

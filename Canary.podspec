@@ -31,17 +31,15 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
   
-  s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
+#  s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
   
   s.resource = 'Sources/Assets/Canary.bundle'
   s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1' }
 
   s.source_files = 'Sources/CanarySwift/**/*'
-  s.dependency 'CocoaLumberjack/Swift'
   s.dependency 'SwifterSwift'
   s.dependency 'SnapKit'
   s.dependency 'SwiftyJSON'
   s.dependency 'SocketRocket', '~> 0.5'
-  s.dependency 'AFNetworking'
 
 end

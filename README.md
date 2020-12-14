@@ -11,6 +11,9 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+- CocoaLumberjack
+- AFNetwoking
+
 ## Preview
 
 ![image](https://user-images.githubusercontent.com/8289395/83215048-9f6c5780-a198-11ea-8456-5df86c95d25e.png)

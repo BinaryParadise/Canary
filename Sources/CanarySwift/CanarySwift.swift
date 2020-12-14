@@ -6,28 +6,26 @@
 //
 
 import Foundation
-import AFNetworking
-import CocoaLumberjack
 import SwiftyJSON
 
-public class CanarySwift {
+@objc public class CanarySwift: NSObject {
     
     /// 金丝雀服务域名
-    public var baseURL: String?
+    @objc public var baseURL: String?
     
     /// 设备唯一标识
-    public var deviceId: String?
+    @objc public var deviceId: String?
     
     /// 应用标识
-    public var appSecret: String = ""
+    @objc public var appSecret: String = ""
     
     /// 是否启用Mock
-    public var isMockEnabled: Bool = false {
+    @objc public var isMockEnabled: Bool = false {
         didSet {
             MockURLProtocol.isEnabled = isMockEnabled
         }
     }
-    public static let shared = CanarySwift()
+    @objc public static let shared = CanarySwift()
     @objc public func show() {
         assert(baseURL != nil, "请初始化baseURL")
         assert(deviceId != nil, "请初始化deviceId")
@@ -44,19 +42,22 @@ public class CanarySwift {
 
 extension CanarySwift {
     @objc public func startLogger(domain: String? = nil, customProfile: (() -> [String: Any])? = nil) {
-        TTYLoggerAdapter.shared.customProfile = customProfile
-        DDTTYLogger.sharedInstance?.logFormatter = LoggerFormatter()
+        LoggerManager.shared.customProfile = customProfile
         if let domain = domain {
             let url = URL(string: domain)!
             let port = url.port == nil ? "": ":\(url.port!)"
-            TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/api/channel")!)
+            LoggerManager.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/api/channel")!)
         } else {
             let url = URL(string: baseURL!)!
             let port = url.port == nil ? "": ":\(url.port!)"
-            TTYLoggerAdapter.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/channel")!)
+            LoggerManager.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/channel")!)
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: NSNotification.Name.AFNetworkingTaskDidComplete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: NSNotification.Name(rawValue: "com.alamofire.networking.task.complete"), object: nil)
+    }
+    
+    @objc public func storeLogMessage(dict: [String : Any], timestamp: TimeInterval) {
+        LoggerManager.shared.addTTYLogger(dict: dict, timestamp: timestamp)
     }
 
     @objc func af_didRquestDidFinish(notification: NSNotification) {
@@ -64,8 +65,7 @@ extension CanarySwift {
         guard let request = task.originalRequest as NSURLRequest? else { return }
         guard let response = task.response as? HTTPURLResponse else { return }
                         
-        let responseObject = notification.userInfo![AFNetworkingTaskDidCompleteSerializedResponseKey];
-        guard let responseData = notification.userInfo![AFNetworkingTaskDidCompleteResponseDataKey] as? Data else { return }
+        guard let responseData = notification.userInfo?["com.alamofire.networking.complete.finish.responsedata"] as? Data else { return }
         storeNetworkLogger(netLog: NetLogMessage(request: request, response: response, data: responseData))
     }
 
@@ -74,7 +74,7 @@ extension CanarySwift {
         
         let msg = WebSocketMessage(type: .netLogger);
         var mdict: [String: Any] = [:]
-        mdict["flag"] = DDLogFlag.info.rawValue
+        mdict["flag"] = 4  //DDLogFlag.DDLogFlagInfo 1 << 2
         mdict["method"] = netLog.method
         mdict["url"] = netLog.requestURL!.absoluteString;
         mdict["requestfields"] = netLog.allRequestHTTPHeaderFields
@@ -99,4 +99,25 @@ extension CanarySwift {
         msg.data = JSON(mdict)
         CanaryWebSocket.shared.sendMessage(message: msg)
     }
+    
+    /// 获取当前环境的配置参数
+    @objc public func stringValue(for key: String, def: String?) -> String? {
+        return ConfigProvider.shared.stringValue(for: key, def: def)
+    }
 }
+
+/// 日志对象Key集合
+public let StoreLogKeys = ["message",
+"level",
+"flag",
+"context",
+"file",
+"fileName",
+"function",
+"line",
+"tag",
+"options",
+"timestamp",
+"threadID",
+"threadName",
+"queueLabel"]

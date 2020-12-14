@@ -1,0 +1,21 @@
+use_frameworks!
+use_modular_headers!
+
+target 'ObjectiveCDemo' do
+  platform :ios, '9.0'
+  pod 'Canary', :path => '../'
+  pod 'AFNetworking'
+  pod 'CocoaLumberjack/Swift'
+  
+  target 'ObjectiveCDemoTests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 1.2.0'
+    pod 'Nimble', '~> 7.0'
+  end
+end
+
+post_install do |installer|
+  require_relative '../Sources/CanarySwift/Configuration/ProjectConfigurator.rb'
+  ProjectConfigurator::configure_project(installer, '82e439d7968b7c366e24a41d7f53f47d', 'http://127.0.0.1:8081')
+end
