@@ -1,5 +1,5 @@
 //
-//  MockURLProtocolOC.m
+//  CanaryMockURLProtocol.m
 //  Canary
 //
 //  Created by Rake Yang on 2020/12/14.
@@ -7,7 +7,8 @@
 
 #import "CanaryMockURLProtocol.h"
 #import <objc/runtime.h>
-#import <Canary/Canary-Swift.h>
+// pod push 时改为Canary/Canary-Swift.h
+#import "Canary-Swift.h"
 
 static BOOL mockEnabled = false;
 NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";

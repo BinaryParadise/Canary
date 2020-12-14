@@ -31,12 +31,13 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
   
-  #s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
+  s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
   
   s.resource = 'Sources/Assets/Canary.bundle'
   s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1', "OTHER_SWIFT_FLAGS" => "-D CANARY_ENABLE"}
 
   s.source_files = 'Sources/CanarySwift/**/*'
+  s.public_header_files = 'Sources/CanarySwift/Mock/CanaryMockURLProtocol.h'
   s.dependency 'SwifterSwift'
   s.dependency 'SnapKit'
   s.dependency 'SwiftyJSON'
