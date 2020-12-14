@@ -22,17 +22,7 @@ PODS:
   - CocoaLumberjack/Core (3.7.0)
   - CocoaLumberjack/Swift (3.7.0):
     - CocoaLumberjack/Core
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
   - Nimble (7.3.4)
-  - Nimble-Snapshots (6.3.0):
-    - Nimble-Snapshots/Core (= 6.3.0)
-  - Nimble-Snapshots/Core (6.3.0):
-    - FBSnapshotTestCase (~> 2.0)
-    - Nimble (~> 7.0)
   - Quick (1.2.0)
   - SnapKit (4.2.0)
   - SocketRocket (0.5.1)
@@ -64,16 +54,13 @@ DEPENDENCIES:
   - Canary (from `../`)
   - CocoaLumberjack/Swift
   - Nimble (~> 7.0)
-  - Nimble-Snapshots (~> 6.3.0)
   - Quick (~> 1.2.0)
 
 SPEC REPOS:
   trunk:
     - AFNetworking
     - CocoaLumberjack
-    - FBSnapshotTestCase
     - Nimble
-    - Nimble-Snapshots
     - Quick
     - SnapKit
     - SocketRocket
@@ -88,15 +75,13 @@ SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Canary: 94d7f9ad4f71bb0f9b53d8bfabe9bf8d7ae7107b
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
-  Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: a2bf755ad4508c73c3c27f3f34c1064f0829357d
+PODFILE CHECKSUM: 6e6e0d1e07a34152b189016a56edd24d954b7a39
 
 COCOAPODS: 1.10.0

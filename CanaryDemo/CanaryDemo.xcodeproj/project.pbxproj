@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		76246545812E8F787A1ED241 /* Pods_ObjectiveCDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF90C8C269E564649E473AE /* Pods_ObjectiveCDemo.framework */; };
-		B4F0E8AD4041887DD47730E9 /* Pods_ObjectiveCDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D38885EBBD1FB5F509858FB /* Pods_ObjectiveCDemoTests.framework */; };
+		C3F41A77BA2759129D652346 /* Pods_CanaryDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5B8B0A0D91D11780BB0101 /* Pods_CanaryDemo.framework */; };
 		C95C5BEA25859F47003596D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BE925859F47003596D8 /* AppDelegate.m */; };
 		C95C5BED25859F47003596D8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BEC25859F47003596D8 /* SceneDelegate.m */; };
 		C95C5BF025859F47003596D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BEF25859F47003596D8 /* ViewController.m */; };
@@ -19,6 +18,7 @@
 		C95C5C0525859F49003596D8 /* ObjectiveCDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C0425859F49003596D8 /* ObjectiveCDemoTests.m */; };
 		C95C5C2E2585A03A003596D8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C2D2585A03A003596D8 /* File.swift */; };
 		C95C5C442585A196003596D8 /* CanaryTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C432585A196003596D8 /* CanaryTTYLogger.m */; };
+		CE6363535FA19056FFC8422F /* Pods_CanaryDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140196CA278E846FBC386843 /* Pods_CanaryDemoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,10 +33,14 @@
 
 /* Begin PBXFileReference section */
 		01FCC16C8B027EBD165F0C1F /* Pods-ObjectiveCDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		1D38885EBBD1FB5F509858FB /* Pods_ObjectiveCDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ObjectiveCDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D6AAFA37ACE559805CE44AA /* Pods-CanaryDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemo.debug.xcconfig"; path = "Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		140196CA278E846FBC386843 /* Pods_CanaryDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CanaryDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F662B63CE663CD2F836FCA1 /* Pods-CanaryDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemoTests.release.xcconfig"; path = "Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		770EFD42D5342266288E376A /* Pods-ObjectiveCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemo.debug.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		87404B535AC485BEF719F1BB /* Pods-ObjectiveCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemo.release.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo.release.xcconfig"; sourceTree = "<group>"; };
-		C95C5BE525859F47003596D8 /* ObjectiveCDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveCDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		98401FD5EF8C0C6E35195CEB /* Pods-CanaryDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemo.release.xcconfig"; path = "Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo.release.xcconfig"; sourceTree = "<group>"; };
+		9A5B8B0A0D91D11780BB0101 /* Pods_CanaryDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CanaryDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C95C5BE525859F47003596D8 /* CanaryDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanaryDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C5BE825859F47003596D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C95C5BE925859F47003596D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C95C5BEB25859F47003596D8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -48,15 +52,15 @@
 		C95C5BF725859F48003596D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C95C5BF925859F48003596D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C95C5BFA25859F48003596D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C95C5C0025859F48003596D8 /* ObjectiveCDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectiveCDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C95C5C0025859F48003596D8 /* CanaryDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CanaryDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C5C0425859F49003596D8 /* ObjectiveCDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCDemoTests.m; sourceTree = "<group>"; };
 		C95C5C0625859F49003596D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C95C5C2425859FDB003596D8 /* ObjectiveCDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveCDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		C95C5C2425859FDB003596D8 /* CanaryDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CanaryDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		C95C5C2D2585A03A003596D8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C95C5C422585A196003596D8 /* CanaryTTYLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanaryTTYLogger.h; sourceTree = "<group>"; };
 		C95C5C432585A196003596D8 /* CanaryTTYLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanaryTTYLogger.m; sourceTree = "<group>"; };
+		EF82A7AF59BB18474A95DEF0 /* Pods-CanaryDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F5CA5ACF745616928A67F276 /* Pods-ObjectiveCDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemoTests.release.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		FEF90C8C269E564649E473AE /* Pods_ObjectiveCDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ObjectiveCDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76246545812E8F787A1ED241 /* Pods_ObjectiveCDemo.framework in Frameworks */,
+				C3F41A77BA2759129D652346 /* Pods_CanaryDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4F0E8AD4041887DD47730E9 /* Pods_ObjectiveCDemoTests.framework in Frameworks */,
+				CE6363535FA19056FFC8422F /* Pods_CanaryDemoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,8 +86,8 @@
 		9394FDFB7AA5D486B5CB8E25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FEF90C8C269E564649E473AE /* Pods_ObjectiveCDemo.framework */,
-				1D38885EBBD1FB5F509858FB /* Pods_ObjectiveCDemoTests.framework */,
+				9A5B8B0A0D91D11780BB0101 /* Pods_CanaryDemo.framework */,
+				140196CA278E846FBC386843 /* Pods_CanaryDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -95,6 +99,10 @@
 				87404B535AC485BEF719F1BB /* Pods-ObjectiveCDemo.release.xcconfig */,
 				01FCC16C8B027EBD165F0C1F /* Pods-ObjectiveCDemoTests.debug.xcconfig */,
 				F5CA5ACF745616928A67F276 /* Pods-ObjectiveCDemoTests.release.xcconfig */,
+				0D6AAFA37ACE559805CE44AA /* Pods-CanaryDemo.debug.xcconfig */,
+				98401FD5EF8C0C6E35195CEB /* Pods-CanaryDemo.release.xcconfig */,
+				EF82A7AF59BB18474A95DEF0 /* Pods-CanaryDemoTests.debug.xcconfig */,
+				1F662B63CE663CD2F836FCA1 /* Pods-CanaryDemoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -105,7 +113,7 @@
 				C95C5BE725859F47003596D8 /* ObjectiveCDemo */,
 				C95C5C0325859F48003596D8 /* ObjectiveCDemoTests */,
 				C95C5BE625859F47003596D8 /* Products */,
-				C95C5C2425859FDB003596D8 /* ObjectiveCDemo-Bridging-Header.h */,
+				C95C5C2425859FDB003596D8 /* CanaryDemo-Bridging-Header.h */,
 				B28C242FE551DAE423093F94 /* Pods */,
 				9394FDFB7AA5D486B5CB8E25 /* Frameworks */,
 			);
@@ -114,8 +122,8 @@
 		C95C5BE625859F47003596D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C95C5BE525859F47003596D8 /* ObjectiveCDemo.app */,
-				C95C5C0025859F48003596D8 /* ObjectiveCDemoTests.xctest */,
+				C95C5BE525859F47003596D8 /* CanaryDemo.app */,
+				C95C5C0025859F48003596D8 /* CanaryDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C95C5BE425859F47003596D8 /* ObjectiveCDemo */ = {
+		C95C5BE425859F47003596D8 /* CanaryDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C95C5C1425859F49003596D8 /* Build configuration list for PBXNativeTarget "ObjectiveCDemo" */;
+			buildConfigurationList = C95C5C1425859F49003596D8 /* Build configuration list for PBXNativeTarget "CanaryDemo" */;
 			buildPhases = (
 				CFB70BD49C1DA6705C474219 /* [CP] Check Pods Manifest.lock */,
 				C95C5BE125859F47003596D8 /* Sources */,
@@ -168,14 +176,14 @@
 			);
 			dependencies = (
 			);
-			name = ObjectiveCDemo;
+			name = CanaryDemo;
 			productName = ObjectiveCDemo;
-			productReference = C95C5BE525859F47003596D8 /* ObjectiveCDemo.app */;
+			productReference = C95C5BE525859F47003596D8 /* CanaryDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C95C5BFF25859F48003596D8 /* ObjectiveCDemoTests */ = {
+		C95C5BFF25859F48003596D8 /* CanaryDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C95C5C1725859F49003596D8 /* Build configuration list for PBXNativeTarget "ObjectiveCDemoTests" */;
+			buildConfigurationList = C95C5C1725859F49003596D8 /* Build configuration list for PBXNativeTarget "CanaryDemoTests" */;
 			buildPhases = (
 				DE4E7B5D65A5309DE685EA0B /* [CP] Check Pods Manifest.lock */,
 				C95C5BFC25859F48003596D8 /* Sources */,
@@ -188,9 +196,9 @@
 			dependencies = (
 				C95C5C0225859F48003596D8 /* PBXTargetDependency */,
 			);
-			name = ObjectiveCDemoTests;
+			name = CanaryDemoTests;
 			productName = ObjectiveCDemoTests;
-			productReference = C95C5C0025859F48003596D8 /* ObjectiveCDemoTests.xctest */;
+			productReference = C95C5C0025859F48003596D8 /* CanaryDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -211,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C95C5BE025859F47003596D8 /* Build configuration list for PBXProject "ObjectiveCDemo" */;
+			buildConfigurationList = C95C5BE025859F47003596D8 /* Build configuration list for PBXProject "CanaryDemo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -224,8 +232,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C95C5BE425859F47003596D8 /* ObjectiveCDemo */,
-				C95C5BFF25859F48003596D8 /* ObjectiveCDemoTests */,
+				C95C5BE425859F47003596D8 /* CanaryDemo */,
+				C95C5BFF25859F48003596D8 /* CanaryDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,15 +284,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFB70BD49C1DA6705C474219 /* [CP] Check Pods Manifest.lock */ = {
@@ -302,7 +310,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ObjectiveCDemo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CanaryDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -324,7 +332,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ObjectiveCDemoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-CanaryDemoTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -337,15 +345,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -377,7 +385,7 @@
 /* Begin PBXTargetDependency section */
 		C95C5C0225859F48003596D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C95C5BE425859F47003596D8 /* ObjectiveCDemo */;
+			target = C95C5BE425859F47003596D8 /* CanaryDemo */;
 			targetProxy = C95C5C0125859F48003596D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -518,7 +526,7 @@
 		};
 		C95C5C1525859F49003596D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 770EFD42D5342266288E376A /* Pods-ObjectiveCDemo.debug.xcconfig */;
+			baseConfigurationReference = 0D6AAFA37ACE559805CE44AA /* Pods-CanaryDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -531,7 +539,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.ObjectiveCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ObjectiveCDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CanaryDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -539,7 +547,7 @@
 		};
 		C95C5C1625859F49003596D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87404B535AC485BEF719F1BB /* Pods-ObjectiveCDemo.release.xcconfig */;
+			baseConfigurationReference = 98401FD5EF8C0C6E35195CEB /* Pods-CanaryDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -552,14 +560,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.ObjectiveCDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ObjectiveCDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CanaryDemo-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 		C95C5C1825859F49003596D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01FCC16C8B027EBD165F0C1F /* Pods-ObjectiveCDemoTests.debug.xcconfig */;
+			baseConfigurationReference = EF82A7AF59BB18474A95DEF0 /* Pods-CanaryDemoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -574,13 +582,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.ObjectiveCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ObjectiveCDemo.app/ObjectiveCDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CanaryDemo.app/CanaryDemo";
 			};
 			name = Debug;
 		};
 		C95C5C1925859F49003596D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5CA5ACF745616928A67F276 /* Pods-ObjectiveCDemoTests.release.xcconfig */;
+			baseConfigurationReference = 1F662B63CE663CD2F836FCA1 /* Pods-CanaryDemoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -595,14 +603,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.binaryparadise.ObjectiveCDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ObjectiveCDemo.app/ObjectiveCDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CanaryDemo.app/CanaryDemo";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C95C5BE025859F47003596D8 /* Build configuration list for PBXProject "ObjectiveCDemo" */ = {
+		C95C5BE025859F47003596D8 /* Build configuration list for PBXProject "CanaryDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C95C5C1225859F49003596D8 /* Debug */,
@@ -611,7 +619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C95C5C1425859F49003596D8 /* Build configuration list for PBXNativeTarget "ObjectiveCDemo" */ = {
+		C95C5C1425859F49003596D8 /* Build configuration list for PBXNativeTarget "CanaryDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C95C5C1525859F49003596D8 /* Debug */,
@@ -620,7 +628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C95C5C1725859F49003596D8 /* Build configuration list for PBXNativeTarget "ObjectiveCDemoTests" */ = {
+		C95C5C1725859F49003596D8 /* Build configuration list for PBXNativeTarget "CanaryDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C95C5C1825859F49003596D8 /* Debug */,

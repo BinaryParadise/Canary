@@ -7,8 +7,8 @@
 
 #import "ViewController.h"
 #import <AFNetworking/AFNetworking.h>
-#import "ObjectiveCDemo-Bridging-Header.h"
-#import "ObjectiveCDemo-Swift.h"
+#import "CanaryDemo-Bridging-Header.h"
+#import "CanaryDemo-Swift.h"
 
 @interface ViewController ()
 

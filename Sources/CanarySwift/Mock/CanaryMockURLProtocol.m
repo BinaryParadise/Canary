@@ -7,7 +7,7 @@
 
 #import "CanaryMockURLProtocol.h"
 #import <objc/runtime.h>
-#import "Canary-Swift.h"
+#import <Canary/Canary-Swift.h>
 
 static BOOL mockEnabled = false;
 NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";

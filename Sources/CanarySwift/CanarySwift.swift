@@ -32,11 +32,6 @@ import SwiftyJSON
     public func requestURL(with path:String) -> URL {
         return URL(string: "\(baseURL ?? "")\(path)\(path.contains("?") ? "&":"?")appsecret=\(appSecret)")!
     }
-        
-    /// 是否启用Mock（OC）
-    @objc public func setMock(enabled: Bool) {
-        CanaryMockURLProtocol.setEnabled(enabled)
-    }
 }
 
 extension CanarySwift {

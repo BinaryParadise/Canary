@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+@class MockManager;
+
 @interface CanaryMockURLProtocol : NSURLProtocol
 
 + (void)setEnabled:(BOOL)enabled;
