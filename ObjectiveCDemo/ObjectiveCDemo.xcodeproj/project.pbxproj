@@ -174,6 +174,7 @@
 				C95C5BE225859F47003596D8 /* Frameworks */,
 				C95C5BE325859F47003596D8 /* Resources */,
 				71C86A2E5688AF5EDD63138F /* [CP] Embed Pods Frameworks */,
+				21E27A8C837A5A7F717B02C3 /* [MC] Fetch Remote Config */,
 			);
 			buildRules = (
 			);
@@ -262,6 +263,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		21E27A8C837A5A7F717B02C3 /* [MC] Fetch Remote Config */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = 1;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[MC] Fetch Remote Config";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/rakeyang/Github/Canary/Sources/CanarySwift/Configuration/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"82e439d7968b7c366e24a41d7f53f47d\" http://127.0.0.1:8081\nfi";
+		};
 		71C86A2E5688AF5EDD63138F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

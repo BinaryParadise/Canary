@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Canary'
-  s.version          = '0.4.0'
+  s.version          = '0.4.1'
   s.summary          = 'Canary is SDK For CanaryWeb.'
 
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,8 @@ TODO: Add long description of the pod here.
 #  s.pod_target_xcconfig = { "DEFINES_MODULE" => "YES" }
   
   s.resource = 'Sources/Assets/Canary.bundle'
-  s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1' }
+  s.user_target_xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => 'CANARY_ENABLE=1', "OTHER_SWIFT_FLAGS" => "-D CANARY_ENABLE"}
+  s.compiler_flags = 
 
   s.source_files = 'Sources/CanarySwift/**/*'
   s.dependency 'SwifterSwift'
