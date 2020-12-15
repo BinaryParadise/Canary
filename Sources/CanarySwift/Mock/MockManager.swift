@@ -72,11 +72,11 @@ struct MockSwitch: Codable {
     @objc public func shouldIntercept(for request: URLRequest) -> Bool {
         guard let mock = mockMap[request.url?.path ?? ""] else { return false }
         let match = switchFor(mockid: mock.id)
+        var intercept = false
         if match.isEnabled {
-            return mock.matchScene(for: request, sceneid: match.sceneId) != nil
-        } else {
-            return false
+            intercept = mock.matchScene(for: request, sceneid: match.sceneId) != nil
         }
+        return intercept
     }
     
     @objc public func mockURL(for request: URLRequest) -> URL? {

@@ -1,26 +1,25 @@
 //
-//  CanaryMockURLProtocol.m
+//  CanaryMockNSURLProtocol.m
 //  Canary
 //
 //  Created by Rake Yang on 2020/12/14.
 //
 
-#import "CanaryMockURLProtocol.h"
+#import "CanaryMockNSURLProtocol.h"
 #import <objc/runtime.h>
-#import "Canary-Swift.h"
 
 static BOOL mockEnabled = false;
-NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
+NSString * const MockURLProtocolHandledKey = @"MockURLNSProtocolHandledKey";
 
 
-@interface CanaryMockURLProtocol () <NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
+@interface CanaryMockNSURLProtocol () <NSURLSessionDataDelegate, NSURLSessionTaskDelegate>
 
 @property (nonatomic, strong) NSURLSessionDataTask *dataTask;
 @property (nonatomic, strong) NSMutableData *receiveData;
 
 @end
 
-@implementation CanaryMockURLProtocol
+@implementation CanaryMockNSURLProtocol
 
 + (void)setEnabled:(BOOL)enabled {
     mockEnabled = enabled;
@@ -41,7 +40,7 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
             return false;
         }
         if ([@[@"http", @"https"] containsObject:request.URL.scheme]) {
-            return [MockManager.shared shouldInterceptFor:request];
+//            return [MockManager.shared shouldInterceptFor:request];
         }
         return false;
     }
@@ -50,7 +49,7 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
     NSMutableURLRequest *newRequest = request.mutableCopy;
-    newRequest.URL = [MockManager.shared mockURLFor:request];
+//    newRequest.URL = [MockManager.shared mockURLFor:request];
     [NSURLProtocol setProperty:@(true) forKey:MockURLProtocolHandledKey inRequest:newRequest];
     return newRequest;
 }
@@ -167,7 +166,7 @@ NSString * const MockURLProtocolHandledKey = @"MockURLProtocolHandledKey";
     if (mockEnabled && [self respondsToSelector:@selector(protocolClasses)]
         && [self respondsToSelector:@selector(setProtocolClasses:)]) {
         NSMutableArray * urlProtocolClasses = [NSMutableArray arrayWithArray: self.protocolClasses];
-        Class protoCls = CanaryMockURLProtocol.class;
+        Class protoCls = CanaryMockNSURLProtocol.class;
         if (![urlProtocolClasses containsObject:protoCls]) {
             [urlProtocolClasses insertObject:protoCls atIndex:0];
         }

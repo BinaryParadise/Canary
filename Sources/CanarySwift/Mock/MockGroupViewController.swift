@@ -11,7 +11,7 @@ import SnapKit
 import SwiftyJSON
 
 class MockGroupViewController: UIViewController {
-    var tableView = UITableView(frame: .zero, style: .plain)
+    var tableView = UITableView(frame: .zero, style: .grouped)
     var groups: [MockGroup] {
         return MockManager.shared.groups
     }

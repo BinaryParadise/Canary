@@ -64,5 +64,9 @@ extension LoggerManager: WebSocketMessageProtocol {
     func webSocket(webSocket: CanaryWebSocket, didReceive pongPayload: Data?) {
         //更新设备信息
         register(webSocket: webSocket)
+        //更细Mock配置
+        MockManager.shared.fetchGroups {
+            
+        }
     }
 }

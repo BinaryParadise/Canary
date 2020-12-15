@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C3F41A77BA2759129D652346 /* Pods_CanaryDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A5B8B0A0D91D11780BB0101 /* Pods_CanaryDemo.framework */; };
+		BC72D9DE6F49FA4CF346D404 /* libPods-CanaryDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D518B6053AD3B9C6037007B /* libPods-CanaryDemoTests.a */; };
 		C95C5BEA25859F47003596D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BE925859F47003596D8 /* AppDelegate.m */; };
 		C95C5BED25859F47003596D8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BEC25859F47003596D8 /* SceneDelegate.m */; };
 		C95C5BF025859F47003596D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BEF25859F47003596D8 /* ViewController.m */; };
@@ -18,7 +18,7 @@
 		C95C5C0525859F49003596D8 /* ObjectiveCDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C0425859F49003596D8 /* ObjectiveCDemoTests.m */; };
 		C95C5C2E2585A03A003596D8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C2D2585A03A003596D8 /* File.swift */; };
 		C95C5C442585A196003596D8 /* CanaryTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C432585A196003596D8 /* CanaryTTYLogger.m */; };
-		CE6363535FA19056FFC8422F /* Pods_CanaryDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140196CA278E846FBC386843 /* Pods_CanaryDemoTests.framework */; };
+		FBE404F6A0E1D3605C9AB760 /* libPods-CanaryDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8D43299CF21C465C8C1963 /* libPods-CanaryDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +34,12 @@
 /* Begin PBXFileReference section */
 		01FCC16C8B027EBD165F0C1F /* Pods-ObjectiveCDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0D6AAFA37ACE559805CE44AA /* Pods-CanaryDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemo.debug.xcconfig"; path = "Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		140196CA278E846FBC386843 /* Pods_CanaryDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CanaryDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F662B63CE663CD2F836FCA1 /* Pods-CanaryDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemoTests.release.xcconfig"; path = "Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		3D518B6053AD3B9C6037007B /* libPods-CanaryDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CanaryDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		770EFD42D5342266288E376A /* Pods-ObjectiveCDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemo.debug.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		87404B535AC485BEF719F1BB /* Pods-ObjectiveCDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemo.release.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemo/Pods-ObjectiveCDemo.release.xcconfig"; sourceTree = "<group>"; };
 		98401FD5EF8C0C6E35195CEB /* Pods-CanaryDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemo.release.xcconfig"; path = "Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo.release.xcconfig"; sourceTree = "<group>"; };
-		9A5B8B0A0D91D11780BB0101 /* Pods_CanaryDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CanaryDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD8D43299CF21C465C8C1963 /* libPods-CanaryDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CanaryDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C5BE525859F47003596D8 /* CanaryDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanaryDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C5BE825859F47003596D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C95C5BE925859F47003596D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3F41A77BA2759129D652346 /* Pods_CanaryDemo.framework in Frameworks */,
+				FBE404F6A0E1D3605C9AB760 /* libPods-CanaryDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE6363535FA19056FFC8422F /* Pods_CanaryDemoTests.framework in Frameworks */,
+				BC72D9DE6F49FA4CF346D404 /* libPods-CanaryDemoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,8 +86,8 @@
 		9394FDFB7AA5D486B5CB8E25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9A5B8B0A0D91D11780BB0101 /* Pods_CanaryDemo.framework */,
-				140196CA278E846FBC386843 /* Pods_CanaryDemoTests.framework */,
+				BD8D43299CF21C465C8C1963 /* libPods-CanaryDemo.a */,
+				3D518B6053AD3B9C6037007B /* libPods-CanaryDemoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,8 +169,8 @@
 				C95C5BE125859F47003596D8 /* Sources */,
 				C95C5BE225859F47003596D8 /* Frameworks */,
 				C95C5BE325859F47003596D8 /* Resources */,
-				71C86A2E5688AF5EDD63138F /* [CP] Embed Pods Frameworks */,
 				21E27A8C837A5A7F717B02C3 /* [MC] Fetch Remote Config */,
+				647B339DA34884CB6C9F8DD6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,7 +189,6 @@
 				C95C5BFC25859F48003596D8 /* Sources */,
 				C95C5BFD25859F48003596D8 /* Frameworks */,
 				C95C5BFE25859F48003596D8 /* Resources */,
-				EF086606900E800975D6FFB6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,21 +277,21 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nexport LANG=en_US.UTF-8\nexport LANGUAGE=en_US.UTF-8\nexport LC_ALL=en_US.UTF-8\nruby \"/Users/rakeyang/Github/Canary/Sources/CanarySwift/Configuration/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"82e439d7968b7c366e24a41d7f53f47d\" http://127.0.0.1:8081\nfi";
 		};
-		71C86A2E5688AF5EDD63138F /* [CP] Embed Pods Frameworks */ = {
+		647B339DA34884CB6C9F8DD6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CanaryDemo/Pods-CanaryDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFB70BD49C1DA6705C474219 /* [CP] Check Pods Manifest.lock */ = {
@@ -337,23 +336,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF086606900E800975D6FFB6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -569,7 +551,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EF82A7AF59BB18474A95DEF0 /* Pods-CanaryDemoTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ObjectiveCDemoTests/Info.plist;
@@ -590,7 +571,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F662B63CE663CD2F836FCA1 /* Pods-CanaryDemoTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ObjectiveCDemoTests/Info.plist;

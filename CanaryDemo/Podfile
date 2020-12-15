@@ -1,11 +1,15 @@
-use_frameworks!
-use_modular_headers!
+platform :ios, '9.0'
+
+install! 'cocoapods',
+  :generate_multiple_pod_projects => true,
+  :incremental_installation => true
 
 target 'CanaryDemo' do
-  platform :ios, '9.0'
+  
   pod 'Canary', :path => '../'
   pod 'AFNetworking'
   pod 'CocoaLumberjack/Swift'
+  pod 'SocketRocket', :modular_headers => true
   
   target 'CanaryDemoTests' do
     inherit! :search_paths

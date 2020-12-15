@@ -20,8 +20,15 @@ struct MockData: Codable {
     func matchScene(for request: URLRequest, sceneid: Int?) -> Int? {
         guard let match = scenes?.first(where: { (scene) -> Bool in
             scene.id == sceneid
-        }) else { return nil }
+        }) else { return scenes?.first?.id }
         return match.id
+    }
+    
+    func matched(sceneid: Int?) -> Bool {
+        guard let match = scenes?.first(where: { (scene) -> Bool in
+            scene.id == sceneid
+        }) else { return scenes?.first?.id == sceneid }
+        return true
     }
 }
 

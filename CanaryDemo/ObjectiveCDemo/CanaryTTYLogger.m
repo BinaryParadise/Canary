@@ -6,7 +6,7 @@
 //
 
 #import "CanaryTTYLogger.h"
-#import <Canary/Canary-Swift.h>
+#import "CanaryDemo-Bridging-Header.h"
 
 @implementation CanaryTTYLogger
 

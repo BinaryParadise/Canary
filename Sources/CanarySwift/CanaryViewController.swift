@@ -17,7 +17,13 @@ func safeBottom() -> CGFloat {
 }
 
 class CanaryViewController: UIViewController {
-    var tableView = UITableView(frame: .zero, style: .plain)
+    var tableView: UITableView = {
+        if #available(iOS 13.0, *) {
+            return UITableView(frame: .zero, style: .insetGrouped)
+        } else {
+            return UITableView(frame: .zero, style: .grouped)
+        }
+    }()
     let datas = ["环境配置", "Mock数据", "WKWebView"]
     
     override func viewDidLoad() {
@@ -30,7 +36,6 @@ class CanaryViewController: UIViewController {
         tableView.backgroundColor = view.backgroundColor
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .none
         if #available(iOS 13.0, *) {
             tableView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -63,6 +68,7 @@ extension CanaryViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         if indexPath.row == 0 {
             navigationController?.pushViewController(ConfigurationViewController(), animated: true)
         } else if indexPath.row == 1 {

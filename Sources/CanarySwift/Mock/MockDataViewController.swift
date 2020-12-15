@@ -9,7 +9,7 @@ import Foundation
 
 class MockDataViewController: UIViewController {
     var group: MockGroup?
-    var tableView = UITableView(frame: .zero, style: .plain)
+    var tableView = UITableView(frame: .zero, style: .grouped)
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +20,8 @@ class MockDataViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.estimatedSectionHeaderHeight = 0
+        tableView.estimatedSectionFooterHeight = 0
         if #available(iOS 13.0, *) {
             tableView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -35,18 +37,30 @@ class MockDataViewController: UIViewController {
 }
 
 extension MockDataViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return group?.mocks?.count ?? 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return group?.mocks?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: MockDataViewCell.self)
-        cell.config(mock:group?.mocks?[safe: indexPath.row])
+        cell.config(mock:group?.mocks?[safe: indexPath.section])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 58+50
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
     }
 }
 
@@ -119,7 +133,8 @@ class MockDataViewCell: UITableViewCell {
     func config(mock: MockData?) {
         guard let mock = mock else { return }
         self.mock = mock
-        switchBtn.isOn = MockManager.shared.switchFor(mockid: mock.id).isEnabled ?? false
+        let switchMock = MockManager.shared.switchFor(mockid: mock.id)
+        switchBtn.isOn = mock.matched(sceneid: switchMock.sceneId)
         nameLabel.text = mock.name
         pathLabel.text = "路径：\(mock.path)"
         collectView.reloadData()

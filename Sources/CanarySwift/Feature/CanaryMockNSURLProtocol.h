@@ -1,5 +1,5 @@
 //
-//  CanaryMockURLProtocol.h
+//  CanaryMockNSURLProtocol.h
 //  Canary
 //
 //  Created by Rake Yang on 2020/12/14.
@@ -10,7 +10,7 @@
 
 @class MockManager;
 
-@interface CanaryMockURLProtocol : NSURLProtocol
+@interface CanaryMockNSURLProtocol : NSURLProtocol
 
 + (void)setEnabled:(BOOL)enabled;
 
