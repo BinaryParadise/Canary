@@ -7,6 +7,10 @@
 
 import Foundation
 
+public let CanaryMockedNotification = "Canary.MockedNotification"
+public let CanaryOriginURLKey = "Canary.OriginURLKey"
+public let CanaryMockedURLKey = "Canary.MockedURLKey"
+
 @objc public class CanaryMockURLProtocol: URLProtocol {
   
     struct Constants {
@@ -61,6 +65,7 @@ import Foundation
     }
     URLProtocol.setProperty(true, forKey: Constants.RequestHandledKey, in: newRequest)
     newRequest.url = MockManager.shared.mockURL(for: newRequest as URLRequest)
+    NotificationCenter.default.post(name: NSNotification.Name(rawValue: CanaryMockedNotification), object: nil, userInfo: [CanaryOriginURLKey: request.url, CanaryMockedURLKey: newRequest.url])
     receiveData = Data()
     sessionTask = session?.dataTask(with: newRequest as URLRequest)
     sessionTask?.resume()
@@ -88,6 +93,8 @@ extension CanaryMockURLProtocol: URLSessionDataDelegate {
   }
   
   public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    //接口日志收集
+//    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "com.alamofire.networking.task.complete"), object: task, userInfo: ["com.alamofire.networking.complete.finish.responsedata": receiveData])
     if let error = error {
       client?.urlProtocol(self, didFailWithError: error)
     } else {

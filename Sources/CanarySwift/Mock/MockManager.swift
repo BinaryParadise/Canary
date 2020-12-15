@@ -70,7 +70,26 @@ struct MockSwitch: Codable {
     }
     
     @objc public func shouldIntercept(for request: URLRequest) -> Bool {
-        guard let mock = mockMap[request.url?.path ?? ""] else { return false }
+        //完全匹配
+        let path = request.url?.path ?? ""
+        var matchMock = mockMap[path]
+        /*if matchMock == nil  {
+            //正则匹配
+            matchMock = mockMap.values.first(where: { (item) -> Bool in
+                do {
+                    //示例：/live/room/end/([0-9./-A-Za-z]+)
+                    let regex = try NSRegularExpression(pattern: item.path, options: .caseInsensitive)
+                    let count = regex.matches(in: path, options: .reportProgress, range: NSRange(location: 0, length: path.count)).count
+                    if count > 0 {
+                        return true
+                    }
+                } catch {
+                    print("正则匹配：\(error)")
+                }
+                return false
+            })
+        }*/
+        guard let mock = matchMock else { return false }
         let match = switchFor(mockid: mock.id)
         var intercept = false
         if match.isEnabled {

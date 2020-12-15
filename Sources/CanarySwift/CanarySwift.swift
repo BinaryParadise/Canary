@@ -44,7 +44,7 @@ extension CanarySwift {
         } else {
             let url = URL(string: baseURL!)!
             let port = url.port == nil ? "": ":\(url.port!)"
-            LoggerManager.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/channel")!)
+            LoggerManager.shared.start(with: URL(string: "\(url.scheme!)://\(url.host!)\(port)/api/channel")!)
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: NSNotification.Name(rawValue: "com.alamofire.networking.task.complete"), object: nil)

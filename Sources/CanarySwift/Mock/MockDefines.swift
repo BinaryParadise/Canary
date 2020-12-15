@@ -24,6 +24,8 @@ struct MockData: Codable {
         return match.id
     }
     
+    /// 匹配场景，未指定时，默认第一个场景生效
+    /// - Parameter sceneid: 场景id
     func matched(sceneid: Int?) -> Bool {
         guard let match = scenes?.first(where: { (scene) -> Bool in
             scene.id == sceneid

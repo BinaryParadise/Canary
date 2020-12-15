@@ -90,6 +90,7 @@ class MockDataViewCell: UITableViewCell {
         }
         
         //路径
+        pathLabel.numberOfLines = 2
         pathLabel.textColor = UIColor(hex: 0x666666)
         pathLabel.font = UIFont.systemFont(ofSize: 13)
         pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -104,7 +105,8 @@ class MockDataViewCell: UITableViewCell {
         switchBtn.snp.makeConstraints { (make) in
             make.right.equalToSuperview().offset(-16)
             make.top.equalTo(nameLabel)
-            make.left.greaterThanOrEqualTo(nameLabel).offset(20)
+            make.left.greaterThanOrEqualTo(nameLabel.snp_right).offset(20)
+            make.left.greaterThanOrEqualTo(pathLabel.snp_right).offset(10)
         }
         switchBtn.addTarget(self, action: #selector(onSwitchChanged(_:)), for: .valueChanged)
         
@@ -133,8 +135,7 @@ class MockDataViewCell: UITableViewCell {
     func config(mock: MockData?) {
         guard let mock = mock else { return }
         self.mock = mock
-        let switchMock = MockManager.shared.switchFor(mockid: mock.id)
-        switchBtn.isOn = mock.matched(sceneid: switchMock.sceneId)
+        switchBtn.isOn = MockManager.shared.switchFor(mockid: mock.id).isEnabled
         nameLabel.text = mock.name
         pathLabel.text = "路径：\(mock.path)"
         collectView.reloadData()
@@ -181,9 +182,13 @@ extension MockDataViewCell: UICollectionViewDataSource, UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withClass: ItemCell.self, for: indexPath)
         if let mock = mock {
             if let scene = mock.scenes?[safe: indexPath.row] {
+                let switchMock = MockManager.shared.switchFor(mockid: mock.id)
                 cell.config(scene: scene)
-                cell.selectedBtn.isSelected = MockManager.shared.switchFor(mockid: mock.id).sceneId == scene.id
-                cell.config(scene: scene)
+                if switchMock.sceneId == nil {
+                    cell.selectedBtn.isSelected = indexPath.row == 0
+                } else {
+                    cell.selectedBtn.isSelected = switchMock.sceneId == scene.id
+                }
             }
         }
         return cell
