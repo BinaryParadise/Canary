@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  ObjectiveCDemo
+//  CanaryDemo
 //
 //  Created by Rake Yang on 2020/12/13.
 //

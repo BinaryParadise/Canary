@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dj-hy-f29">
-                                <rect key="frame" x="61" y="202" width="46" height="30"/>
+                                <rect key="frame" x="53" y="200" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="金丝雀"/>
                                 <connections>
@@ -31,6 +31,14 @@
                                 <state key="normal" title="网络请求"/>
                                 <connections>
                                     <action selector="showNetworking:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qIk-Fj-nvn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQ0-Su-5lj">
+                                <rect key="frame" x="53" y="335" width="123" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="网络请求（正则）"/>
+                                <connections>
+                                    <action selector="showNetworkingParam:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wke-aR-WQh"/>
                                 </connections>
                             </button>
                         </subviews>

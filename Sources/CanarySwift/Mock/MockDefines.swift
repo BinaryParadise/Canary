@@ -16,21 +16,13 @@ struct MockData: Codable {
     var name: String
     var path: String
     var scenes: [MockScene]?
-
-    func matchScene(for request: URLRequest, sceneid: Int?) -> Int? {
+    
+    /// 匹配场景，未指定时，默认第一个场景生效
+    func matchScene(sceneid: Int?) -> Int? {
         guard let match = scenes?.first(where: { (scene) -> Bool in
             scene.id == sceneid
         }) else { return scenes?.first?.id }
         return match.id
-    }
-    
-    /// 匹配场景，未指定时，默认第一个场景生效
-    /// - Parameter sceneid: 场景id
-    func matched(sceneid: Int?) -> Bool {
-        guard let match = scenes?.first(where: { (scene) -> Bool in
-            scene.id == sceneid
-        }) else { return scenes?.first?.id == sceneid }
-        return true
     }
 }
 

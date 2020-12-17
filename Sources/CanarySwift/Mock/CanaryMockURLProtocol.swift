@@ -12,7 +12,7 @@ public let CanaryOriginURLKey = "Canary.OriginURLKey"
 public let CanaryMockedURLKey = "Canary.MockedURLKey"
 
 @objc public class CanaryMockURLProtocol: URLProtocol {
-  
+    
     struct Constants {
         static let RequestHandledKey = "MockURLProtocolHandledKey"
     }
@@ -20,6 +20,7 @@ public let CanaryMockedURLKey = "Canary.MockedURLKey"
     var session: URLSession?
     var sessionTask: URLSessionDataTask?
     var receiveData: Data?
+    var mockedURL: URL?
     @objc public static var isEnabled: Bool = false {
         didSet {
             if isEnabled {
@@ -49,7 +50,7 @@ public let CanaryMockedURLKey = "Canary.MockedURLKey"
         return false;
     }
     if ["http", "https"].contains(request.url?.scheme ?? "") {
-        return MockManager.shared.shouldIntercept(for: request)
+        return MockManager.shared.shouldIntercept(for: request).should
     }
     return false
   }
@@ -64,7 +65,7 @@ public let CanaryMockedURLKey = "Canary.MockedURLKey"
       return
     }
     URLProtocol.setProperty(true, forKey: Constants.RequestHandledKey, in: newRequest)
-    newRequest.url = MockManager.shared.mockURL(for: newRequest as URLRequest)
+    newRequest.url = MockManager.shared.shouldIntercept(for: newRequest as URLRequest).url
     NotificationCenter.default.post(name: NSNotification.Name(rawValue: CanaryMockedNotification), object: nil, userInfo: [CanaryOriginURLKey: request.url, CanaryMockedURLKey: newRequest.url])
     receiveData = Data()
     sessionTask = session?.dataTask(with: newRequest as URLRequest)

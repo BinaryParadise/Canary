@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  ObjectiveCDemo
+//  CanaryDemo
 //
 //  Created by Rake Yang on 2020/12/13.
 //
@@ -41,6 +41,20 @@
     }];
     [task resume];
     
+}
+
+- (IBAction)showNetworkingParam:(id)sender {
+    NSLog(@"%@", NSURLSessionConfiguration.defaultSessionConfiguration.protocolClasses);
+    
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:NSURLSessionConfiguration.defaultSessionConfiguration];
+    manager.requestSerializer = AFHTTPRequestSerializer.serializer;
+    manager.responseSerializer = AFJSONResponseSerializer.serializer;
+    NSURLSessionDataTask *task = [manager GET:@"http://quan.suning.com/getSysTime.do" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+    [task resume];
 }
 
 

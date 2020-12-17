@@ -8,7 +8,8 @@
 import Foundation
 import SwiftyJSON
 
-let suiteName = "com.binaryparadise.canary"
+let suiteName       = "com.binaryparadise.canary"
+let MockGroupURL    = "/api/mock/whole"
 
 /// 接口状态
 struct MockSwitch: Codable {
@@ -47,8 +48,10 @@ struct MockSwitch: Codable {
         }
     }
     
+    /// 接口开关状态
     func switchFor(mockid: Int) -> MockSwitch {
-        return mockSwitchs[mockid.string] ?? MockSwitch(isEnabled: false, sceneId: nil, automatic: false)
+        guard let mockS = mockSwitchs[mockid.string] else { return MockSwitch(isEnabled: false, sceneId: nil, automatic: false) }
+        return mockS
     }
     
     /// 设置接口状态
@@ -69,16 +72,19 @@ struct MockSwitch: Codable {
         userDefaults.synchronize()
     }
     
-    @objc public func shouldIntercept(for request: URLRequest) -> Bool {
+    func shouldIntercept(for request: URLRequest) -> (should:Bool, url: URL?) {
         //完全匹配
         let path = request.url?.path ?? ""
+        if path == MockGroupURL {
+            return (false, nil)
+        }
         var matchMock = mockMap[path]
-        /*if matchMock == nil  {
+        if matchMock == nil  {
             //正则匹配
             matchMock = mockMap.values.first(where: { (item) -> Bool in
                 do {
-                    //示例：/live/room/end/([0-9./-A-Za-z]+)
-                    let regex = try NSRegularExpression(pattern: item.path, options: .caseInsensitive)
+                    let regexStr = matchParameter(path: item.path)
+                    let regex = try NSRegularExpression(pattern: regexStr, options: .caseInsensitive)
                     let count = regex.matches(in: path, options: .reportProgress, range: NSRange(location: 0, length: path.count)).count
                     if count > 0 {
                         return true
@@ -88,25 +94,36 @@ struct MockSwitch: Codable {
                 }
                 return false
             })
-        }*/
-        guard let mock = matchMock else { return false }
+        }
+        guard let mock = matchMock else { return (false, nil) }
         let match = switchFor(mockid: mock.id)
         var intercept = false
+        var url: URL?
         if match.isEnabled {
-            intercept = mock.matchScene(for: request, sceneid: match.sceneId) != nil
+            if let scendid = mock.matchScene(sceneid: match.sceneId) {
+                intercept = true
+                url = URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(scendid)")
+            }
+
         }
-        return intercept
+        return (intercept, url)
     }
     
-    @objc public func mockURL(for request: URLRequest) -> URL? {
-        guard let mock = mockMap[request.url?.path ?? ""] else { return nil }
-        let match = switchFor(mockid: mock.id)
-        let sceneid = mock.matchScene(for: request, sceneid: match.sceneId) ?? 0
-        return URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(sceneid)")
+    // 替换参数占位正则表达式
+    func matchParameter(path: String) -> String {
+        do {
+            let mstr = NSString(string: path).mutableCopy() as! NSMutableString
+            let regex = try NSRegularExpression(pattern: "\\{param[0-9]+\\}", options: .caseInsensitive)
+            let count = regex.replaceMatches(in: mstr, options: .reportProgress, range: NSRange(location: 0, length: path.count), withTemplate: "([0-9./-A-Za-z]+)")
+            return mstr as String
+        } catch {
+            print("\(error)")
+        }
+        return path
     }
     
     func fetchGroups(completion: @escaping (() -> Void)) -> Void {
-        URLSession.shared.dataTask(with: CanarySwift.shared.requestURL(with: "/api/mock/whole")) { [weak self] (data, response, error) in
+        URLSession.shared.dataTask(with: CanarySwift.shared.requestURL(with: MockGroupURL)) { [weak self] (data, response, error) in
             do {
                 let data = JSON(data)["data"]
                 self?.groups = try JSONDecoder().decode([MockGroup].self, from: data.rawData())
