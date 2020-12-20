@@ -102,7 +102,11 @@ struct MockSwitch: Codable {
         if match.isEnabled {
             if let scendid = mock.matchScene(sceneid: match.sceneId) {
                 intercept = true
-                url = URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(scendid)")
+                var queryStr = ""
+                if let q = request.url?.query {
+                    queryStr = "?\(q)"
+                }
+                url = URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(scendid)\(queryStr)")
             }
 
         }
