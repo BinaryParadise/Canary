@@ -11,8 +11,8 @@ import Foundation
 class NetLogMessage {
     var method: String?
     var requestURL: URL?
-    var allRequestHTTPHeaderFields: [AnyHashable: Any]?
-    var allResponseHTTPHeaderFields: [AnyHashable: Any]?
+    var requestHeaderFields: [AnyHashable: Any]?
+    var responseHeaderFields: [AnyHashable: Any]?
     var requestBody: Data?
     var responseBody: Data?
     var statusCode: Int?
@@ -20,12 +20,12 @@ class NetLogMessage {
     init(request: NSURLRequest, response: HTTPURLResponse, data: Data?) {
         method = request.httpMethod;
         requestURL = request.url;
-        allRequestHTTPHeaderFields = request.allHTTPHeaderFields;
+        requestHeaderFields = request.allHTTPHeaderFields;
         requestBody = request.httpBody;
         if requestBody == nil {
             requestBody = bodyData(stream: request.httpBodyStream)
         }
-        allResponseHTTPHeaderFields = response.allHeaderFields
+        responseHeaderFields = response.allHeaderFields
         responseBody = data
         statusCode = response.statusCode
     }

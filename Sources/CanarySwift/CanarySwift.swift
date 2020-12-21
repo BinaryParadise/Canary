@@ -68,11 +68,17 @@ extension CanarySwift {
         
         let msg = WebSocketMessage(type: .netLogger);
         var mdict: [String: Any] = [:]
-        mdict["flag"] = 4  //DDLogFlag.DDLogFlagInfo 1 << 2
+        if let sceneid = netLog.responseHeaderFields?["scene_id"] as? String {
+            mdict["flag"] = 2 //DDLogFlag.DDLogFlagWarning
+            let scenename = (netLog.responseHeaderFields?["scene_name"] as! String)
+            mdict["url"] = netLog.requestURL!.absoluteString + "&scene_id=\(sceneid)&scene_name=\(scenename.urlDecoded)"
+        } else {
+            mdict["flag"] = 4  //DDLogFlag.DDLogFlagInfo 1 << 2
+            mdict["url"] = netLog.requestURL!.absoluteString;
+        }
         mdict["method"] = netLog.method
-        mdict["url"] = netLog.requestURL!.absoluteString;
-        mdict["requestfields"] = netLog.allRequestHTTPHeaderFields
-        mdict["responsefields"] = netLog.allResponseHTTPHeaderFields
+        mdict["requestfields"] = netLog.requestHeaderFields
+        mdict["responsefields"] = netLog.responseHeaderFields
         do {
             if netLog.requestBody != nil {
                 mdict["requestbody"] = try JSONSerialization.jsonObject(with: netLog.requestBody ?? Data(), options: .mutableLeaves)

@@ -9,7 +9,7 @@ import Foundation
 import SwiftyJSON
 
 let suiteName       = "com.binaryparadise.canary"
-let MockGroupURL    = "/api/mock/whole"
+let MockGroupURL    = "/api/mock/app/whole"
 
 /// 接口状态
 struct MockSwitch: Codable {
@@ -100,9 +100,13 @@ struct MockSwitch: Codable {
         var intercept = false
         var url: URL?
         if match.isEnabled {
-            if let scendid = mock.matchScene(sceneid: match.sceneId) {
+            if let scendid = mock.matchScene(sceneid: match.sceneId, request: request) {
                 intercept = true
-                url = URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(scendid)")
+                var queryStr = ""
+                if let q = request.url?.query {
+                    queryStr.append("?\(q)")
+                }
+                url = URL(string: "\(CanarySwift.shared.baseURL ?? "")/api/mock/app/scene/\(scendid)\(queryStr)")
             }
 
         }
@@ -128,7 +132,7 @@ struct MockSwitch: Codable {
                 let data = JSON(data)["data"]
                 self?.groups = try JSONDecoder().decode([MockGroup].self, from: data.rawData())
             } catch {
-                print("\(#file).\(#function)+\(#line)\(error)")
+                print("\(#file).\(#function)+\(#line) \(error)")
             }
             completion()
         }.resume()

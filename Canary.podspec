@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Canary'
-  s.version          = '0.4.2'
-  s.summary          = 'Canary is SDK For CanaryWeb.'
+  s.version          = '0.5.0'
+  s.summary          = 'Canary is SDK For CanaryService.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
