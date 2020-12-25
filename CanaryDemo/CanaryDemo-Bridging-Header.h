@@ -3,3 +3,6 @@
 //
 
 @import Canary;
+
+@import CocoaLumberjack;
+static DDLogLevel ddLogLevel = DDLogLevelVerbose;

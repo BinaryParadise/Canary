@@ -9,7 +9,7 @@
 
 #import "CanaryDemo-Bridging-Header.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
-#import "CanaryTTYLogger.h"
+#import "CanaryDemo-Swift.h"
 
 @interface AppDelegate ()
 

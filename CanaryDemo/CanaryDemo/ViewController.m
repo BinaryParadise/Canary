@@ -25,6 +25,11 @@
 
 - (IBAction)showCanary:(id)sender {
     [CanarySwift.shared show];
+    DDLogVerbose(@"verbose");
+    DDLogInfo(@"info");
+    DDLogWarn(@"warn");
+    DDLogDebug(@"degbu");
+    DDLogError(@"error");
 }
 
 - (IBAction)showNetworking:(id)sender {
