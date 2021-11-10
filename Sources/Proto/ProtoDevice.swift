@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftyJSON
-import SystemConfiguration
 
 public struct ProtoDevice: Codable {
     public var ipAddrs: [String : [String : String]]?
