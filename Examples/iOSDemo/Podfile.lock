@@ -1,0 +1,95 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - Canary (0.8.0):
+    - Canary/iOS (= 0.8.0)
+  - Canary/Core (0.8.0):
+    - Canary/Proto
+    - SnapKit
+    - Starscream (~> 4.0)
+    - SwifterSwift
+    - SwiftyJSON
+  - Canary/iOS (0.8.0):
+    - Canary/Core
+    - SnapKit
+  - Canary/Proto (0.8.0):
+    - SwiftyJSON
+  - CocoaLumberjack/Core (3.7.2)
+  - CocoaLumberjack/Swift (3.7.2):
+    - CocoaLumberjack/Core
+  - Nimble (7.3.4)
+  - Quick (1.2.0)
+  - SnapKit (4.2.0)
+  - Starscream (4.0.4)
+  - SwifterSwift (5.1.0):
+    - SwifterSwift/AppKit (= 5.1.0)
+    - SwifterSwift/CoreGraphics (= 5.1.0)
+    - SwifterSwift/CoreLocation (= 5.1.0)
+    - SwifterSwift/Dispatch (= 5.1.0)
+    - SwifterSwift/Foundation (= 5.1.0)
+    - SwifterSwift/MapKit (= 5.1.0)
+    - SwifterSwift/SceneKit (= 5.1.0)
+    - SwifterSwift/SpriteKit (= 5.1.0)
+    - SwifterSwift/SwiftStdlib (= 5.1.0)
+    - SwifterSwift/UIKit (= 5.1.0)
+  - SwifterSwift/AppKit (5.1.0)
+  - SwifterSwift/CoreGraphics (5.1.0)
+  - SwifterSwift/CoreLocation (5.1.0)
+  - SwifterSwift/Dispatch (5.1.0)
+  - SwifterSwift/Foundation (5.1.0)
+  - SwifterSwift/MapKit (5.1.0)
+  - SwifterSwift/SceneKit (5.1.0)
+  - SwifterSwift/SpriteKit (5.1.0)
+  - SwifterSwift/SwiftStdlib (5.1.0)
+  - SwifterSwift/UIKit (5.1.0)
+  - SwiftyJSON (5.0.1)
+
+DEPENDENCIES:
+  - AFNetworking
+  - Canary (from `../../`)
+  - CocoaLumberjack/Swift
+  - Nimble (~> 7.0)
+  - Quick (~> 1.2.0)
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - CocoaLumberjack
+    - Nimble
+    - Quick
+    - SnapKit
+    - Starscream
+    - SwifterSwift
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  Canary:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  Canary: a9d3c8ea8ea9f1569257162ef4add7e2cf9953a1
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwifterSwift: a9e8e144832638c2850b43da5feaf9598c6ad65b
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+
+PODFILE CHECKSUM: c818ed010f119985ac71cc958bc8461e151a8ee0
+
+COCOAPODS: 1.11.2
