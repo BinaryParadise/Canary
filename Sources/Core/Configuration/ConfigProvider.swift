@@ -50,7 +50,7 @@ public class ConfigProvider {
     }
 
     func fetchRemoteConfig(completion: @escaping (() -> Void)) {
-        var confURL = "/api/conf/full?appkey=\(CanaryManager.shared.appSecret)"
+        let confURL = "/api/conf/full?appkey=\(CanaryManager.shared.appSecret)"
         URLRequest.get(with: confURL) { [weak self] (result, error) in
             if result.code == 0 {
                 self?.processRemoteConfig(data: result.data)
@@ -75,7 +75,7 @@ public class ConfigProvider {
         var defaultItem: ProtoConf?
         remoteConfig.forEach { (group) in
             group.items.forEach { (item) in
-                if item.defaultTag ?? false {
+                if item.defaultTag {
                     defaultItem = item
                 }
                 if item.name == currentName {

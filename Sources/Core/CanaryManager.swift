@@ -134,7 +134,7 @@ extension CanaryManager {
                     
         let responseData = notification.userInfo?["com.alamofire.networking.complete.finish.responsedata"] as? Data
         if responseData == nil {
-            notification.userInfo?["org.alamofire.notification.key.responseData"]
+            _ = notification.userInfo?["org.alamofire.notification.key.responseData"]
         }
         DispatchQueue.global().async { [weak self] in
             self?.storeNetworkLogger(netLog: NetLogMessage(request: request, response: response, data: responseData))

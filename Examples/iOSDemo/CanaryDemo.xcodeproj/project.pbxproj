@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		BC72D9DE6F49FA4CF346D404 /* libPods-CanaryDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D518B6053AD3B9C6037007B /* libPods-CanaryDemoTests.a */; };
 		C95C5BEA25859F47003596D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BE925859F47003596D8 /* AppDelegate.m */; };
-		C95C5BED25859F47003596D8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BEC25859F47003596D8 /* SceneDelegate.m */; };
 		C95C5BF025859F47003596D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BEF25859F47003596D8 /* ViewController.m */; };
 		C95C5BF325859F47003596D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C95C5BF125859F47003596D8 /* Main.storyboard */; };
 		C95C5BF525859F48003596D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95C5BF425859F48003596D8 /* Assets.xcassets */; };
@@ -42,8 +41,6 @@
 		C95C5BE525859F47003596D8 /* CanaryDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CanaryDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C95C5BE825859F47003596D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C95C5BE925859F47003596D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C95C5BEB25859F47003596D8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		C95C5BEC25859F47003596D8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		C95C5BEE25859F47003596D8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C95C5BEF25859F47003596D8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C95C5BF225859F47003596D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -130,8 +127,6 @@
 			children = (
 				C95C5BE825859F47003596D8 /* AppDelegate.h */,
 				C95C5BE925859F47003596D8 /* AppDelegate.m */,
-				C95C5BEB25859F47003596D8 /* SceneDelegate.h */,
-				C95C5BEC25859F47003596D8 /* SceneDelegate.m */,
 				C95C5BEE25859F47003596D8 /* ViewController.h */,
 				C95C5BEF25859F47003596D8 /* ViewController.m */,
 				C95C5BF125859F47003596D8 /* Main.storyboard */,
@@ -205,7 +200,7 @@
 				TargetAttributes = {
 					C95C5BE425859F47003596D8 = {
 						CreatedOnToolsVersion = 12.1;
-						LastSwiftMigration = 1210;
+						LastSwiftMigration = 1310;
 					};
 					C95C5BFF25859F48003596D8 = {
 						CreatedOnToolsVersion = 12.1;
@@ -345,7 +340,6 @@
 				C95C5BEA25859F47003596D8 /* AppDelegate.m in Sources */,
 				C9F190162595F2770056D376 /* CanaryTTYLogger.swift in Sources */,
 				C95C5BFB25859F48003596D8 /* main.m in Sources */,
-				C95C5BED25859F47003596D8 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

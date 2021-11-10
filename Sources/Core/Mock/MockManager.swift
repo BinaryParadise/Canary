@@ -98,7 +98,7 @@ struct Result: Codable {
         do {
             let mstr = NSString(string: path).mutableCopy() as! NSMutableString
             let regex = try NSRegularExpression(pattern: "\\{param[0-9]+\\}", options: .caseInsensitive)
-            let count = regex.replaceMatches(in: mstr, options: .reportProgress, range: NSRange(location: 0, length: path.count), withTemplate: "([0-9./-A-Za-z]+)")
+            _ = regex.replaceMatches(in: mstr, options: .reportProgress, range: NSRange(location: 0, length: path.count), withTemplate: "([0-9./-A-Za-z]+)")
             return mstr as String
         } catch {
             print("\(error)")

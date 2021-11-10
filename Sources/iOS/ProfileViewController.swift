@@ -58,7 +58,7 @@ class ProfileViewController: UIViewController {
         infoView = nil
         loginView?.removeFromSuperview()
         loginView = nil
-        if let user = CanaryManager.shared.user() {
+        if CanaryManager.shared.user() != nil {
             infoView = InfoView(frame: .zero)
             view.addSubview(infoView!)
             infoView?.snp.makeConstraints({ (make) in
@@ -147,8 +147,8 @@ class ProfileViewController: UIViewController {
             let nameLabel = UILabel()
             nameLabel.attributedText = {
                 let mattr = NSMutableAttributedString()
-                mattr.append(NSAttributedString(string: "名称：", attributes: [.font: UIFont(name: "DINAlternate-Bold", size: 15), .foregroundColor: UIColor(hex: 0x333333)]))
-                mattr.append(NSAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor:UIColor(hex: 0xF20000)]))
+                mattr.append(NSAttributedString(string: "名称：", attributes: [.font: UIFont(name: "DINAlternate-Bold", size: 15)!, .foregroundColor: UIColor(hex: 0x333333)!]))
+                mattr.append(NSAttributedString(string: user.name, attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor:UIColor(hex: 0xF20000)!]))
                 return mattr
             }()
             addSubview(nameLabel)
