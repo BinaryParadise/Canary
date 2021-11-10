@@ -26,8 +26,21 @@ public struct ProtoDevice: Codable {
         name = Host.current().localizedName ?? "Unknown"
         osName = "macOS"
         osVersion = "\(info.operatingSystemVersion.majorVersion).\(info.operatingSystemVersion.minorVersion).\(info.operatingSystemVersion.patchVersion)"
-        modelName = ProtoDevice.platform()
+                
+        modelName = {
+            var size = 0
+            sysctlbyname("hw.model", nil, &size, nil, 0)
+            var machine = [CChar](repeating: 0,  count: size)
+            sysctlbyname("hw.model", &machine, &size, nil, 0)
+            return String(cString: machine)
+        }()
         simulator = TARGET_OS_SIMULATOR == 1
+        #elseif os(Linux)
+        name = Host.current().localizedName ?? "Unknown"
+        osName = "Linux"
+        osVersion = "\(info.operatingSystemVersion.majorVersion).\(info.operatingSystemVersion.minorVersion).\(info.operatingSystemVersion.patchVersion)"
+        modelName = "Linux"
+        simulator = false
         #else
         name = UIDevice.current.name
         osName = UIDevice.current.systemName
@@ -41,14 +54,6 @@ public struct ProtoDevice: Codable {
             appVersion = "0.1.0"
         }
         ipAddrs = ipAddress()
-    }
-    
-    static func platform() -> String {
-        var size = 0
-        sysctlbyname("hw.model", nil, &size, nil, 0)
-        var machine = [CChar](repeating: 0,  count: size)
-        sysctlbyname("hw.model", &machine, &size, nil, 0)
-        return String(cString: machine)
     }
     
     private func ipAddress() -> [String : [String : String]]? {
