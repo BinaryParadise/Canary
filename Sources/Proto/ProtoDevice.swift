@@ -21,6 +21,12 @@ public struct ProtoDevice: Codable {
     
     public init(identify: String) {
         deviceId = identify
+        
+        if let info = Bundle.main.infoDictionary, info.count > 0 {
+            appVersion = info["CFBundleShortVersionString"] as! String
+        } else {
+            appVersion = "0.1.0"
+        }
         #if os(macOS)
         let info = ProcessInfo.processInfo
         name = Host.current().localizedName ?? "Unknown"
@@ -35,7 +41,9 @@ public struct ProtoDevice: Codable {
             return String(cString: machine)
         }()
         simulator = TARGET_OS_SIMULATOR == 1
+        ipAddrs = ipAddress()
         #elseif os(Linux)
+        let info = ProcessInfo.processInfo
         name = Host.current().localizedName ?? "Unknown"
         osName = "Linux"
         osVersion = "\(info.operatingSystemVersion.majorVersion).\(info.operatingSystemVersion.minorVersion).\(info.operatingSystemVersion.patchVersion)"
@@ -47,13 +55,8 @@ public struct ProtoDevice: Codable {
         osVersion = UIDevice.current.systemVersion
         modelName = UIDevice.current.localizedModel
         simulator = TARGET_OS_SIMULATOR == 1
-        #endif
-        if let info = Bundle.main.infoDictionary, info.count > 0 {
-            appVersion = info["CFBundleShortVersionString"] as! String
-        } else {
-            appVersion = "0.1.0"
-        }
         ipAddrs = ipAddress()
+        #endif
     }
     
     private func ipAddress() -> [String : [String : String]]? {

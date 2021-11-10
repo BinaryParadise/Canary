@@ -7,6 +7,6 @@
 
 import Foundation
 
-@objc public protocol ProtoUIEngine: NSObjectProtocol {
+@objc public protocol ProtoUIEngine {
     func show()
 }
