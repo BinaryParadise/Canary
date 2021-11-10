@@ -21,10 +21,10 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/BinaryParadise/CanaryService'
+  s.homepage         = 'https://github.com/BinaryParadise/Canary'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Rake Yang' => 'fenglaijun@gmail.com' }
-  s.source           = { :git => 'https://github.com/BinaryParadise/CanaryService.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/BinaryParadise/Canary.git', :tag => s.version.to_s }
   
   s.swift_version = '4.2'
 
