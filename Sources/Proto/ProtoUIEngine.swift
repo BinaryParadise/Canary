@@ -9,8 +9,10 @@ import Foundation
 
 #if os(Linux)
 public protocol ProtoUIEngine {
-#else
-@objc public protocol ProtoUIEngine {
-#endif
     func show()
 }
+#else
+@objc public protocol ProtoUIEngine {
+    func show()
+}
+#endif
