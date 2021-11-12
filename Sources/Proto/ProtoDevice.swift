@@ -7,9 +7,10 @@
 
 import Foundation
 import SwiftyJSON
+import Network
 
 public struct ProtoDevice: Codable {
-    public var ipAddrs: [String : [String : String]]?
+    public var ipAddrs: [String]?
     public var simulator: Bool
     public var appVersion: String
     public var osName: String
@@ -40,6 +41,7 @@ public struct ProtoDevice: Codable {
             sysctlbyname("hw.model", &machine, &size, nil, 0)
             return String(cString: machine)
         }()
+        ipAddrs = Host.current().addresses
         simulator = TARGET_OS_SIMULATOR == 1
         #elseif os(Linux)
         let info = ProcessInfo.processInfo
@@ -53,6 +55,35 @@ public struct ProtoDevice: Codable {
         osName = UIDevice.current.systemName
         osVersion = UIDevice.current.systemVersion
         modelName = UIDevice.current.localizedModel
+        ipAddrs = {
+            var ips: [String] = []
+            var ifaddr : UnsafeMutablePointer<ifaddrs>? = nil
+            if getifaddrs(&ifaddr) == 0 {
+                var ptr = ifaddr
+                while (ptr != nil) {
+                    let flags = Int32(ptr!.pointee.ifa_flags)
+                    var addr = ptr!.pointee.ifa_addr.pointee
+                    if (flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING) {
+                        if addr.sa_family == UInt8(AF_INET) || addr.sa_family == UInt8(AF_INET6) {
+                            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                            if (getnameinfo(&addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),nil, socklen_t(0), NI_NUMERICHOST) == 0) {
+                                if let address = String(validatingUTF8:hostname) {
+                                    let name = String(cString: ptr!.pointee.ifa_name)
+                                    if name.hasPrefix("en") {
+                                        ips.append(address)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ptr = ptr!.pointee.ifa_next
+                }
+                freeifaddrs(ifaddr)
+            }
+            
+            return ips
+        }()
+
         simulator = TARGET_OS_SIMULATOR == 1
         #endif
     }
