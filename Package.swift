@@ -25,7 +25,8 @@ let package = Package(
         .target(name: "macOS", dependencies: ["Core"]),
         .target(
             name: "Core",
-            dependencies: ["Starscream", "Proto", "SwiftyJSON", "SwifterSwift"]),
+            dependencies: ["Starscream", "Proto", "SwiftyJSON", "SwifterSwift"],
+            exclude: ["Configuration/ProjectConfigurator.rb"]),
         .target(name: "Proto", dependencies: ["SwiftyJSON"])
     ]
 )
