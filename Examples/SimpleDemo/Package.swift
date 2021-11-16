@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "SimpleDemo",
-    platforms: [.macOS(.v10_13)],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(path: "../.."),
