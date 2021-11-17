@@ -7,6 +7,8 @@
 
 import Foundation
 
+public let DeviceRegistertedNotificationKey = "com.binaryparadise.canary.registered"
+
 /// 金丝雀公共支持库
 public class CanaryProto {
     public class func generateIdentify() -> String {

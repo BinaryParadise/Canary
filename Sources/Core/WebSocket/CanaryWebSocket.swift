@@ -113,6 +113,9 @@ extension CanaryWebSocket: WebSocketDelegate {
                 receiver.webSocketDidOpen(webSocket: self)
             }
             print("[Canary] WebSocket连接成功：\(client.request.url?.absoluteString ?? "")🍺")
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .init(rawValue: DeviceRegistertedNotificationKey), object: nil)
+            }
         case .disconnected(let reason, let code):
             canSend = false
             print("[Canary] 连接关闭：\(code)-\(reason)🍺")
