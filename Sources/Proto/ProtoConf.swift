@@ -12,7 +12,7 @@ public struct ProtoConf: Codable {
     public var name: String
     public var type: ConfType
     public var updateTime: Int64
-    public var appId: Int
+    public var appId: Int?
     public var author: String?
     public var uid: Int
     public var comment: String?
