@@ -18,6 +18,7 @@ public struct ProtoDevice: Codable {
     public var name: String
     public var profile: [String : JSON]?
     public var deviceId: String
+    public var update: TimeInterval?
     
     public init(identify: String) {
         deviceId = identify
