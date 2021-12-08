@@ -8,6 +8,7 @@
 import Foundation
 import WebKit
 import SwiftyJSON
+import SwifterSwift
 
 #if TARGET_OS_IOS || TARGET_OS_WATCH || TARGET_OS_TV
 import MobileCoreServices
@@ -26,13 +27,17 @@ extension URLRequest {
         r.setValue(userAgent(), forHTTPHeaderField: "User-Agent")
         print("GET \(r.url?.absoluteString ?? "")")
         URLSession.shared.dataTask(with: r as URLRequest) { (data, response, error) in
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if status == 401 {
+                CanaryManager.shared.logout()
+                DispatchQueue.main.async {
+                    CanaryManager.shared.show()
+                }
+                return
+            }
             DispatchQueue.main.async {
                 do {
                     let result = try JSONDecoder().decode(Result.self, from: data ?? Data())
-                    if result.code == 401 {
-                        CanaryManager.shared.logout()
-                        return
-                    }
                     completion?(result, error)
                 } catch {
                     completion?(Result(code: 1, msg: error.localizedDescription, data: nil, timestamp: Date().timeIntervalSince1970), error)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SnapKit
 
 class ConfigurationItemViewController: UIViewController {
     var item: ProtoConf
@@ -65,7 +66,9 @@ class ConfigurationItemViewController: UIViewController {
     
     @objc func applyConfig() {
         ConfigProvider.shared.currentName = item.name
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            CanaryManager.shared.hide()
+        }
     }
 }
 

@@ -19,8 +19,8 @@ public class ConfigProvider {
     var remoteConfig: [ProtoConfGroup] = []
     var selectedConfig: ProtoConf?
     var currentName: String? {
-        didSet {
-            userDefaults.set(object: currentName, forKey: kMCCurrentName)
+        willSet {
+            userDefaults.set(newValue, forKey: kMCCurrentName)
             userDefaults.synchronize()
         }
     }
@@ -28,8 +28,7 @@ public class ConfigProvider {
     public static let shared = ConfigProvider()
         
     init() {
-        let jsonData = userDefaults.object(forKey: kMCRemoteConfig)
-        if let jsonData = jsonData as? Data {
+        if let jsonData = userDefaults.string(forKey: kMCRemoteConfig)?.base64Decoded?.data(using: .utf8) {
             do {
                 remoteConfig = try JSONDecoder().decode([ProtoConfGroup].self, from: jsonData)
             } catch {
@@ -54,6 +53,8 @@ public class ConfigProvider {
         URLRequest.get(with: confURL) { [weak self] (result, error) in
             if result.code == 0 {
                 self?.processRemoteConfig(data: result.data)
+            } else {
+                print("\(#function) \(error)")
             }
             completion()
         }
@@ -63,7 +64,7 @@ public class ConfigProvider {
         guard let data = data else { return }
         do {
             remoteConfig = try JSONDecoder().decode([ProtoConfGroup].self, from: data.rawData())
-            try userDefaults.set(object: data.rawData(), forKey: kMCRemoteConfig)
+            userDefaults.set(data.rawString()?.base64Encoded, forKey: kMCRemoteConfig)
             switchToCurrentConfig()
         } catch {
             print("\(#file).\(#function)+\(#line) \(error)")
@@ -91,6 +92,7 @@ public class ConfigProvider {
         if let selectedItem = selectedItem {
             currentName = selectedItem.name
         }
+        
         selectedConfig = selectedItem
     }
     

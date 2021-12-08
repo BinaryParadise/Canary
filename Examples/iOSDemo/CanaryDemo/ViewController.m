@@ -21,6 +21,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self fetchParam];
+}
+
+- (void)fetchParam {
     [self showLog:[NSString stringWithFormat:@"获取配置参数：A = %@", [CanaryManager.shared stringValueFor:@"A" def:@"123"]]];
 }
 
@@ -33,6 +37,7 @@
 
 - (IBAction)showCanary:(id)sender {
     [CanaryManager.shared show];
+    [self fetchParam];
     DDLogVerbose(@"verbose");
     DDLogInfo(@"info");
     DDLogWarn(@"warn");

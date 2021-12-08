@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftyJSON
-import SwifterSwift
 
 #if canImport(Proto)
 import Proto
@@ -28,7 +27,7 @@ import UIKit
     /// 应用标识
     @objc public var appSecret: String = ""
     
-    let lock = NSLock()
+    private let lock = NSLock()
     
     private var _user: UserAuth?
         
@@ -71,6 +70,10 @@ import UIKit
         if lock.try() {
             engine?.show()
         }
+    }
+    
+    @objc public func hide() {
+        lock.unlock()
     }
     
     public func requestURL(with path:String) -> URL {
@@ -154,7 +157,7 @@ extension CanaryManager {
         if let sceneid = netLog.responseHeaderFields?["scene_id"] as? String {
             mdict["flag"] = 2 //DDLogFlag.DDLogFlagWarning
             let scenename = (netLog.responseHeaderFields?["scene_name"] as! String)
-            mdict["url"] = netLog.requestURL!.absoluteString + "&scene_id=\(sceneid)&scene_name=\(scenename.urlDecoded)"
+            mdict["url"] = netLog.requestURL!.absoluteString + "&scene_id=\(sceneid)&scene_name=\(scenename.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
         } else {
             mdict["flag"] = 4  //DDLogFlag.DDLogFlagInfo 1 << 2
             mdict["url"] = netLog.requestURL!.absoluteString;
@@ -163,7 +166,8 @@ extension CanaryManager {
         mdict["requestfields"] = netLog.requestHeaderFields
         mdict["responsefields"] = netLog.responseHeaderFields
         if let requestBody = netLog.requestBody {
-            mdict["requestbody"] = (try? JSONSerialization.jsonObject(with: requestBody, options: .mutableLeaves)) ?? requestBody.string(encoding:.utf8)
+            mdict["requestbody"] = (try? JSONSerialization.jsonObject(with: requestBody, options: .mutableLeaves)) ??
+                String(data: requestBody, encoding: .utf8)
         }
         if let responseBody = netLog.responseBody {
             mdict["responsebody"] = (try? JSONSerialization.jsonObject(with: responseBody, options: .mutableLeaves)) ?? responseBody

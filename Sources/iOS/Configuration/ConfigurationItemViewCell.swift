@@ -16,19 +16,21 @@ class ConfigurationItemViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+                
         titleLabel.font = UIFont(name: "DINAlternate-Bold", size: 18)
         contentView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: superview!.topAnchor, constant: 10).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: superview!.leftAnchor, constant: 12).isActive = true
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(10)
+        }
         
         valueLabel.font = UIFont(name: "DINCondensed", size: 16)
         valueLabel.textColor = .orange
         contentView.addSubview(valueLabel)
-        valueLabel.snp.makeConstraints({ (make) in
+        valueLabel.snp.makeConstraints { make in
             make.left.equalTo(titleLabel)
-            make.top.equalTo(titleLabel.snp_bottom).offset(4)
-        })
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+        }
         
         extraLabel.lineBreakMode = .byCharWrapping;
         extraLabel.numberOfLines = 0;
