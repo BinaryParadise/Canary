@@ -14,18 +14,18 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
-  - Canary (0.8.1):
-    - Canary/iOS (= 0.8.1)
-  - Canary/Core (0.8.1):
+  - Canary (0.8.2):
+    - Canary/iOS (= 0.8.2)
+  - Canary/Core (0.8.2):
     - Canary/Proto
     - SnapKit
     - Starscream (~> 4.0)
     - SwifterSwift
     - SwiftyJSON
-  - Canary/iOS (0.8.1):
+  - Canary/iOS (0.8.2):
     - Canary/Core
     - SnapKit
-  - Canary/Proto (0.8.1):
+  - Canary/Proto (0.8.2):
     - SwiftyJSON
   - CocoaLumberjack/Core (3.7.2)
   - CocoaLumberjack/Swift (3.7.2):
@@ -81,7 +81,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  Canary: f036b394ce972a12df1f600c14ef13945e968452
+  Canary: 34862d0c3f5a0c712b4d4ae4ef2beb6e2a898139
   CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
   Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
