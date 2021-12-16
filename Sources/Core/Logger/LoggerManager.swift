@@ -16,7 +16,19 @@ class LoggerManager: NSObject {
     var customProfile: (() -> [String: Any])?
     static let shared = LoggerManager()
     var updateTime = Date().timeIntervalSince1970
+    static var beforeExceptionHandler: NSUncaughtExceptionHandler?
     
+    override init() {
+        super.init()
+        LoggerManager.beforeExceptionHandler = NSGetUncaughtExceptionHandler()
+        
+        NSSetUncaughtExceptionHandler { exception in
+            LoggerManager.storeCrash(exception)
+        }
+        
+        reportCrashCache()
+    }
+
     func start(with domain: URL) -> Void {
         CanaryWebSocket.shared.webSocketURL = domain.absoluteString
         CanaryWebSocket.shared.addMessageReciver(reciver: self)
@@ -50,6 +62,47 @@ class LoggerManager: NSObject {
             print("\(#filePath).\(#function)+\(#line) \(error)")
         }
         webSocket.sendMessage(message: msg)
+    }
+    
+    class func storeCrash(_ exception: NSException) {
+        let dict = ["name": exception.name,
+                    "reason": exception.reason as Any,
+                    "stackSymbols":exception.callStackSymbols,
+                    "stackAddresses": exception.callStackReturnAddresses,
+                    "timestamp": Int64(Date().timeIntervalSince1970 * 1000)]
+        if let cache = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
+            let fpath = "\(cache)/Canary"
+            if !FileManager.default.fileExists(atPath: fpath) {
+                try? FileManager.default.createDirectory(atPath: fpath, withIntermediateDirectories: true, attributes: nil)
+            }
+            if let data = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted) {
+                try? data.write(to: URL(fileURLWithPath: "\(fpath)/\(Int64(Date().timeIntervalSince1970)).json"))
+            }
+        }
+        
+        beforeExceptionHandler?(exception)
+        
+    }
+    
+    /// 报告本地缓存的崩溃日志
+    func reportCrashCache() {
+        let queue = DispatchQueue(label: "report.crash")
+        let cachePath = "\(NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)/Canary"
+        let subs = try? FileManager.default.subpathsOfDirectory(atPath: cachePath)
+        for subPath in subs ?? [] {
+            let filePath = URL(fileURLWithPath: "\(cachePath)/\(subPath)")
+            if let dict = try? JSONSerialization.jsonObject(with: Data(contentsOf: filePath), options: .fragmentsAllowed) as? [String : AnyHashable] {
+                queue.async {
+                    URLRequest.custom(method: "PUT", path: "/api/crash/\(CanaryManager.shared.deviceId ?? "")", params: dict) { r, e in
+                        if r.code == 0 {
+                            try? FileManager.default.removeItem(at: filePath)
+                        } else {
+                            print("\(r.msg ?? "")")
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -35,6 +35,7 @@ import UIKit
     
     @objc public var engine: ProtoUIEngine?
     
+    
     /// 日志对象Key集合
     @objc public static let StoreLogKeys = ["message",
     "level",
@@ -50,7 +51,7 @@ import UIKit
     "threadID",
     "threadName",
     "queueLabel"]
-    
+        
     public override init() {
         if UserDefaults.standard.bool(forKey: "Canary.MockEnabled") {
             CanaryMockURLProtocol.isEnabled = true

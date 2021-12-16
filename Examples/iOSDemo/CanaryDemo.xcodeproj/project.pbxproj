@@ -16,6 +16,7 @@
 		C95C5BFB25859F48003596D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C95C5BFA25859F48003596D8 /* main.m */; };
 		C95C5C2E2585A03A003596D8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95C5C2D2585A03A003596D8 /* File.swift */; };
 		C9F190162595F2770056D376 /* CanaryTTYLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F190152595F2770056D376 /* CanaryTTYLogger.swift */; };
+		C9F50E94276B376C00B0DE45 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9F50E93276B376C00B0DE45 /* GoogleService-Info.plist */; };
 		FBE404F6A0E1D3605C9AB760 /* libPods-CanaryDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8D43299CF21C465C8C1963 /* libPods-CanaryDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		C95C5C2425859FDB003596D8 /* CanaryDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CanaryDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		C95C5C2D2585A03A003596D8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		C9F190152595F2770056D376 /* CanaryTTYLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanaryTTYLogger.swift; sourceTree = "<group>"; };
+		C9F50E93276B376C00B0DE45 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF82A7AF59BB18474A95DEF0 /* Pods-CanaryDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CanaryDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-CanaryDemoTests/Pods-CanaryDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F5CA5ACF745616928A67F276 /* Pods-ObjectiveCDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjectiveCDemoTests.release.xcconfig"; path = "Target Support Files/Pods-ObjectiveCDemoTests/Pods-ObjectiveCDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 				C95C5BFA25859F48003596D8 /* main.m */,
 				C95C5C2D2585A03A003596D8 /* File.swift */,
 				C9F190152595F2770056D376 /* CanaryTTYLogger.swift */,
+				C9F50E93276B376C00B0DE45 /* GoogleService-Info.plist */,
 			);
 			path = CanaryDemo;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				C95C5BE325859F47003596D8 /* Resources */,
 				21E27A8C837A5A7F717B02C3 /* [MC] Fetch Remote Config */,
 				EC6E79BBFE6CFCC46859C959 /* [CP] Copy Pods Resources */,
+				C9F50EFF276B38D900B0DE45 /* Firebase */,
 			);
 			buildRules = (
 			);
@@ -233,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C95C5BF825859F48003596D8 /* LaunchScreen.storyboard in Resources */,
+				C9F50E94276B376C00B0DE45 /* GoogleService-Info.plist in Resources */,
 				C95C5BF525859F48003596D8 /* Assets.xcassets in Resources */,
 				C95C5BF325859F47003596D8 /* Main.storyboard in Resources */,
 			);
@@ -266,6 +271,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"$CONFIGURATION\" != \"Release\" ]; then\nruby \"../../Sources/Core/Configuration/ProjectConfigurator.rb\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}${WRAPPER_SUFFIX}\" \"82e439d7968b7c366e24a41d7f53f47d\" http://127.0.0.1:8081\nfi";
+		};
+		C9F50EFF276B38D900B0DE45 /* Firebase */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Firebase;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		CFB70BD49C1DA6705C474219 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -502,6 +525,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = CanaryDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

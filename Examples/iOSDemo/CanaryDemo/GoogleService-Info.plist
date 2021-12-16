@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>909666660699-mo5lftothdaer00b4mvfgrc7ulnvplca.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.909666660699-mo5lftothdaer00b4mvfgrc7ulnvplca</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDa2uE5PzNK2KPFJRzCq-yy2E05rXCDyxQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>909666660699</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.binaryparadise.CanaryDemo</string>
+	<key>PROJECT_ID</key>
+	<string>canary-281c1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>canary-281c1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:909666660699:ios:06dac62640d2d773b56a7e</string>
+</dict>
+</plist>

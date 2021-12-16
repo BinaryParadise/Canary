@@ -75,5 +75,8 @@
     [task resume];
 }
 
+- (IBAction)makeCrash:(id)sender {
+    DDLogError(@"%@", @[][1]);
+}
 
 @end

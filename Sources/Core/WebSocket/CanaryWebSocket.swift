@@ -157,7 +157,7 @@ extension CanaryWebSocket: WebSocketDelegate {
                     receiver.webSocket(webSocket: self, didReceive: result)
                 }
             } else {
-                print("\(result.message ?? "")")
+                print("\(result.msg ?? "")")
             }
         } catch {
             print("\(#filePath).\(#function)+\(#line) \(error)")
