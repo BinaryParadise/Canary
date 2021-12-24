@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftyJSON
-#if os(macOS)
-import Proto
+#if canImport(CanaryProto)
+import CanaryProto
 #endif
 
 let kMCRemoteConfig = "remoteConfig"

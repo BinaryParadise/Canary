@@ -1,6 +1,6 @@
 import CocoaLumberjack
 import CocoaLumberjackSwift
-import Core
+import CanaryCore
 
 DDLog.add(DDTTYLogger.sharedInstance!)
 DDLog.add(CanaryTTYLogger())

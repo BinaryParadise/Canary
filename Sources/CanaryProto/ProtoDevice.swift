@@ -7,6 +7,9 @@
 
 import Foundation
 import SwiftyJSON
+#if canImport(UIKit)
+import UIKit
+#endif
 
 public struct ProtoDevice: Codable {
     public var ipAddrs: [String]?

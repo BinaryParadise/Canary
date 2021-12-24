@@ -16,7 +16,7 @@ let package = Package(
         .executableTarget(
             name: "SimpleDemo",
             dependencies: [
-                .product(name: "macOS", package: "Canary"),
+                .product(name: "CanaryCore", package: "Canary"),
                 .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack"),
             ]),
         .testTarget(

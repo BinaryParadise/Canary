@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 #if os(macOS)
-import Proto
+import CanaryProto
 #endif
 
 let suiteName       = "com.binaryparadise.canary"

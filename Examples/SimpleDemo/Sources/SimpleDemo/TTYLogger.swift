@@ -7,7 +7,7 @@
 
 import Foundation
 import CocoaLumberjackSwift
-import Core
+import CanaryCore
 
 public class CanaryTTYLogger: DDAbstractLogger {
     @objc static let shared = CanaryTTYLogger()

@@ -8,8 +8,8 @@
 import Foundation
 import SwiftyJSON
 
-#if canImport(Proto)
-import Proto
+#if canImport(CanaryProto)
+import CanaryProto
 #endif
 #if os(macOS)
 #else

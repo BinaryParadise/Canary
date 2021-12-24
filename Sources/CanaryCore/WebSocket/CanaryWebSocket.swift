@@ -7,9 +7,10 @@
 
 import Foundation
 import Starscream
-#if os(macOS)
-import Proto
-#else
+#if canImport(CanaryProto)
+import CanaryProto
+#endif
+#if canImport(UIKit)
 import UIKit
 #endif
 
@@ -38,11 +39,11 @@ class CanaryWebSocket: NSObject {
     
     func start() {
         mySocket?.disconnect()
-        var sysname: String
-        #if os(macOS)
-        sysname = "Mac"
-        #else
+        var sysname: String = "Linux"
+        #if os(iOS)
         sysname = UIDevice.current.systemName
+        #elseif os(macOS)
+        sysname = "Mac"
         #endif
         let baseURL = URL(string: "\(webSocketURL)/\(sysname)/\(CanaryManager.shared.deviceId!)")!
         let fullURL = URL(string: "\(baseURL.isTLSScheme ? "wss": "ws")://\(baseURL.host!)\(baseURL.path)")
