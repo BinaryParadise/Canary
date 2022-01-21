@@ -1,0 +1,47 @@
+PODS:
+  - CocoaLumberjack/Core (3.7.4)
+  - CocoaLumberjack/Swift (3.7.4):
+    - CocoaLumberjack/Core
+  - Flutter (1.0.0)
+  - flutter_canary (0.0.1):
+    - Flutter
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - shared_preferences_ios (0.0.1):
+    - Flutter
+  - Toast (4.0.0)
+
+DEPENDENCIES:
+  - CocoaLumberjack/Swift
+  - Flutter (from `Flutter`)
+  - flutter_canary (from `.symlinks/plugins/flutter_canary/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+
+SPEC REPOS:
+  trunk:
+    - CocoaLumberjack
+    - Toast
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_canary:
+    :path: ".symlinks/plugins/flutter_canary/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
+  shared_preferences_ios:
+    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+
+SPEC CHECKSUMS:
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_canary: c0b7f6be5075a23722e29a7b9117f5cbb1e6791a
+  fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
+  shared_preferences_ios: aef470a42dc4675a1cdd50e3158b42e3d1232b32
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+
+PODFILE CHECKSUM: 656f71badba51832853757f0413307d49fa0cc6e
+
+COCOAPODS: 1.11.2
