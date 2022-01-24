@@ -44,7 +44,7 @@ class _MyHomeState extends State<MyHome> {
 
     FlutterCanary.instance().configure('82e439d7968b7c366e24a41d7f53f47d',
         service: 'http://127.0.0.1:9001/api',
-        deviceid: 'aee1e660812548fd87806ba354a11bf6');
+        deviceid: 'flutter-canary-example-device-id');
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -87,7 +87,7 @@ class _MyHomeState extends State<MyHome> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text('Running on: $_platformVersion\n'),
           TextButton(onPressed: _testCanary, child: const Text('连接测试')),
-          TextButton(onPressed: () => log('日志测试'), child: Text('日志测试'))
+          TextButton(onPressed: () => log('日志测试'), child: Text('日志测试')),
         ]),
       ),
       floatingActionButton: FloatingActionButton(

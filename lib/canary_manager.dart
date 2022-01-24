@@ -12,10 +12,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:flutter_canary/canary_options.dart';
 import 'package:flutter_canary/model/model_user.dart';
+import 'package:flutter_canary/model/module_device.dart';
 import 'package:flutter_canary/websocket/canary_websocket.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
+import 'package:flutter_canary/websocket/websocket_receiver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 class FlutterCanary {
   static final FlutterCanary _instance = FlutterCanary._();
@@ -56,6 +57,7 @@ class FlutterCanary {
   }
 
   void start() {
+    CanaryWebSocket.instance().provider = WebSocketReceiver();
     CanaryWebSocket.instance().start();
   }
 
@@ -67,7 +69,7 @@ class FlutterCanary {
   Future<dynamic> _callHandler(MethodCall call) {
     if (call.method == "forwardLog") {
       var msg = WebSocketMessage(MessageAction.log, data: call.arguments);
-      CanaryWebSocket.instance().send(call.arguments);
+      CanaryWebSocket.instance().send(msg);
       return Future.value(true);
     }
     return Future.value(false);

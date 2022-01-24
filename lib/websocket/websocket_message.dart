@@ -1,3 +1,6 @@
+import 'package:flutter_canary/websocket/canary_websocket.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
+
 enum MessageAction {
   /// 连接成功
   connected,
@@ -47,6 +50,10 @@ class WebSocketMessage {
         'data': data,
         'timestamp': timestamp,
         'msg': msg,
-        'type': type
+        'type': type.value
       };
+}
+
+abstract class WebSocketProvider {
+  void onMessage(WebSocketMessage message, CanaryWebSocket webSocket);
 }

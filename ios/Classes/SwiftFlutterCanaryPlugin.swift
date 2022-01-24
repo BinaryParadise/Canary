@@ -35,6 +35,7 @@ public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
         if let date = dict["timestamp"] as? Date {
             dict["timestamp"] = date.timeIntervalSince1970 * 1000
         }
+        dict["type"] = 1
         
         instance.channel.invokeMethod("forwardLog", arguments: dict)
     }
