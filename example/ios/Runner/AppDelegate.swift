@@ -2,15 +2,18 @@ import UIKit
 import Flutter
 import CocoaLumberjack
 import flutter_canary
+import AFNetworking
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
+    let mgr = AFHTTPSessionManager()
 
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
       GeneratedPluginRegistrant.register(with: self)
+      mgr.responseSerializer = AFJSONResponseSerializer()
       DDLog.add(DDTTYLogger.sharedInstance!)
       DDLog.add(CanaryLogger())
       DDLogInfo("launch")
@@ -20,7 +23,11 @@ import flutter_canary
   }
     
     @IBAction func onTimer(sender: Timer) {
-        DDLogInfo("hint test")
+        mgr.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp", parameters: nil, headers: nil, progress: nil) { task, data in
+            //DDLogWarn("\(data)")
+        } failure: { task, error in
+            DDLogError("\(error)")
+        }?.resume()
     }
 }
 

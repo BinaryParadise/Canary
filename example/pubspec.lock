@@ -350,6 +350,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  websocket_io:
+    dependency: transitive
+    description:
+      path: "../plugin/websocket_io"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   win32:
     dependency: transitive
     description:

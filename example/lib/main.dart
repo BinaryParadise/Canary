@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -36,6 +35,7 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   String _platformVersion = 'Unknown';
+  bool connect = false;
 
   @override
   void initState() {
@@ -70,7 +70,14 @@ class _MyHomeState extends State<MyHome> {
   }
 
   void _testCanary() {
-    FlutterCanary.instance().start();
+    if (connect) {
+      FlutterCanary.instance().stop();
+    } else {
+      FlutterCanary.instance().start();
+    }
+    setState(() {
+      connect = !connect;
+    });
   }
 
   void log(String msg, {StackTrace? trace}) {
@@ -86,7 +93,8 @@ class _MyHomeState extends State<MyHome> {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text('Running on: $_platformVersion\n'),
-          TextButton(onPressed: _testCanary, child: const Text('连接测试')),
+          TextButton(
+              onPressed: _testCanary, child: Text(connect ? '关闭连接' : '连接测试')),
           TextButton(onPressed: () => log('日志测试'), child: Text('日志测试')),
         ]),
       ),

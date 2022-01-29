@@ -18,6 +18,8 @@ import 'package:flutter_canary/websocket/websocket_message.dart';
 import 'package:flutter_canary/websocket/websocket_receiver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+enum NetLogMode { AFNetworking, Alamofire }
+
 class FlutterCanary {
   static final FlutterCanary _instance = FlutterCanary._();
   FlutterCanary._();
@@ -33,6 +35,7 @@ class FlutterCanary {
   late String appSecret;
   late String service;
   late String deviceid;
+  bool _forwardLog = false;
 
   ValueNotifier<User?> user = ValueNotifier(null);
 
@@ -56,9 +59,17 @@ class FlutterCanary {
     CanaryWebSocket.instance().configure(service, deviceid, appSecret);
   }
 
-  void start() {
+  void start({NetLogMode mode = NetLogMode.AFNetworking}) {
     CanaryWebSocket.instance().provider = WebSocketReceiver();
     CanaryWebSocket.instance().start();
+    _channel.invokeMethod('enableNetLog', mode.toString()).then((value) {
+      _forwardLog = true;
+      print('开启网络日志');
+    });
+  }
+
+  void stop() {
+    _forwardLog = false;
   }
 
   void showOptions(BuildContext context) {
@@ -67,7 +78,7 @@ class FlutterCanary {
   }
 
   Future<dynamic> _callHandler(MethodCall call) {
-    if (call.method == "forwardLog") {
+    if (call.method == "forwardLog" && _forwardLog) {
       var msg = WebSocketMessage(MessageAction.log, data: call.arguments);
       CanaryWebSocket.instance().send(msg);
       return Future.value(true);

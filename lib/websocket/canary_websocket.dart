@@ -1,4 +1,4 @@
-import 'dart:convert' show Utf8Decoder, jsonDecode, jsonEncode;
+import 'dart:convert' show Utf8Decoder, Utf8Encoder, jsonDecode, jsonEncode;
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
@@ -7,41 +7,66 @@ import 'package:flutter_canary/model/model_result.dart';
 import 'package:flutter_canary/model/module_device.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
 import 'package:flutter_canary/websocket/websocket_receiver.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:websocket_io/websocket_io.dart';
 
 class CanaryWebSocket {
   static final CanaryWebSocket _instance = CanaryWebSocket._();
   static CanaryWebSocket instance() => _instance;
   CanaryWebSocket._();
 
-  WebSocketChannel? channel;
+  WebSocketIO? channel;
   late String _webSocketUrl;
+  String get url {
+    return _webSocketUrl;
+  }
   WebSocketProvider? provider;
+  String appSecret = '';
 
   void configure(String url, String deviceid, String appSecret) {
     var uri = Uri.parse(url);
+    this.appSecret = appSecret;
     var platform =
         defaultTargetPlatform.toString().replaceAll('TargetPlatform.', '');
     _webSocketUrl =
-        '${uri.scheme.toLowerCase() == 'http' ? 'ws' : 'wss'}://${uri.host}:${uri.port}${uri.path}/channel/$platform/$deviceid?app-secret=$appSecret';
+        '${uri.scheme.toLowerCase() == 'http' ? 'ws' : 'wss'}://${uri.host}:${uri.port}${uri.path}/channel/$platform/$deviceid';
   }
 
-  void _setup() {
-    channel = WebSocketChannel.connect(Uri.parse(_webSocketUrl));
-    channel?.stream.listen((event) {
-      var data = jsonDecode(const Utf8Decoder().convert(event))
-          as Map<String, dynamic>;
-      if (data.isNotEmpty) {
-        var r = WebSocketMessage.fromJson(data);
-        provider?.onMessage(r, this);
-        print(data);
+  void _setup() async {
+    await channel?.close();
+    channel =
+        WebSocketIO(_webSocketUrl, headers: {'Canary-App-Secret': appSecret});
+    channel?.connect().then((value) => provider?.onConnected(this));
+    channel?.onMessage = (frame) {
+      switch (frame.opcode) {
+        case OpCode.text:
+          break;
+        case OpCode.binary:
+          var data = jsonDecode(const Utf8Decoder().convert(frame.payload))
+              as Map<String, dynamic>;
+          if (data.isNotEmpty) {
+            var r = WebSocketMessage.fromJson(data);
+            provider?.onMessage(r, this);
+            print(data);
+          }
+          break;
+        case OpCode.close:
+          // TODO: Handle this case.
+          break;
+        case OpCode.ping:
+          // TODO: Handle this case.
+          break;
+        case OpCode.pong:
+          // TODO: Handle this case.
+          break;
+        case OpCode.reserved:
+          // TODO: Handle this case.
+          break;
       }
-    }, onError: (e) {
-      print('onError');
-    }, onDone: () {
-      print('onDone');
-    });
-    channel?.sink.done.then((value) => print(value));
+    };
+    channel?.onClose = (closeCode) {
+      print('$closeCode');
+    };
   }
 
   // 开启服务
@@ -51,13 +76,15 @@ class CanaryWebSocket {
 
   Future<bool> clear() async {
     if (channel != null) {
-      channel?.sink.close().then((value) => true);
+      channel?.close().then((value) => true);
     }
     return Future.value(true);
   }
 
   // 发送消息
   void send(WebSocketMessage msg) {
-    channel?.sink.add(jsonEncode(msg.toJson()).codeUnits);
+    var data = Utf8Encoder().convert(jsonEncode(msg.toJson()));
+    print('预备: ${data.length}');
+    channel?.sendBinary(data.toList());
   }
 }

@@ -29,6 +29,12 @@ class WebSocketReceiver implements WebSocketProvider {
     }
   }
 
+  @override
+  void onConnected(CanaryWebSocket webSocket) {
+    print('已连接: ${webSocket.url}');
+    register(webSocket);
+  }
+
   void register(CanaryWebSocket webSocket) async {
     var device = await Device.create();
     webSocket
