@@ -20,6 +20,7 @@ class CanaryWebSocket {
   String get url {
     return _webSocketUrl;
   }
+
   WebSocketProvider? provider;
   String appSecret = '';
 
@@ -33,7 +34,6 @@ class CanaryWebSocket {
   }
 
   void _setup() async {
-    await channel?.close();
     channel =
         WebSocketIO(_webSocketUrl, headers: {'Canary-App-Secret': appSecret});
     channel?.connect().then((value) => provider?.onConnected(this));
@@ -76,7 +76,7 @@ class CanaryWebSocket {
 
   Future<bool> clear() async {
     if (channel != null) {
-      channel?.close().then((value) => true);
+      await channel?.close();
     }
     return Future.value(true);
   }
@@ -84,7 +84,6 @@ class CanaryWebSocket {
   // 发送消息
   void send(WebSocketMessage msg) {
     var data = Utf8Encoder().convert(jsonEncode(msg.toJson()));
-    print('预备: ${data.length}');
     channel?.sendBinary(data.toList());
   }
 }

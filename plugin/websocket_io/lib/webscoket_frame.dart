@@ -147,12 +147,13 @@ class WebSocketFrame {
     bytes.addByte(head);
     length = payload.length;
     if (length < 126) {
-      bytes.addByte(payload.length.bytes(bit: BitWidth.byte).first);
+      bytes.addByte(payload.length.bytes(bit: BitWidth.byte).first |
+          (mask ? MaskMask : 0x00));
     } else if (length == 126) {
-      bytes.addByte(0x7E);
+      bytes.addByte(0x7E | (mask ? MaskMask : 0x00));
       bytes.add(payload.length.bytes(bit: BitWidth.short).toList());
     } else {
-      bytes.addByte(0x7F);
+      bytes.addByte(0x7F | (mask ? MaskMask : 0x00));
       bytes.add(payload.length.bytes(bit: BitWidth.long).toList());
     }
 
@@ -160,14 +161,13 @@ class WebSocketFrame {
     if (mask) {
       maskingKey = Random().nextInt(4294967295).bytes();
       bytes.add(maskingKey!.toList());
+
       for (var i = 0; i < data.length; i++) {
         data[i] = data[i] ^ maskingKey![i % 4];
       }
     }
 
     bytes.add(data.toList());
-    print(
-        'total: ${bytes.length} payload: ${data.length} head: ${bytes.length - data.length}');
     return bytes.toBytes();
   }
 
@@ -233,5 +233,40 @@ extension IntExtension on int {
 extension Uint8ListExt on Uint8List {
   int get uint16 {
     return ((this[0] & 0xFF) << 8) + (this[1] & 0xFF);
+  }
+
+  String toHex() {
+    if (this == null || this.length == 0) {
+      return "";
+    }
+    Uint8List result = Uint8List(this.length << 1);
+    var hexTable = [
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F'
+    ]; //16进制字符表
+    for (var i = 0; i < this.length; i++) {
+      var bit = this[i]; //取传入的byteArr的每一位
+      var index = bit >> 4 & 15; //右移4位,取剩下四位
+      var i2 = i << 1; //byteArr的每一位对应结果的两位,所以对于结果的操作位数要乘2
+      result[i2] = hexTable[index].codeUnitAt(0); //左边的值取字符表,转为Unicode放进resut数组
+      index = bit & 15; //取右边四位
+      result[i2 + 1] =
+          hexTable[index].codeUnitAt(0); //右边的值取字符表,转为Unicode放进resut数组
+    }
+    return String.fromCharCodes(result); //Unicode转回为对应字符,生成字符串返回
   }
 }
