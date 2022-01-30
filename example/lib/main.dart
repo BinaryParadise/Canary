@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -36,6 +35,9 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   String _platformVersion = 'Unknown';
   bool connect = false;
+
+  static const MethodChannel _testChannel =
+      MethodChannel('canary_example_channel');
 
   @override
   void initState() {
@@ -80,8 +82,10 @@ class _MyHomeState extends State<MyHome> {
     });
   }
 
-  void log(String msg, {StackTrace? trace}) {
-    throw msg;
+  void log(String msg, {StackTrace? trace, bool network = false}) async {
+    await _testChannel
+        .invokeMethod(network ? 'logger-request' : 'logger', true)
+        .then((value) => null);
   }
 
   @override
@@ -95,7 +99,10 @@ class _MyHomeState extends State<MyHome> {
           Text('Running on: $_platformVersion\n'),
           TextButton(
               onPressed: _testCanary, child: Text(connect ? '关闭连接' : '连接测试')),
-          TextButton(onPressed: () => log('日志测试'), child: Text('日志测试')),
+          TextButton(onPressed: () => log('日志测试'), child: Text('测试日志')),
+          TextButton(
+              onPressed: () => log('日志测试', network: true),
+              child: Text('测试日志-网络')),
         ]),
       ),
       floatingActionButton: FloatingActionButton(

@@ -25,44 +25,46 @@ class WebSocketIO {
   Future<bool> connect() async {
     this.close();
     var uri = Uri.parse(url);
-    _socket = await Socket.connect(uri.host, uri.port);
+    await Socket.connect(uri.host, uri.port).then((value) {
+      _socket = value;
 
-    _socket?.listen((event) {
-      if (_handshaked) {
-        var frame = WebSocketFrame.create(event);
-        if (onMessage != null) {
-          if (frame.opcode == OpCode.close) {
-            if (onClose != null) {
-              onClose!(CloseCodeExtension.parse(frame.payload.uint16));
+      _socket?.listen((event) {
+        if (_handshaked) {
+          var frame = WebSocketFrame.create(event);
+          if (onMessage != null) {
+            if (frame.opcode == OpCode.close) {
+              if (onClose != null) {
+                onClose!(CloseCodeExtension.parse(frame.payload.uint16));
+              }
+            } else {
+              onMessage!(frame);
             }
-          } else {
-            onMessage!(frame);
           }
+        } else {
+          var hds = String.fromCharCodes(event.toList()).split('\r\n');
+          _handshaked = true;
         }
-      } else {
-        var hds = String.fromCharCodes(event.toList()).split('\r\n');
-        _handshaked = true;
-      }
-    }, onDone: () {
-      print('onDone');
-    }, onError: (error) {
-      if (onClose != null) {
-        onClose!(CloseCode.error);
-      }
-    });
+      }, onDone: () {
+        print('onDone');
+      }, onError: (error) {
+        if (onClose != null) {
+          onClose!(CloseCode.error);
+        }
+      });
 
-    _socket?.writeln('GET ${uri.path} HTTP/1.1');
-    _socket?.writeln('Host: ${uri.host}:${uri.port}');
-    _socket?.writeln('Upgrade: websocket');
-    _socket?.writeln('Connection: Upgrade');
-    _socket?.writeln('Sec-WebSocket-Key: ${secKey()}');
-    _socket?.writeln('Sec-WebSocket-Version: 13');
-    _socket?.writeln(
-        'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits');
-    headers?.forEach((key, value) {
-      _socket?.writeln('$key: $value');
-    });
-    _socket?.writeln();
+      _socket?.writeln('GET ${uri.path} HTTP/1.1');
+      _socket?.writeln('Host: ${uri.host}:${uri.port}');
+      _socket?.writeln('Upgrade: websocket');
+      _socket?.writeln('Connection: Upgrade');
+      _socket?.writeln('Sec-WebSocket-Key: ${secKey()}');
+      _socket?.writeln('Sec-WebSocket-Version: 13');
+      _socket?.writeln(
+          'Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits');
+      headers?.forEach((key, value) {
+        _socket?.writeln('$key: $value');
+      });
+      _socket?.writeln();
+    }).catchError((error) => print(error));
     return true;
   }
 
@@ -71,6 +73,10 @@ class WebSocketIO {
         mask: true, payload: Uint8List.fromList(data));
     var raw = frame.rawBytes();
     _socket?.add(raw.toList());
+    _socket?.flush().then((value) {
+      if (value == null) {}
+      return true;
+    });
   }
 
   Future<dynamic> close() async {

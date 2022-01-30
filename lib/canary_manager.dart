@@ -36,14 +36,16 @@ class FlutterCanary {
   late String service;
   late String deviceid;
   bool _forwardLog = false;
+  bool debug = false;
 
   ValueNotifier<User?> user = ValueNotifier(null);
 
   void configure(String appSecret,
-      {required String service, required String deviceid}) {
+      {required String service, required String deviceid, bool debug = false}) {
     this.appSecret = appSecret;
     this.service = service;
     this.deviceid = deviceid;
+    this.debug = debug;
 
     SharedPreferences.getInstance().then((prefs) {
       var map =
@@ -59,13 +61,12 @@ class FlutterCanary {
     CanaryWebSocket.instance().configure(service, deviceid, appSecret);
   }
 
-  void start({NetLogMode mode = NetLogMode.AFNetworking}) {
+  void start({NetLogMode mode = NetLogMode.AFNetworking}) async {
     CanaryWebSocket.instance().provider = WebSocketReceiver();
     CanaryWebSocket.instance().start();
-    _channel.invokeMethod('enableNetLog', mode.toString()).then((value) {
-      _forwardLog = true;
-      print('开启网络日志');
-    });
+    await _channel.invokeMethod('enableNetLog', mode.toString()).then((value) => null);
+    _forwardLog = true;
+    print('开启网络日志');
   }
 
   void stop() {
@@ -78,6 +79,9 @@ class FlutterCanary {
   }
 
   Future<dynamic> _callHandler(MethodCall call) {
+    if (debug) {
+      print('${call.method} ${call.arguments}');
+    }
     if (call.method == "forwardLog" && _forwardLog) {
       var msg = WebSocketMessage(MessageAction.log, data: call.arguments);
       CanaryWebSocket.instance().send(msg);

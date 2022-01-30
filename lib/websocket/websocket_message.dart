@@ -55,6 +55,5 @@ class WebSocketMessage {
 }
 
 abstract class WebSocketProvider {
-  void onConnected(CanaryWebSocket webSocket);
   void onMessage(WebSocketMessage message, CanaryWebSocket webSocket);
 }

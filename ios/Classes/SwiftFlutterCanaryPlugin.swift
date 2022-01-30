@@ -31,6 +31,7 @@ public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
           result("iOS " + UIDevice.current.systemVersion)
       } else if call.method == "enableNetLog" {
           enableNetLog(mode: call.arguments as? String)
+          result(true)
       }
   }
     
@@ -99,6 +100,6 @@ public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
         }
         mdict["statusCode"] = netLog.statusCode
         mdict["type"] = 2
-        SwiftFlutterCanaryPlugin.storeLog(dict: mdict);
+        channel.invokeMethod("forwardLog", arguments: mdict)
     }
 }

@@ -17,17 +17,7 @@ class WebSocketReceiver implements WebSocketProvider {
         });
         onConnected(webSocket);
         break;
-      case MessageAction.update:
-        // TODO: Handle this case.
-        break;
-      case MessageAction.register:
-        // TODO: Handle this case.
-        break;
-      case MessageAction.list:
-        // TODO: Handle this case.
-        break;
-      case MessageAction.log:
-        // TODO: Handle this case.
+      default:
         break;
     }
   }

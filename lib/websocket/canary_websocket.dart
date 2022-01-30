@@ -36,7 +36,7 @@ class CanaryWebSocket {
   void _setup() async {
     channel =
         WebSocketIO(_webSocketUrl, headers: {'Canary-App-Secret': appSecret});
-    channel?.connect().then((value) => provider?.onConnected(this));
+    await channel?.connect();
     channel?.onMessage = (frame) {
       switch (frame.opcode) {
         case OpCode.text:
