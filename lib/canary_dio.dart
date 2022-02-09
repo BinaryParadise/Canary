@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter_canary/canary_manager.dart';
 
@@ -24,7 +23,17 @@ class CanaryDio {
     _dio.options.connectTimeout = 30000;
   }
 
-  Future<Result> post(String path, Map<String, dynamic>? arguments) async {
+  Future<Result> get(String path, {Map<String, dynamic>? arguments}) async {
+    try {
+      var response = await _dio.get<Map>(path, queryParameters: arguments);
+      var res = Result.fromJson(response.data as Map<String, dynamic>);
+      return res;
+    } on DioError catch (e) {
+      return Result(1000, e.message);
+    }
+  }
+
+  Future<Result> post(String path, {Map<String, dynamic>? arguments}) async {
     try {
       var response = await _dio.post<Map>(path, data: arguments);
       var res = Result.fromJson(response.data as Map<String, dynamic>);
@@ -35,5 +44,4 @@ class CanaryDio {
   }
 }
 
-class _CanaryDioInterceptor extends Interceptor {
-}
+class _CanaryDioInterceptor extends Interceptor {}

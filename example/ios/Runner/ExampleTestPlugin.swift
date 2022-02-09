@@ -11,8 +11,6 @@ import AFNetworking
 import CocoaLumberjack
 
 class ExampleTestPlugin: NSObject, FlutterPlugin {
-    let mgr = AFHTTPSessionManager()
-    
 
     static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "canary_example_channel", binaryMessenger: registrar.messenger())
@@ -40,6 +38,7 @@ class ExampleTestPlugin: NSObject, FlutterPlugin {
     }
     
     func doRequest() {
+        let mgr = AFHTTPSessionManager()
         mgr.responseSerializer = AFJSONResponseSerializer()
         mgr.get("http://api.m.taobao.com/rest/api3.do?api=mtop.common.getTimestamp", parameters: nil, headers: nil, progress: nil) { task, data in
             //DDLogWarn("\(data)")

@@ -35,7 +35,9 @@ class ProjectConfigurator
         end
       end
 
-      rubyfile = @ruby_path + "/Sources/Core/Configuration/ProjectConfigurator.rb"
+      puts Dir.pwd
+
+      rubyfile = @ruby_path + "/Sources/CanaryCore/Configuration/ProjectConfigurator.rb"
 
       phase = self.fetch_exist_phase(CN_PHASE_NAME_FETCH_ENV, project_target)
       if phase.nil?

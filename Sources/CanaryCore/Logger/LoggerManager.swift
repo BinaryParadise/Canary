@@ -29,7 +29,7 @@ class LoggerManager: NSObject {
         reportCrashCache()
     }
 
-    func zstart(with domain: URL) -> Void {
+    func start(with domain: URL) -> Void {
         CanaryWebSocket.shared.webSocketURL = domain.absoluteString
         CanaryWebSocket.shared.addMessageReciver(reciver: self)
         CanaryWebSocket.shared.start()

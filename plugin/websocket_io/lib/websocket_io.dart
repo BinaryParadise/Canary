@@ -44,8 +44,6 @@ class WebSocketIO {
           var hds = String.fromCharCodes(event.toList()).split('\r\n');
           _handshaked = true;
         }
-      }, onDone: () {
-        print('onDone');
       }, onError: (error) {
         if (onClose != null) {
           onClose!(CloseCode.error);
@@ -79,8 +77,10 @@ class WebSocketIO {
     });
   }
 
-  Future<dynamic> close() async {
-    await _socket?.close();
+  void close() {
+    var frame =
+        WebSocketFrame(OpCode.close, payload: 1006.bytes(bit: BitWidth.short));
+    _socket?.add(frame.rawBytes());
   }
 
   String signKey(String key) => convert.base64

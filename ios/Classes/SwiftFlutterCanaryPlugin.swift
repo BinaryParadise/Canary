@@ -20,6 +20,7 @@ public let StoreLogKeys = ["message",
 public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
     static let instance = SwiftFlutterCanaryPlugin()
     var channel: FlutterMethodChannel!
+    var baseURL: String?
     
   public static func register(with registrar: FlutterPluginRegistrar) {
       instance.channel = FlutterMethodChannel(name: "flutter_canary", binaryMessenger: registrar.messenger())
@@ -27,10 +28,21 @@ public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+      #if DEBUG
+      print("method: \(call.method) args: \(call.arguments ?? "nil"), \(call)")
+      #endif
       if call.method == "getPlatformVersion" {
           result("iOS " + UIDevice.current.systemVersion)
       } else if call.method == "enableNetLog" {
           enableNetLog(mode: call.arguments as? String)
+          result(true)
+      } else if call.method == "enableMock" {
+          CanaryMockURLProtocol.isEnabled = call.arguments as? Bool ?? false;
+          result(true)
+      } else if call.method == "configure" {
+          if let dict = call.arguments as? [String: Any],let url = dict["baseUrl"] as? String {
+              baseURL = url
+          }
           result(true)
       }
   }

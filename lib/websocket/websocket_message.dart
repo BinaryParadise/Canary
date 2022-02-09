@@ -1,5 +1,5 @@
 import 'package:flutter_canary/websocket/canary_websocket.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:websocket_io/websocket_io.dart';
 
 enum MessageAction {
   /// 连接成功
@@ -56,4 +56,5 @@ class WebSocketMessage {
 
 abstract class WebSocketProvider {
   void onMessage(WebSocketMessage message, CanaryWebSocket webSocket);
+  void onClosed(CloseCode code);
 }

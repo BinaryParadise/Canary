@@ -1,9 +1,12 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter_canary/canary_mock.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +23,7 @@ class CanaryOptions extends StatefulWidget {
 class _CanaryOptionsState extends State<CanaryOptions> {
   final TextEditingController _editingController1 = TextEditingController();
   final TextEditingController _editingController2 = TextEditingController();
+  bool mockOn = FlutterCanary.instance().mockOn;
 
   @override
   void initState() {
@@ -53,7 +57,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
   }
 
   void onLogin() {
-    CanaryDio.instance().post('/user/login', {
+    CanaryDio.instance().post('/user/login', arguments: {
       'username': _editingController1.text,
       'password': md5
           .convert(utf8.encode(_editingController2.text))
@@ -85,7 +89,8 @@ class _CanaryOptionsState extends State<CanaryOptions> {
           child: const Text('取消'),
         ),
         TextButton(
-            onPressed: () => Navigator.pop(context, true), child: const Text('确认'))
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('确认'))
       ],
     );
     showDialog<bool>(
@@ -105,9 +110,52 @@ class _CanaryOptionsState extends State<CanaryOptions> {
     current = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text('昵称: ${user.name}（${user.rolename ?? '?'}）'),
+        RichText(
+            text: TextSpan(children: [
+          const TextSpan(
+              text: '昵称: ',
+              style:
+                  TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: '${user.name}（${user.rolename ?? '?'}）',
+              style: const TextStyle(color: Colors.orange))
+        ])),
         TextButton(onPressed: () => loginout(context), child: const Text('退出'))
       ],
+    );
+    current = Column(
+      children: [
+            current,
+            _RowActionElement('监控日志',
+                children: [Switch(value: false, onChanged: (on) {})]),
+            _RowActionElement('网络日志',
+                children: [Switch(value: false, onChanged: (on) {})]),
+            _RowActionElement(
+              'Mock',
+              children: [
+                Switch(
+                    value: mockOn,
+                    onChanged: (on) {
+                      FlutterCanary.instance().mockOn = on;
+                      setState(() {
+                        mockOn = on;
+                      });
+                    })
+              ],
+            ),
+          ] +
+          (mockOn
+              ? [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                          CupertinoPageRoute(builder: (ctx) => CanaryMock()));
+                    },
+                    child: _RowActionElement('Mock',
+                        children: [const Icon(Icons.arrow_right)]),
+                  )
+                ]
+              : []),
     );
     return current;
   }
@@ -116,14 +164,14 @@ class _CanaryOptionsState extends State<CanaryOptions> {
     Widget current;
     var username = TextField(
       controller: _editingController1,
-      decoration:
-          const InputDecoration(prefixIcon: Icon(Icons.account_box), hintText: '用户名'),
+      decoration: const InputDecoration(
+          prefixIcon: Icon(Icons.account_box), hintText: '用户名'),
     );
     var password = TextField(
       controller: _editingController2,
       obscureText: true,
-      decoration:
-          const InputDecoration(prefixIcon: Icon(Icons.password), hintText: '密码'),
+      decoration: const InputDecoration(
+          prefixIcon: Icon(Icons.password), hintText: '密码'),
     );
     Widget login = Container(
       padding: const EdgeInsets.fromLTRB(50, 10, 50, 10),
@@ -148,6 +196,26 @@ class _CanaryOptionsState extends State<CanaryOptions> {
         login
       ],
     );
+    return current;
+  }
+}
+
+class _RowActionElement extends StatelessWidget {
+  String title;
+  List<Widget> children;
+  _RowActionElement(this.title, {this.children = const []});
+
+  @override
+  Widget build(BuildContext context) {
+    Widget current;
+    current = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[Text(title)] + children,
+    );
+    current = Container(
+        margin: const EdgeInsets.only(left: 20, right: 20),
+        height: 60,
+        child: current);
     return current;
   }
 }

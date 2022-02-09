@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter_canary/model/module_device.dart';
 import 'package:flutter_canary/websocket/canary_websocket.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
+import 'package:websocket_io/websocket_io.dart';
+
+import '../canary_logger.dart';
 
 class WebSocketReceiver implements WebSocketProvider {
   Timer? timer;
@@ -23,6 +26,12 @@ class WebSocketReceiver implements WebSocketProvider {
   }
 
   @override
+  void onClosed(CloseCode code) {
+    logger.i('连接已关闭: $code');
+    timer?.cancel();
+    timer = null;
+  }
+
   void onConnected(CanaryWebSocket webSocket) {
     print('已连接: ${webSocket.url}');
     register(webSocket);

@@ -10,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  web_socket_channel: ^2.1.0
   dio: ^4.0.0
   json_annotation: ^4.4.0
   shared_preferences: ^2.0.0
   fluttertoast: ^8.0.8
   device_info: ^2.0.3
+  logger: ^1.1.0
   websocket_io:
     path: ./plugin/websocket_io
 

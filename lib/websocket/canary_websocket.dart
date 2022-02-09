@@ -1,13 +1,7 @@
 import 'dart:convert' show Utf8Decoder, Utf8Encoder, jsonDecode, jsonEncode;
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_canary/model/model_result.dart';
-import 'package:flutter_canary/model/module_device.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
-import 'package:flutter_canary/websocket/websocket_receiver.dart';
-import 'package:web_socket_channel/io.dart';
 import 'package:websocket_io/websocket_io.dart';
 
 class CanaryWebSocket {
@@ -65,20 +59,17 @@ class CanaryWebSocket {
       }
     };
     channel?.onClose = (closeCode) {
-      print('$closeCode');
+      provider?.onClosed(closeCode);
     };
   }
 
   // 开启服务
   void start() {
-    clear().then((value) => _setup());
+    _setup();
   }
 
-  Future<bool> clear() async {
-    if (channel != null) {
-      await channel?.close();
-    }
-    return Future.value(true);
+  void clear() {
+    channel?.close();
   }
 
   // 发送消息

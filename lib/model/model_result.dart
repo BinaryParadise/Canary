@@ -4,6 +4,10 @@ class Result {
   dynamic data;
   int? timestamp;
 
+  bool get success {
+    return code == 0;
+  }
+
   Result(this.code, this.data, {this.msg});
 
   Result.fromJson(Map<String, dynamic> json)
