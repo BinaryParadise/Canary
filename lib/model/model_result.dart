@@ -8,6 +8,10 @@ class Result {
     return code == 0;
   }
 
+  String get localizedDescription {
+    return msg ?? '未知异常:$code';
+  }
+
   Result(this.code, this.data, {this.msg});
 
   Result.fromJson(Map<String, dynamic> json)

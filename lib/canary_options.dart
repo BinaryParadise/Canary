@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_canary/canary_mock.dart';
+import 'package:flutter_canary/canary_remote_conf.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,6 +49,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
         });
 
     current = Scaffold(
+      backgroundColor: const Color(0xFFF2F4F6),
       appBar: AppBar(
         title: const Text('金丝雀'),
       ),
@@ -68,7 +70,8 @@ class _CanaryOptionsState extends State<CanaryOptions> {
         Fluttertoast.showToast(msg: '登录成功');
         loginSuccess(User.fromJson(value.data as Map<String, dynamic>));
       } else {
-        Fluttertoast.showToast(msg: value.msg ?? '错误码:${value.code}');
+        Fluttertoast.showToast(
+            msg: value.localizedDescription, gravity: ToastGravity.CENTER);
       }
     });
   }
@@ -123,39 +126,52 @@ class _CanaryOptionsState extends State<CanaryOptions> {
         TextButton(onPressed: () => loginout(context), child: const Text('退出'))
       ],
     );
-    current = Column(
-      children: [
-            current,
-            _RowActionElement('监控日志',
-                children: [Switch(value: false, onChanged: (on) {})]),
-            _RowActionElement('网络日志',
-                children: [Switch(value: false, onChanged: (on) {})]),
-            _RowActionElement(
-              'Mock',
-              children: [
-                Switch(
-                    value: mockOn,
-                    onChanged: (on) {
-                      FlutterCanary.instance().mockOn = on;
-                      setState(() {
-                        mockOn = on;
-                      });
-                    })
-              ],
+
+    List<Widget> items = [
+          GestureDetector(
+            onTap: () => Navigator.of(context)
+                .push(CupertinoPageRoute(builder: (ctx) => CanaryRemoteConf())),
+            child: _RowActionElement('远程配置',
+                children: [const Icon(Icons.arrow_right)]),
+          ),
+          _RowActionElement('监控日志',
+              children: [Switch(value: false, onChanged: (on) {})]),
+          _RowActionElement('网络日志',
+              children: [Switch(value: false, onChanged: (on) {})]),
+          _RowActionElement(
+            'Mock',
+            children: [
+              Switch(
+                  value: mockOn,
+                  onChanged: (on) {
+                    FlutterCanary.instance().mockOn = on;
+                    setState(() {
+                      mockOn = on;
+                    });
+                  })
+            ],
+          ),
+        ] +
+        (mockOn
+            ? [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        CupertinoPageRoute(builder: (ctx) => CanaryMock()));
+                  },
+                  child: _RowActionElement('Mock',
+                      children: [const Icon(Icons.arrow_right)]),
+                )
+              ]
+            : []);
+    Widget list = ListView.separated(
+        itemBuilder: (ctx, row) => items[row],
+        separatorBuilder: (ctx, row) => SizedBox(
+              height: 8,
             ),
-          ] +
-          (mockOn
-              ? [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                          CupertinoPageRoute(builder: (ctx) => CanaryMock()));
-                    },
-                    child: _RowActionElement('Mock',
-                        children: [const Icon(Icons.arrow_right)]),
-                  )
-                ]
-              : []),
+        itemCount: items.length);
+    current = Column(
+      children: [current, Expanded(child: list)],
     );
     return current;
   }
@@ -213,8 +229,9 @@ class _RowActionElement extends StatelessWidget {
       children: <Widget>[Text(title)] + children,
     );
     current = Container(
-        margin: const EdgeInsets.only(left: 20, right: 20),
+        padding: const EdgeInsets.only(left: 20, right: 20),
         height: 60,
+        color: Colors.white,
         child: current);
     return current;
   }
