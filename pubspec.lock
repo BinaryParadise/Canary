@@ -595,12 +595,12 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
-  websocket_io:
+  web_socket_io:
     dependency: "direct main"
     description:
-      path: "plugin/websocket_io"
-      relative: true
-    source: path
+      name: web_socket_io
+      url: "https://pub.flutter-io.cn"
+    source: hosted
     version: "0.0.1"
   win32:
     dependency: transitive

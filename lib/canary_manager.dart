@@ -85,7 +85,6 @@ class FlutterCanary {
   }
 
   void start({NetLogMode mode = NetLogMode.AFNetworking}) async {
-    CanaryWebSocket.instance().provider = WebSocketReceiver();
     CanaryWebSocket.instance().start();
     await channel
         .invokeMethod('enableNetLog', mode.toString())

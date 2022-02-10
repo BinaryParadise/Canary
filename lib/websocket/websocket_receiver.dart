@@ -1,45 +1,56 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_canary/model/module_device.dart';
-import 'package:flutter_canary/websocket/canary_websocket.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
-import 'package:websocket_io/websocket_io.dart';
+import 'package:web_socket_io/web_socket_io.dart';
 
 import '../canary_logger.dart';
 
 class WebSocketReceiver implements WebSocketProvider {
-  Timer? timer;
+  late WebSocketChannel channel;
 
-  @override
-  void onMessage(WebSocketMessage message, CanaryWebSocket webSocket) {
-    switch (message.type) {
-      case MessageAction.connected:
-        timer?.cancel();
-        timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-          register(webSocket);
-        });
-        onConnected(webSocket);
-        break;
-      default:
-        break;
-    }
-  }
+  Timer? _timer;
+  int _count = 0;
 
-  @override
-  void onClosed(CloseCode code) {
-    logger.i('连接已关闭: $code');
-    timer?.cancel();
-    timer = null;
-  }
-
-  void onConnected(CanaryWebSocket webSocket) {
-    print('已连接: ${webSocket.url}');
-    register(webSocket);
-  }
-
-  void register(CanaryWebSocket webSocket) async {
+  void register() async {
     var device = await Device.create();
-    webSocket
-        .send(WebSocketMessage(MessageAction.register, data: device.toJson()));
+    var msg = WebSocketMessage(MessageAction.register, data: device.toJson());
+    channel.send(OpCode.binary, const Utf8Encoder().convert(jsonEncode(msg)));
+  }
+
+  @override
+  void onClosed(CloseCode code, WebSocketChannel webSocket) {
+    // TODO: implement onClosed
+  }
+
+  @override
+  void onConnected(WebSocketChannel webSocket) {
+    channel = webSocket;
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      _count++;
+      channel.send(OpCode.ping, _count.bytes());
+    });
+  }
+
+  @override
+  void onMessage(Uint8List message, WebSocketChannel webSocket) {
+    // TODO: implement onMessage
+  }
+
+  @override
+  void onPing(Uint8List data, WebSocketChannel webSocket) {
+    // TODO: implement onPing
+  }
+
+  @override
+  void onPong(Uint8List data, WebSocketChannel webSocket) {
+    register();
+  }
+
+  @override
+  void onText(String message, WebSocketChannel webSocket) {
+    // TODO: implement onText
   }
 }

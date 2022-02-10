@@ -16,8 +16,8 @@ dependencies:
   fluttertoast: ^8.0.8
   device_info: ^2.0.3
   logger: ^1.1.0
-  websocket_io:
-    path: ./plugin/websocket_io
+  web_socket_io: ^0.0.1
+    # path: ./plugin/websocket_io
 
 dev_dependencies:
   flutter_test:
