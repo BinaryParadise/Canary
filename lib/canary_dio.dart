@@ -29,7 +29,7 @@ class CanaryDio {
       var res = Result.fromJson(response.data as Map<String, dynamic>);
       return res;
     } on DioError catch (e) {
-      if (e.response.statusCode == 401) {
+      if (e.response?.statusCode == 401) {
         FlutterCanary.instance.user.value = null;
       } else {
         print(e);
@@ -44,7 +44,7 @@ class CanaryDio {
       var res = Result.fromJson(response.data as Map<String, dynamic>);
       return res;
     } on DioError catch (e) {
-      if (e.response.statusCode == 401) {
+      if (e.response?.statusCode == 401) {
         FlutterCanary.instance.user.value = null;
       } else {
         print(e);
