@@ -1,12 +1,15 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_canary/mock/canary_mock.dart';
 import 'package:flutter_canary/model/model_mock.dart';
 import 'package:flutter_canary/model/model_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'canary_dio.dart';
-import 'canary_manager.dart';
+import '../canary_dio.dart';
+import '../canary_manager.dart';
 
 class MockManager {
   static final MockManager _instance = MockManager._();
@@ -24,13 +27,15 @@ class MockManager {
 
   void _loadData(List data) {
     groups.clear();
-    data.forEach((element) {
+    for (var element in data) {
       groups.add(MockGroup.fromJson(element as Map<String, dynamic>));
-    });
+    }
     mockMap.clear();
-    groups.forEach((element) => element.mocks?.forEach((e) {
+    for (var element in groups) {
+      element.mocks?.forEach((e) {
           mockMap[e.path] = e;
-        }));
+        });
+    }
   }
 
   Future<Result> update() async {
@@ -48,7 +53,7 @@ class MockManager {
     String? matchUrl;
     var args = Map<String, dynamic>.from(call.arguments);
     var uri = Uri.parse(args['url'] as String);
-    if (args['url'] as String == FlutterCanary.instance().service) {
+    if (args['url'] as String == FlutterCanary.instance.service) {
       // 不拦截金丝雀域名
       return await Future.value({'intercept': intercept});
     }
@@ -56,7 +61,7 @@ class MockManager {
     //完全匹配
     var matchMock = mockMap[uri.path];
     if (matchMock == null) {
-      //TODO:正则匹配
+      // TODO: 正则匹配
       /*matchMock = mockMap.values.first(where: { (item) -> Bool in
                 do {
                     let regexStr = matchParameter(path: item.path)
@@ -78,11 +83,14 @@ class MockManager {
           intercept = true;
           var queryStr = '?$uri.query';
           matchUrl =
-              '${FlutterCanary.instance().service}/mock/app/scene/$sceneid$queryStr';
+              '${FlutterCanary.instance.service}/mock/app/scene/$sceneid$queryStr';
         }
       }
       return Future.value({'intercept': intercept, 'url': matchUrl});
     }
     return Future.value({'intercept': intercept});
   }
+
+  Route pageRoute() =>
+      CupertinoPageRoute(builder: (context) => const CanaryMock());
 }

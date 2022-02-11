@@ -31,7 +31,7 @@ class Device {
           ios.systemVersion,
           ios.model,
           ios.name,
-          FlutterCanary.instance().deviceid);
+          FlutterCanary.instance.deviceid);
     } else if (defaultTargetPlatform == TargetPlatform.android) {
       throw 'not implement';
     } else {

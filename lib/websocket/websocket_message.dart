@@ -1,5 +1,3 @@
-import 'package:flutter_canary/websocket/canary_websocket.dart';
-
 enum MessageAction {
   /// 连接成功
   connected,

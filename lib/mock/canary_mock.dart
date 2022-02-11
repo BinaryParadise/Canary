@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_canary/canary_dio.dart';
-import 'package:flutter_canary/mock_manager.dart';
+import 'package:flutter_canary/mock/mock_manager.dart';
 import 'package:flutter_canary/model/model_mock.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -46,18 +46,16 @@ class _CanaryMockState extends State<CanaryMock> {
         return _MockGroupRow(groups[row]);
       },
       separatorBuilder: (ctx, row) {
-        return Container(
-          child: SizedBox(
-            height: 8,
-          ),
+        return const SizedBox(
+          height: 8,
         );
       },
     );
     current = Scaffold(
       appBar: AppBar(
-        title: Text('Mock'),
+        title: const Text('Mock'),
       ),
-      backgroundColor: Color(0xFFF2F4F6),
+      backgroundColor: const Color(0xFFF2F4F6),
       body: current,
     );
     return current;
@@ -71,8 +69,8 @@ class _CanaryMockState extends State<CanaryMock> {
 }
 
 class _MockGroupRow extends StatelessWidget {
-  MockGroup group;
-  _MockGroupRow(this.group, {Key? key}) : super(key: key);
+  final MockGroup group;
+  const _MockGroupRow(this.group, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +80,7 @@ class _MockGroupRow extends StatelessWidget {
       itemCount: mocks.length,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (ctx, row) {
         return _MockItemRow(mocks[row]);
       },
@@ -96,15 +94,15 @@ class _MockGroupRow extends StatelessWidget {
         Row(
           children: [
             Container(
-              margin: EdgeInsets.all(12),
+              margin: const EdgeInsets.all(12),
               child: Text(
                 group.name,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             )
           ],
         ),
-        Divider(
+        const Divider(
           indent: 12,
         ),
         current
@@ -119,8 +117,8 @@ class _MockGroupRow extends StatelessWidget {
 }
 
 class _MockItemRow extends StatelessWidget {
-  MockItem item;
-  _MockItemRow(this.item, {Key? key}) : super(key: key);
+  final MockItem item;
+  const _MockItemRow(this.item, {Key? key}) : super(key: key);
 
   void setEnabled(MockItem item, bool isOn) {
     CanaryDio.instance().post('/mock/active',
@@ -160,7 +158,7 @@ class _MockItemRow extends StatelessWidget {
             Text(item.name),
             Text(
               '路径: ${item.path}',
-              style: TextStyle(color: Color(0xFF666666)),
+              style: const TextStyle(color: Color(0xFF666666)),
             )
           ],
         ),
@@ -182,21 +180,21 @@ class _MockItemRow extends StatelessWidget {
                   onTap: () {
                     var s =
                         scenes.firstWhere((element) => element.name == e.name);
-                    if (s != null) {
-                      activeScene(s);
-                    }
+                    activeScene(s);
                   },
                 ))
             .toList());
-    scene = Row(
-        children: [Text('场景: ', style: TextStyle(color: Colors.black)), scene]);
+    scene = Row(children: [
+      const Text('场景: ', style: TextStyle(color: Colors.black)),
+      scene
+    ]);
 
     current = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         current,
         scene,
-        SizedBox(
+        const SizedBox(
           height: 10,
         )
       ],
@@ -204,19 +202,9 @@ class _MockItemRow extends StatelessWidget {
     current = Container(
       // height: 80,
       // color: Colors.lightGreenAccent[100],
-      margin: EdgeInsets.only(left: 12, right: 8),
+      margin: const EdgeInsets.only(left: 12, right: 8),
       child: current,
     );
     return current;
-  }
-}
-
-class _SceneModeChange extends StatelessWidget {
-  MockItem item;
-  _SceneModeChange(this.item, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

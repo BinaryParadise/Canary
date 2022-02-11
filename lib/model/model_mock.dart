@@ -59,9 +59,7 @@ class MockItem {
     }
     var scene =
         scenes?.firstWhere((element) => element.id == sceneid && sceneid != 0);
-    if (scene == null) {
-      scene = scenes?.firstWhere((element) => element.id > 0);
-    }
+    scene ??= scenes?.firstWhere((element) => element.id > 0);
     return scene?.id;
   }
 

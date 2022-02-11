@@ -2,9 +2,30 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'model_remote_conf.g.dart';
 
+enum GroupType { dev, test, production }
+
+extension GroupTypeExtension on GroupType {
+  int get value => index;
+  static GroupType parse(int value) {
+    return GroupType.values[value];
+  }
+
+  String get decription {
+    switch (this) {
+      case GroupType.dev:
+        return '开发';
+      case GroupType.test:
+        return '测试';
+      case GroupType.production:
+        return '生产';
+    }
+  }
+}
+
 @JsonSerializable()
 class ConfigGroup {
   int type;
+  GroupType get typeEnum => GroupTypeExtension.parse(type);
   String name;
   List<Config>? items;
 
@@ -20,6 +41,7 @@ class Config {
   int id;
   String name;
   int type;
+  GroupType get typeEnum => GroupTypeExtension.parse(type);
   int updateTime;
   int? appId;
   String? author;

@@ -6,8 +6,6 @@ import 'package:flutter_canary/model/module_device.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
 import 'package:web_socket_io/web_socket_io.dart';
 
-import '../canary_logger.dart';
-
 class WebSocketReceiver implements WebSocketProvider {
   late WebSocketChannel channel;
 
@@ -22,7 +20,8 @@ class WebSocketReceiver implements WebSocketProvider {
 
   @override
   void onClosed(CloseCode code, WebSocketChannel webSocket) {
-    // TODO: implement onClosed
+    _timer?.cancel();
+    _timer = null;
   }
 
   @override
@@ -32,17 +31,14 @@ class WebSocketReceiver implements WebSocketProvider {
       _count++;
       channel.send(OpCode.ping, _count.bytes());
     });
+    register();
   }
 
   @override
-  void onMessage(Uint8List message, WebSocketChannel webSocket) {
-    // TODO: implement onMessage
-  }
+  void onMessage(Uint8List message, WebSocketChannel webSocket) {}
 
   @override
-  void onPing(Uint8List data, WebSocketChannel webSocket) {
-    // TODO: implement onPing
-  }
+  void onPing(Uint8List data, WebSocketChannel webSocket) {}
 
   @override
   void onPong(Uint8List data, WebSocketChannel webSocket) {
@@ -50,7 +46,5 @@ class WebSocketReceiver implements WebSocketProvider {
   }
 
   @override
-  void onText(String message, WebSocketChannel webSocket) {
-    // TODO: implement onText
-  }
+  void onText(String message, WebSocketChannel webSocket) {}
 }

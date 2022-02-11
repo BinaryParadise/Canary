@@ -12,9 +12,9 @@ class CanaryDio {
     _dio = Dio();
     _dio.options.contentType = 'application/json; charset=utf8';
     _dio.interceptors.add(_CanaryDioInterceptor());
-    FlutterCanary.instance().user.addListener(() {
+    FlutterCanary.instance.user.addListener(() {
       _dio.options.headers['Canary-Access-Token'] =
-          FlutterCanary.instance().user.value?.token;
+          FlutterCanary.instance.user.value?.token;
     });
   }
 

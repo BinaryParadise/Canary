@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:crypto/crypto.dart';
-import 'package:flutter_canary/canary_mock.dart';
-import 'package:flutter_canary/canary_remote_conf.dart';
+import 'package:flutter_canary/config/config_manager.dart';
+import 'package:flutter_canary/mock/canary_mock.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +23,7 @@ class CanaryOptions extends StatefulWidget {
 class _CanaryOptionsState extends State<CanaryOptions> {
   final TextEditingController _editingController1 = TextEditingController();
   final TextEditingController _editingController2 = TextEditingController();
-  bool mockOn = FlutterCanary.instance().mockOn;
+  bool mockOn = FlutterCanary.instance.mockOn;
 
   @override
   void initState() {
@@ -39,7 +38,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
     Widget current;
 
     current = ValueListenableBuilder(
-        valueListenable: FlutterCanary.instance().user,
+        valueListenable: FlutterCanary.instance.user,
         builder: (ctx, user, child) {
           if (user == null) {
             return loginWidget(ctx);
@@ -77,7 +76,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
   }
 
   void loginSuccess(User user) {
-    FlutterCanary.instance().user.value = user;
+    FlutterCanary.instance.user.value = user;
     SharedPreferences.getInstance()
         .then((value) => value.setString('user', jsonEncode(user)));
   }
@@ -102,14 +101,14 @@ class _CanaryOptionsState extends State<CanaryOptions> {
           return diag;
         }).then((value) {
       if (value!) {
-        FlutterCanary.instance().user.value = null;
+        FlutterCanary.instance.user.value = null;
       }
     });
   }
 
   Widget listWidget(BuildContext context) {
     Widget current;
-    User user = FlutterCanary.instance().user.value!;
+    User user = FlutterCanary.instance.user.value!;
     current = Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -130,9 +129,9 @@ class _CanaryOptionsState extends State<CanaryOptions> {
     List<Widget> items = [
           GestureDetector(
             onTap: () => Navigator.of(context)
-                .push(CupertinoPageRoute(builder: (ctx) => CanaryRemoteConf())),
-            child: _RowActionElement('远程配置',
-                children: [const Icon(Icons.arrow_right)]),
+                .push(ConfigManager.instance.listPageRoute()),
+            child: const _RowActionElement('远程配置',
+                children: [Icon(Icons.arrow_right)]),
           ),
           _RowActionElement('监控日志',
               children: [Switch(value: false, onChanged: (on) {})]),
@@ -144,7 +143,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
               Switch(
                   value: mockOn,
                   onChanged: (on) {
-                    FlutterCanary.instance().mockOn = on;
+                    FlutterCanary.instance.mockOn = on;
                     setState(() {
                       mockOn = on;
                     });
@@ -156,17 +155,17 @@ class _CanaryOptionsState extends State<CanaryOptions> {
             ? [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        CupertinoPageRoute(builder: (ctx) => CanaryMock()));
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (ctx) => const CanaryMock()));
                   },
-                  child: _RowActionElement('Mock',
-                      children: [const Icon(Icons.arrow_right)]),
+                  child: const _RowActionElement('Mock',
+                      children: [Icon(Icons.arrow_right)]),
                 )
               ]
             : []);
     Widget list = ListView.separated(
         itemBuilder: (ctx, row) => items[row],
-        separatorBuilder: (ctx, row) => SizedBox(
+        separatorBuilder: (ctx, row) => const SizedBox(
               height: 8,
             ),
         itemCount: items.length);
@@ -217,9 +216,9 @@ class _CanaryOptionsState extends State<CanaryOptions> {
 }
 
 class _RowActionElement extends StatelessWidget {
-  String title;
-  List<Widget> children;
-  _RowActionElement(this.title, {this.children = const []});
+  final String title;
+  final List<Widget> children;
+  const _RowActionElement(this.title, {this.children = const []});
 
   @override
   Widget build(BuildContext context) {

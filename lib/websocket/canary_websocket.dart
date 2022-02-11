@@ -1,6 +1,4 @@
-import 'dart:async';
-import 'dart:convert' show Utf8Decoder, Utf8Encoder, jsonDecode, jsonEncode;
-import 'dart:typed_data';
+import 'dart:convert' show Utf8Encoder, jsonEncode;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
@@ -19,8 +17,6 @@ class CanaryWebSocket {
   }
 
   String appSecret = '';
-  Timer? _pingTimer;
-  int _pingCount = 0;
 
   void configure(String url, String deviceid, String appSecret) {
     var uri = Uri.parse(url);
@@ -45,7 +41,7 @@ class CanaryWebSocket {
 
   // 发送消息
   void send(WebSocketMessage msg) {
-    var data = Utf8Encoder().convert(jsonEncode(msg.toJson()));
+    var data = const Utf8Encoder().convert(jsonEncode(msg.toJson()));
     client?.sendData(data);
   }
 }

@@ -14,6 +14,7 @@ class User {
   int? rolelevel;
   int expire;
 // String app: ProtoProject?
+  // ignore: non_constant_identifier_names
   int? app_id;
 
   User(this.id, this.username, this.password, this.name, this.token,

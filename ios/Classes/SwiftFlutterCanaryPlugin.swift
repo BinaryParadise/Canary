@@ -59,7 +59,7 @@ public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
     
     func enableNetLog(mode: String? = nil) {
         if let mode = mode {
-            if mode == "NetLogMode.AFNetworking" {
+            if mode == "NetLogMode.afNetworking" {
                 NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: NSNotification.Name(rawValue: "com.alamofire.networking.task.complete"), object: nil)
                 NotificationCenter.default.addObserver(self, selector: #selector(af_didRquestDidFinish(notification:)), name: Notification.Name(rawValue: "org.alamofire.notification.name.task.didComplete"), object: nil)
             } else {

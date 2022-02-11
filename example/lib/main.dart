@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_canary/flutter_canary.dart';
-import 'package:stack_trace/stack_trace.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,6 +34,7 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   String _platformVersion = 'Unknown';
   bool connect = false;
+  String? _testValue;
 
   static const MethodChannel _testChannel =
       MethodChannel('canary_example_channel');
@@ -43,12 +43,13 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     super.initState();
     initPlatformState();
+    initCanary();
   }
 
   void initCanary() {
-    FlutterCanary.instance().configure('82e439d7968b7c366e24a41d7f53f47d',
-        service: 'http://127.0.0.1:9001/api',
-        deviceid: 'canary-device-id');
+    FlutterCanary.instance.configure('82e439d7968b7c366e24a41d7f53f47d',
+        service: 'http://127.0.0.1:9001/api', deviceid: 'canary-device-id');
+    _testValue = FlutterCanary.instance.configValue('TestParam1');
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -75,9 +76,9 @@ class _MyHomeState extends State<MyHome> {
 
   void _testCanary() {
     if (connect) {
-      FlutterCanary.instance().stop();
+      FlutterCanary.instance.stop();
     } else {
-      FlutterCanary.instance().start();
+      FlutterCanary.instance.start();
     }
     setState(() {
       connect = !connect;
@@ -99,19 +100,24 @@ class _MyHomeState extends State<MyHome> {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text('Running on: $_platformVersion\n'),
-          TextButton(onPressed: initCanary, child: Text('开启配置')),
           TextButton(
               onPressed: _testCanary, child: Text(connect ? '关闭连接' : '连接测试')),
-          TextButton(onPressed: () => log('日志测试'), child: Text('测试日志')),
+          TextButton(onPressed: () => log('日志测试'), child: const Text('测试日志')),
           TextButton(
               onPressed: () => log('日志测试', network: true),
-              child: Text('测试日志-网络')),
+              child: const Text('测试日志-网络')),
+          TextButton(
+              onPressed: () => setState(() {
+                    _testValue =
+                        FlutterCanary.instance.configValue('TestParam1');
+                  }),
+              child: Text('TestParam1 = $_testValue'))
         ]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _testCanary();
-          FlutterCanary.instance().showOptions(context);
+          FlutterCanary.instance.showOptions(context);
         },
         child: const Icon(Icons.play_arrow),
       ),

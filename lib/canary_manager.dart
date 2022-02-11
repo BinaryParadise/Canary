@@ -12,21 +12,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:flutter_canary/canary_logger.dart';
 import 'package:flutter_canary/canary_options.dart';
-import 'package:flutter_canary/mock_manager.dart';
+import 'package:flutter_canary/config/config_manager.dart';
+import 'package:flutter_canary/mock/mock_manager.dart';
 import 'package:flutter_canary/model/model_user.dart';
 import 'package:flutter_canary/websocket/canary_websocket.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
-import 'package:flutter_canary/websocket/websocket_receiver.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'model/model_mock.dart';
 
-enum NetLogMode { AFNetworking, Alamofire }
+enum NetLogMode { afNetworking, alamofire }
 
 class FlutterCanary {
   static final FlutterCanary _instance = FlutterCanary._();
   FlutterCanary._();
-  static FlutterCanary instance() => _instance;
+  static FlutterCanary get instance => _instance;
 
   static const MethodChannel channel = MethodChannel('flutter_canary');
 
@@ -84,7 +84,7 @@ class FlutterCanary {
     await channel.invokeMethod('configure', {'baseUrl': service});
   }
 
-  void start({NetLogMode mode = NetLogMode.AFNetworking}) async {
+  void start({NetLogMode mode = NetLogMode.afNetworking}) async {
     CanaryWebSocket.instance().start();
     await channel
         .invokeMethod('enableNetLog', mode.toString())
@@ -100,7 +100,23 @@ class FlutterCanary {
 
   void showOptions(BuildContext context) {
     Widget current = const CanaryOptions();
-    showDialog(context: context, useSafeArea: false, builder: (ctx) => current);
+    showDialog(
+        context: context,
+        useSafeArea: false,
+        useRootNavigator: false,
+        builder: (ctx) => current,
+        routeSettings: const RouteSettings(name: '/canary_root'));
+  }
+
+  /// 获取配置的参数值
+  String? configValue(String key, {String? def}) {
+    return ConfigManager.instance.value(key, def: def);
+  }
+
+  void close(BuildContext context) {
+    Navigator.of(context).popUntil((route) {
+      return route.settings.name == 'canary_root';
+    });
   }
 
   Future<dynamic> _callHandler(MethodCall call) {
