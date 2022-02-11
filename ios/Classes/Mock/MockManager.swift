@@ -7,9 +7,6 @@
 
 import Foundation
 import SwiftyJSON
-#if os(macOS)
-import CanaryProto
-#endif
 
 let suiteName       = "com.binaryparadise.canary"
 let MockGroupURL    = "/api/mock/app/whole"

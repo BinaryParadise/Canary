@@ -26,9 +26,10 @@ enum NetLogMode { afNetworking, alamofire }
 class FlutterCanary {
   static final FlutterCanary _instance = FlutterCanary._();
   FlutterCanary._();
+  factory FlutterCanary() => _instance;
   static FlutterCanary get instance => _instance;
 
-  static const MethodChannel channel = MethodChannel('flutter_canary');
+  static MethodChannel channel = MethodChannel('flutter_canary');
 
   static Future<String?> get platformVersion async {
     final String? version = await channel.invokeMethod('getPlatformVersion');
@@ -60,6 +61,8 @@ class FlutterCanary {
     this.deviceid = deviceid;
     this.debug = debug;
 
+    CanaryDio.instance().configure(service);
+    
     MockManager.instance().update();
     SharedPreferences.getInstance().then((prefs) {
       _mockOn = prefs.getBool('mockOn') ?? false;
@@ -75,13 +78,7 @@ class FlutterCanary {
 
     channel.setMethodCallHandler(_callHandler);
 
-    CanaryDio.instance().configure(service);
     CanaryWebSocket.instance().configure(service, deviceid, appSecret);
-    setupChannel();
-  }
-
-  void setupChannel() async {
-    await channel.invokeMethod('configure', {'baseUrl': service});
   }
 
   void start({NetLogMode mode = NetLogMode.afNetworking}) async {
@@ -99,13 +96,16 @@ class FlutterCanary {
   }
 
   void showOptions(BuildContext context) {
-    Widget current = const CanaryOptions();
     showDialog(
         context: context,
         useSafeArea: false,
         useRootNavigator: false,
-        builder: (ctx) => current,
+        builder: (ctx) => options(),
         routeSettings: const RouteSettings(name: '/canary_root'));
+  }
+
+  Widget options() {
+    return CanaryOptions();
   }
 
   /// 获取配置的参数值

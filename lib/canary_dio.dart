@@ -29,6 +29,7 @@ class CanaryDio {
       var res = Result.fromJson(response.data as Map<String, dynamic>);
       return res;
     } on DioError catch (e) {
+      print(e);
       return Result(1000, e.message);
     }
   }
@@ -39,6 +40,7 @@ class CanaryDio {
       var res = Result.fromJson(response.data as Map<String, dynamic>);
       return res;
     } on DioError catch (e) {
+      print(e);
       return Result(1000, e.message);
     }
   }
