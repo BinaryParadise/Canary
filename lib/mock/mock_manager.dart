@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_canary/mock/canary_mock.dart';
+import 'package:flutter_canary/mock/mock_list_page.dart';
 import 'package:flutter_canary/model/model_mock.dart';
 import 'package:flutter_canary/model/model_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -92,5 +92,5 @@ class MockManager {
   }
 
   Route pageRoute() =>
-      CupertinoPageRoute(builder: (context) => const CanaryMock());
+      CupertinoPageRoute(builder: (context) => const MockListPage());
 }

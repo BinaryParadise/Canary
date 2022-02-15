@@ -18,6 +18,7 @@ import 'package:flutter_canary/model/model_user.dart';
 import 'package:flutter_canary/websocket/canary_websocket.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:logger/logger.dart';
 
 import 'model/model_mock.dart';
 
@@ -29,7 +30,7 @@ class FlutterCanary {
   factory FlutterCanary() => _instance;
   static FlutterCanary get instance => _instance;
 
-  static MethodChannel channel = MethodChannel('flutter_canary');
+  static MethodChannel channel = const MethodChannel('flutter_canary');
 
   static Future<String?> get platformVersion async {
     final String? version = await channel.invokeMethod('getPlatformVersion');
@@ -54,45 +55,52 @@ class FlutterCanary {
   ValueNotifier<User?> user = ValueNotifier(null);
   Map<String, MockItem> mockMap = {};
 
-  void configure(String appSecret,
-      {required String service, required String deviceid, bool debug = false}) {
+  Future<void> configure(String appSecret,
+      {required String service,
+      required String deviceid,
+      bool debug = false}) async {
     this.appSecret = appSecret;
     this.service = service;
     this.deviceid = deviceid;
     this.debug = debug;
+    if (debug) {
+      Logger.level = Level.debug;
+    } else {
+      Logger.level = Level.info;
+    }
 
     CanaryDio.instance().configure(service);
-    
+
+    var prefs = await SharedPreferences.getInstance();
+    _mockOn = prefs.getBool('mockOn') ?? false;
+    if (_mockOn) {
+      channel.invokeMethod('enableMock', _mockOn);
+    }
+    var map =
+        jsonDecode(prefs.getString('user') ?? "{}") as Map<String, dynamic>?;
+    if (map != null && map.isNotEmpty) {
+      user.value = User.fromJson(map);
+    }
+
     MockManager.instance().update();
-    SharedPreferences.getInstance().then((prefs) {
-      _mockOn = prefs.getBool('mockOn') ?? false;
-      if (_mockOn) {
-        channel.invokeMethod('enableMock', _mockOn);
-      }
-      var map =
-          jsonDecode(prefs.getString('user') ?? "{}") as Map<String, dynamic>?;
-      if (map != null && map.isNotEmpty) {
-        user.value = User.fromJson(map);
-      }
-    });
 
     channel.setMethodCallHandler(_callHandler);
 
-    CanaryWebSocket.instance().configure(service, deviceid, appSecret);
+    CanaryWebSocket.instance.configure(service, deviceid, appSecret);
   }
 
   void start({NetLogMode mode = NetLogMode.afNetworking}) async {
-    CanaryWebSocket.instance().start();
+    CanaryWebSocket.instance.start();
     await channel
         .invokeMethod('enableNetLog', mode.toString())
         .then((value) => null);
     _forwardLog = true;
-    logger.i('开启网络日志');
+    logger.d('开启网络日志');
   }
 
   void stop() {
     _forwardLog = false;
-    CanaryWebSocket.instance().clear();
+    CanaryWebSocket.instance.clear();
   }
 
   void showOptions(BuildContext context) {
@@ -104,8 +112,13 @@ class FlutterCanary {
         routeSettings: const RouteSettings(name: '/canary_root'));
   }
 
+  // 返回原生页面（若是顶层则关闭）, animated仅对iOS生效
+  static Future<T?> pop<T>({bool animated = true}) {
+    return channel.invokeMethod('navigator.pop', animated);
+  }
+
   Widget options() {
-    return CanaryOptions();
+    return const CanaryOptions();
   }
 
   /// 获取配置的参数值
@@ -125,7 +138,7 @@ class FlutterCanary {
     }
     if (call.method == "forwardLog" && _forwardLog) {
       var msg = WebSocketMessage(MessageAction.log, data: call.arguments);
-      CanaryWebSocket.instance().send(msg);
+      CanaryWebSocket.instance.send(msg);
       return Future.value(true);
     } else if (call.method == "checkIntercept") {
       return MockManager.instance().checkIntercept(call);

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_canary/canary_logger.dart';
 import 'package:flutter_canary/canary_manager.dart';
 
 import 'model/model_result.dart';
@@ -32,7 +33,7 @@ class CanaryDio {
       if (e.response?.statusCode == 401) {
         FlutterCanary.instance.user.value = null;
       } else {
-        print(e);
+        logger.e(e);
       }
       return Result(1000, e.message);
     }
@@ -47,7 +48,7 @@ class CanaryDio {
       if (e.response?.statusCode == 401) {
         FlutterCanary.instance.user.value = null;
       } else {
-        print(e);
+        logger.e(e);
       }
       return Result(1000, e.message);
     }

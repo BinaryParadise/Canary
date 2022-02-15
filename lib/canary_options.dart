@@ -1,12 +1,14 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter_canary/config/config_manager.dart';
-import 'package:flutter_canary/mock/canary_mock.dart';
+import 'package:flutter_canary/mock/mock_list_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,6 +52,18 @@ class _CanaryOptionsState extends State<CanaryOptions> {
     current = Scaffold(
       backgroundColor: const Color(0xFFF2F4F6),
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              // TODO: flutter 2.8及以下存在问题，main分支已解决https://github.com/flutter/engine/pull/30939
+              // SystemNavigator.pop(animated: true);
+              // 以下为临时解决方案
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              } else {
+                FlutterCanary.pop();
+              }
+            },
+            icon: const Icon(Icons.arrow_back_ios)),
         title: const Text('金丝雀'),
       ),
       body: current,
@@ -131,12 +145,12 @@ class _CanaryOptionsState extends State<CanaryOptions> {
             onTap: () => Navigator.of(context)
                 .push(ConfigManager.instance.listPageRoute()),
             child: const _RowActionElement('远程配置',
-                children: [Icon(Icons.arrow_right)]),
+                children: [Icon(Icons.chevron_right)]),
           ),
           _RowActionElement('监控日志',
-              children: [Switch(value: false, onChanged: (on) {})]),
+              children: [Switch(value: true, onChanged: null)]),
           _RowActionElement('网络日志',
-              children: [Switch(value: false, onChanged: (on) {})]),
+              children: [Switch(value: true, onChanged: null)]),
           _RowActionElement(
             'Mock',
             children: [
@@ -156,17 +170,17 @@ class _CanaryOptionsState extends State<CanaryOptions> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(CupertinoPageRoute(
-                        builder: (ctx) => const CanaryMock()));
+                        builder: (ctx) => const MockListPage()));
                   },
                   child: const _RowActionElement('Mock',
-                      children: [Icon(Icons.arrow_right)]),
+                      children: [Icon(Icons.chevron_right)]),
                 )
               ]
             : []);
     Widget list = ListView.separated(
         itemBuilder: (ctx, row) => items[row],
         separatorBuilder: (ctx, row) => const SizedBox(
-              height: 8,
+              height: 10,
             ),
         itemCount: items.length);
     current = Column(
@@ -218,6 +232,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
 class _RowActionElement extends StatelessWidget {
   final String title;
   final List<Widget> children;
+
   const _RowActionElement(this.title, {this.children = const []});
 
   @override
@@ -229,7 +244,7 @@ class _RowActionElement extends StatelessWidget {
     );
     current = Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
-        height: 60,
+        height: 50,
         color: Colors.white,
         child: current);
     return current;

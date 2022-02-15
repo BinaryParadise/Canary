@@ -20,26 +20,62 @@ public let StoreLogKeys = ["message",
 public class SwiftFlutterCanaryPlugin: NSObject, FlutterPlugin {
     static let instance = SwiftFlutterCanaryPlugin()
     var channel: FlutterMethodChannel!
+        
+    public static func register(with registrar: FlutterPluginRegistrar) {
+        instance.channel = FlutterMethodChannel(name: "flutter_canary", binaryMessenger: registrar.messenger())
+        registrar.addMethodCallDelegate(instance, channel: instance.channel)
+    }
     
-  public static func register(with registrar: FlutterPluginRegistrar) {
-      instance.channel = FlutterMethodChannel(name: "flutter_canary", binaryMessenger: registrar.messenger())
-      registrar.addMethodCallDelegate(instance, channel: instance.channel)
-  }
-
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-      #if DEBUG
-      print("method: \(call.method) args: \(call.arguments ?? "nil"), \(call)")
-      #endif
-      if call.method == "getPlatformVersion" {
-          result("flutter_canary running on iOS " + UIDevice.current.systemVersion)
-      } else if call.method == "enableNetLog" {
-          enableNetLog(mode: call.arguments as? String)
-          result(true)
-      } else if call.method == "enableMock" {
-          CanaryMockURLProtocol.isEnabled = call.arguments as? Bool ?? false;
-          result(true)
-      }
-  }
+    public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+          #if DEBUG
+          print("method: \(call.method) args: \(call.arguments ?? "nil"), \(call)")
+          #endif
+          if call.method == "getPlatformVersion" {
+              result("flutter_canary running on iOS " + UIDevice.current.systemVersion)
+          } else if call.method == "enableNetLog" {
+              enableNetLog(mode: call.arguments as? String)
+              result(true)
+          } else if call.method == "enableMock" {
+              CanaryMockURLProtocol.isEnabled = call.arguments as? Bool ?? false;
+              result(true)
+          } else if call.method == "navigator.pop" {
+              let animated = call.arguments as? Bool ?? true
+              let top = SwiftFlutterCanaryPlugin.topViewController()
+              if let nav = top?.navigationController {
+                  if nav.viewControllers.count > 1 {
+                      nav.popViewController(animated: animated)
+                  } else {
+                      nav.dismiss(animated: animated, completion: nil)
+                  }
+              } else {
+                  top?.dismiss(animated: animated, completion: nil)
+              }
+              result(true)
+          }
+    }
+    
+    public static func topViewController() -> UIViewController? {
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+            var current: UIViewController? = rootVC;
+            repeat {
+                if let p = current?.presentedViewController {
+                    current = p
+                } else {
+                    if let cur = current {
+                        if cur.isKind(of: UINavigationController.self) {
+                            current = (current as? UINavigationController)?.visibleViewController
+                        } else if cur.isKind(of: UITabBarController.self) {
+                            current = (current as? UITabBarController)?.selectedViewController
+                        } else {
+                            break;
+                        }
+                    }
+                }
+            } while true
+            return current
+        }
+        return nil
+    }
     
     public static func storeLog(dict: [String : Any]) {
         var dict = dict;

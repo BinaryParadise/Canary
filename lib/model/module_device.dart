@@ -25,7 +25,7 @@ class Device {
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       var ios = await DeviceInfoPlugin().iosInfo;
       return Device(
-          ios.isPhysicalDevice,
+          !ios.isPhysicalDevice,
           '1.0.0',
           ios.systemName,
           ios.systemVersion,

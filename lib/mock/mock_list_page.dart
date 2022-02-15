@@ -5,16 +5,16 @@ import 'package:flutter_canary/mock/mock_manager.dart';
 import 'package:flutter_canary/model/model_mock.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class CanaryMock extends StatefulWidget {
-  const CanaryMock({Key? key}) : super(key: key);
+class MockListPage extends StatefulWidget {
+  const MockListPage({Key? key}) : super(key: key);
 
   @override
-  State<CanaryMock> createState() => _CanaryMockState();
+  State<MockListPage> createState() => _MockListPageState();
 }
 
 final ValueNotifier<int> doRefresh = ValueNotifier(0);
 
-class _CanaryMockState extends State<CanaryMock> {
+class _MockListPageState extends State<MockListPage> {
   List<MockGroup> groups = [];
 
   @override
