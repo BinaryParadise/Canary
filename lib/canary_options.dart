@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:crypto/crypto.dart';
@@ -147,9 +145,9 @@ class _CanaryOptionsState extends State<CanaryOptions> {
             child: const _RowActionElement('远程配置',
                 children: [Icon(Icons.chevron_right)]),
           ),
-          _RowActionElement('监控日志',
+          const _RowActionElement('监控日志',
               children: [Switch(value: true, onChanged: null)]),
-          _RowActionElement('网络日志',
+          const _RowActionElement('网络日志',
               children: [Switch(value: true, onChanged: null)]),
           _RowActionElement(
             'Mock',

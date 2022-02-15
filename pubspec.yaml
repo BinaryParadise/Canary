@@ -1,6 +1,6 @@
 name: flutter_canary
-description: 金丝雀客户端SDK，提供日志（包含网络请求）监控、Mock、远程配置等常用功能。
-version: 0.0.1
+description: sdk for canary -> logger monitor(include networking)、Mock、RemoteConfig...
+version: 0.0.2
 homepage: https://github.com/BinaryParadise/Canary
 
 environment:
