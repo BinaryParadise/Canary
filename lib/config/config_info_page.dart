@@ -69,10 +69,11 @@ class ConfigInfoPage extends StatelessWidget {
                   onPressed: () {
                     ConfigManager.instance.apply(config).then((value) {
                       FlutterCanary.pop().then((value) {
-                        Navigator.of(context).pushNamed('/');
+                        Navigator.of(context)
+                            .popUntil((route) => route.settings.name == '/');
                       });
                       Fluttertoast.showToast(
-                          msg: '切换成功，请重启应用!', gravity: ToastGravity.CENTER);
+                          msg: '切换成功, 请重启应用!', gravity: ToastGravity.CENTER);
                     });
                   },
                   child: const Text('确认')),
