@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:device_info/device_info.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_canary/canary_manager.dart';
@@ -19,9 +21,11 @@ class Device {
   int? update;
 
   Device(this.simulator, this.appVersion, this.osName, this.osVersion,
-      this.modelName, this.name, this.deviceId);
+      this.modelName, this.name, this.deviceId,
+      {this.ipAddrs = const []});
 
   static Future<Device> create() async {
+    var addrs = await NetworkInterface.list();
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       var ios = await DeviceInfoPlugin().iosInfo;
       return Device(
@@ -31,7 +35,8 @@ class Device {
           ios.systemVersion,
           ios.model,
           ios.name,
-          FlutterCanary.instance.deviceid);
+          FlutterCanary.instance.deviceid,
+          ipAddrs: addrs.map((e) => e.addresses.first.address).toList());
     } else if (defaultTargetPlatform == TargetPlatform.android) {
       throw 'not implement';
     } else {

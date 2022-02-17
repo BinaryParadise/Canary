@@ -6,7 +6,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_canary/canary_dio.dart';
@@ -51,6 +50,9 @@ class FlutterCanary {
               channel.invokeMethod('enableMock', _mockOn);
             }));
   }
+
+  /// 附加信息(例如push token)
+  Map<String, dynamic> Function()? extra;
 
   ValueNotifier<User?> user = ValueNotifier(null);
   Map<String, MockItem> mockMap = {};

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_canary/canary_logger.dart';
+import 'package:flutter_canary/canary_manager.dart';
 import 'package:flutter_canary/model/module_device.dart';
 import 'package:flutter_canary/websocket/websocket_message.dart';
 import 'package:web_socket_io/web_socket_io.dart';
@@ -61,6 +62,9 @@ class CanaryWebSocket implements WebSocketProvider {
 
   void register() async {
     var device = await Device.create();
+    if (FlutterCanary.instance.extra != null) {
+      device.profile = FlutterCanary.instance.extra!();
+    }
     var msg = WebSocketMessage(MessageAction.register, data: device.toJson());
     channel.send(OpCode.binary, const Utf8Encoder().convert(jsonEncode(msg)));
   }

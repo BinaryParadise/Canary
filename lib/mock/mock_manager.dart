@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_canary/mock/mock_list_page.dart';
 import 'package:flutter_canary/model/model_mock.dart';
@@ -33,11 +32,12 @@ class MockManager {
     mockMap.clear();
     for (var element in groups) {
       element.mocks?.forEach((e) {
-          mockMap[e.path] = e;
-        });
+        mockMap[e.path] = e;
+      });
     }
   }
 
+  /// 更新mock数据
   Future<Result> update() async {
     var value = await CanaryDio.instance().get('/mock/app/whole');
     if (value.success) {
@@ -48,6 +48,7 @@ class MockManager {
     return value;
   }
 
+  /// 检测是否需要Mock
   Future<dynamic> checkIntercept(MethodCall call) async {
     var intercept = false;
     String? matchUrl;
@@ -60,35 +61,33 @@ class MockManager {
 
     //完全匹配
     var matchMock = mockMap[uri.path];
-    if (matchMock == null) {
-      // TODO: 正则匹配
-      /*matchMock = mockMap.values.first(where: { (item) -> Bool in
-                do {
-                    let regexStr = matchParameter(path: item.path)
-                    let regex = try NSRegularExpression(pattern: regexStr, options: .caseInsensitive)
-                    let count = regex.matches(in: path, options: .reportProgress, range: NSRange(location: 0, length: path.count)).count
-                    if count > 0 {
-                        return true
-                    }
-                } catch {
-                    print("正则匹配：\(error)")
-                }
-                return false
-            })*/
-    } else {
-      if (matchMock.enabled) {
-        var sceneid = matchMock.match(
-            matchMock.sceneid, Map<String, dynamic>.from(args['params']));
-        if (sceneid != null) {
-          intercept = true;
-          var queryStr = '?$uri.query';
-          matchUrl =
-              '${FlutterCanary.instance.service}/mock/app/scene/$sceneid$queryStr';
+    if (matchMock == null || !matchMock.enabled) {
+      for (var element in mockMap.values) {
+        if (element.enabled &&
+            RegExp(element.path.replaceAll(RegExp('({[^{}]+})'), '[^/]+'))
+                .hasMatch(uri.path)) {
+          matchMock = element;
+          break;
         }
+      }
+    }
+
+    if (matchMock != null && matchMock.enabled) {
+      var sceneid = matchMock.match(
+          matchMock.sceneid, Map<String, dynamic>.from(args['params']));
+      if (sceneid != null) {
+        intercept = true;
+        var queryStr = '?$uri.query';
+        matchUrl =
+            '${FlutterCanary.instance.service}/mock/app/scene/$sceneid$queryStr';
       }
       return Future.value({'intercept': intercept, 'url': matchUrl});
     }
     return Future.value({'intercept': intercept});
+  }
+
+  String? matchURLParameter(String path) {
+    return null;
   }
 
   Route pageRoute() =>

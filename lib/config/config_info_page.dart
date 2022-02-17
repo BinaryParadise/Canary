@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_canary/canary_manager.dart';
 import 'package:flutter_canary/config/config_manager.dart';
 import 'package:flutter_canary/model/model_remote_conf.dart';

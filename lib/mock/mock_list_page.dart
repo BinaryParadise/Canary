@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_canary/canary_dio.dart';
 import 'package:flutter_canary/mock/mock_manager.dart';
