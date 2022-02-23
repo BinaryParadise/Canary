@@ -38,7 +38,16 @@ class Device {
           FlutterCanary.instance.deviceid,
           ipAddrs: addrs.map((e) => e.addresses.first.address).toList());
     } else if (defaultTargetPlatform == TargetPlatform.android) {
-      throw 'not implement';
+      var android = await DeviceInfoPlugin().androidInfo;
+      return Device(
+          !android.isPhysicalDevice,
+          '1.0.0',
+          android.brand,
+          android.version.incremental,
+          android.manufacturer,
+          android.product,
+          FlutterCanary.instance.deviceid,
+          ipAddrs: addrs.map((e) => e.addresses.first.address).toList());
     } else {
       throw 'not implement';
     }

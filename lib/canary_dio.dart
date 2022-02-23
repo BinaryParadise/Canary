@@ -6,7 +6,8 @@ import 'model/model_result.dart';
 
 class CanaryDio {
   static final CanaryDio _instance = CanaryDio._();
-  static CanaryDio instance() => _instance;
+  static CanaryDio get instance => _instance;
+  factory CanaryDio() => _instance;
   Dio _dio = Dio();
 
   CanaryDio._() {
@@ -22,6 +23,7 @@ class CanaryDio {
   void configure(String baseURL) {
     _dio.options.baseUrl = baseURL;
     _dio.options.connectTimeout = 30000;
+    logger.i('configure: $baseURL');
   }
 
   Future<Result> get(String path, {Map<String, dynamic>? arguments}) async {
@@ -55,4 +57,16 @@ class CanaryDio {
   }
 }
 
-class _CanaryDioInterceptor extends Interceptor {}
+class _CanaryDioInterceptor extends Interceptor {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    // TODO: implement onRequest
+    super.onRequest(options, handler);
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    // TODO: implement onResponse
+    super.onResponse(response, handler);
+  }
+}

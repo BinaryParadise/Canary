@@ -48,7 +48,7 @@ class _MyHomeState extends State<MyHome> {
 
   void initCanary() {
     FlutterCanary.instance.configure('82e439d7968b7c366e24a41d7f53f47d',
-        service: 'http://127.0.0.1/api', deviceid: 'canary-device-id');
+        service: 'http://192.168.12.67/api', deviceid: 'canary-device-id');
     FlutterCanary.instance.extra = () => {
           'meta': {'name': 'flutter_canary'}
         };

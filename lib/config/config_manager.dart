@@ -38,7 +38,7 @@ class ConfigManager {
   }
 
   Future<Result> update() async {
-    var result = await CanaryDio.instance()
+    var result = await CanaryDio.instance
         .get('/conf/full?appkey=${FlutterCanary.instance.appSecret}');
     if (result.success) {
       _transform(result.data);

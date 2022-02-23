@@ -120,7 +120,7 @@ class _MockItemRow extends StatelessWidget {
   const _MockItemRow(this.item, {Key? key}) : super(key: key);
 
   void setEnabled(MockItem item, bool isOn) {
-    CanaryDio.instance().post('/mock/active',
+    CanaryDio.instance.post('/mock/active',
         arguments: {"mockid": item.id, "enabled": isOn}).then((value) {
       if (value.success) {
         doRefresh.value += 1;
@@ -131,7 +131,7 @@ class _MockItemRow extends StatelessWidget {
   }
 
   void activeScene(MockScene scene) {
-    CanaryDio.instance().post('/mock/scene/active', arguments: {
+    CanaryDio.instance.post('/mock/scene/active', arguments: {
       "sceneid": scene.id,
       "enabled": scene.name != item.sceneMode,
       "mockid": item.id

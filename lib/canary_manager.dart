@@ -5,6 +5,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +22,7 @@ import 'package:logger/logger.dart';
 
 import 'model/model_mock.dart';
 
-enum NetLogMode { afNetworking, alamofire }
+enum NetLogMode { afNetworking, alamofire, okHttp }
 
 class FlutterCanary {
   static final FlutterCanary _instance = FlutterCanary._();
@@ -71,7 +72,7 @@ class FlutterCanary {
       Logger.level = Level.info;
     }
 
-    CanaryDio.instance().configure(service);
+    CanaryDio.instance.configure(service);
 
     var prefs = await SharedPreferences.getInstance();
     _mockOn = prefs.getBool('mockOn') ?? false;
@@ -92,6 +93,7 @@ class FlutterCanary {
   }
 
   void start({NetLogMode mode = NetLogMode.afNetworking}) async {
+    mode = Platform.isAndroid ? NetLogMode.okHttp : mode;
     CanaryWebSocket.instance.start();
     await channel
         .invokeMethod('enableNetLog', mode.toString())

@@ -43,7 +43,6 @@ class CanaryWebSocket implements WebSocketProvider {
   }
 
   Future<bool> _reconnect() async {
-    logger.e('连接已关闭, 10秒后重试...$url');
     await Future.delayed(const Duration(seconds: 10), () {
       start();
     });
@@ -71,6 +70,7 @@ class CanaryWebSocket implements WebSocketProvider {
 
   @override
   void onClosed(CloseCode code, WebSocketChannel webSocket) {
+    logger.e('连接已关闭, 10秒后重试...$url');
     _reconnect();
     _timer?.cancel();
     _timer = null;

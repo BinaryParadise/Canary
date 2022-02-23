@@ -39,7 +39,7 @@ class MockManager {
 
   /// 更新mock数据
   Future<Result> update() async {
-    var value = await CanaryDio.instance().get('/mock/app/whole');
+    var value = await CanaryDio.instance.get('/mock/app/whole');
     if (value.success) {
       _loadData(value.data as List);
       var prefs = await SharedPreferences.getInstance();

@@ -69,7 +69,7 @@ class _CanaryOptionsState extends State<CanaryOptions> {
   }
 
   void onLogin() {
-    CanaryDio.instance().post('/user/login', arguments: {
+    CanaryDio.instance.post('/user/login', arguments: {
       'username': _editingController1.text,
       'password': md5
           .convert(utf8.encode(_editingController2.text))
