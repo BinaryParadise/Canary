@@ -16,7 +16,7 @@ public class FlutterCanaryPlugin implements FlutterPlugin, MethodCallHandler {
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
-    private MethodChannel channel;
+    public static MethodChannel channel;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
