@@ -146,6 +146,9 @@ class FlutterCanary {
       return Future.value(true);
     } else if (call.method == "checkIntercept") {
       return MockManager.instance().checkIntercept(call);
+    } else if (call.method == "configValue") {
+      return Future.value(
+          FlutterCanary.instance.configValue(call.arguments as String));
     }
     return Future.value(false);
   }
